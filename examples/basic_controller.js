@@ -18,7 +18,10 @@ var board = new firmata.Board(serialport, function (error) {
         board.firmware.version.minor
         );
 
-    repl.start("RGB>").context.sses = sendSysExString;
+    var context = repl.start("RGB>").context;
+    context.sses = sendSysExString;
+    context.sendPixel = sendPixel;
+    context.rainbow = rainbow;
 
     board.on('string', function(data) {
         var message = '';
@@ -38,6 +41,43 @@ function colour_loop () {
     // make a loop here that iterates through the colours.
 
 }
+
+function rainbow(pixels) {
+    // create a rainbow across the number of pixels you have. Goes R > G > B
+    var freq = 0.3;
+    var amp = 127;
+    var centre = 128; 
+
+    var msg = "";
+
+    for (var i = 0; i< pixels; i++) {
+        setTimeout(function(n){
+                r = Math.floor(Math.sin(freq*n + 0)*amp + centre);
+                g = Math.floor(Math.sin(freq*n + 2)*amp + centre);
+                b = Math.floor(Math.sin(freq*n + 4)*amp + centre);
+                console.log("i: " + n + " r: " + r + " g: " + g + " b: " + b);
+                sendPixel(r, g, b, n, true);
+        }, i*100, i);
+    }
+
+    //console.log(msg);
+}
+
+var sendPixel = function(red, green, blue, pos, send) {
+    // sets a pixel colour at a particular position
+    // if send is true then send it, if not then return it
+
+    var send = send || false;
+
+    msg = "{r:" + red +  ",g:" + green + ",b:" + blue + ",p:" + pos + "}";
+    console.log(msg);
+    if (send) {
+        sendSysExString(msg);
+    } else {
+        return (msg);
+    }
+}
+
 
 var sendSysExString = function(message) {
 // sends an actual sysex string message

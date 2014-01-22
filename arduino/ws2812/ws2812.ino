@@ -24,14 +24,14 @@ in there quite happily.
 char buf[BUFLENGTH]; // character buffer for json message processing
 int bufCount; // counter for the string buffer.
 
-Adafruit_NeoPixel *strip;
-//Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
+//Adafruit_NeoPixel *strip;
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
     firmataInitialize();
     //Serial.begin(9600);
-    Adafruit_NeoPixel strip2= Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-    strip = *strip2;
+    //Adafruit_NeoPixel strip2= Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
+    //strip = strip2;
     strip.begin();
     strip.show();
 }
