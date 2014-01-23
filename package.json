@@ -1,8 +1,8 @@
 {
   "name": "ws2812-nodebots",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Library for controlling WS2812 LEDs (NeoPixels) from firmata or Johnny Five",
-  "main": "index.js",
+  "main": "inidex.js",
   "directories": {
     "example": "examples"
   },
@@ -20,8 +20,12 @@
     "ws2812",
     "firmata"
   ],
-  "author": "Andrew Fisher (ajfisher)",
-  "license": "BSD",
+  "author": {
+    "name": "Andrew Fisher (ajfisher)",
+    "email": "ajfisher.td@gmail.com",
+    "url": "http://twitter.com/ajfisher"
+  },
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/ajfisher/rgbled/issues"
   },
