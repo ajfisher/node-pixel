@@ -1,120 +1,19 @@
-#include <Firmata.h>
-
-#if MAX_DATA_BYTES < 64
-#error "Firmata.h: MAX_DATA_BYTES should be increased to 64"
-#endif
-
-#include <Adafruit_NeoPixel.h>
-#define LED_PIN 6
-#define STRIP_LENGTH 44
-
-/**
-
-TODO: 
-
-2. From there make it configurable so the constructor is called off a construction
-method so that it can be determined. Look at using a proper SYSEX message for this
-
-3. From there include into the standard simplebot firmata to be able to use it
-in there quite happily. 
-**/
-
-#define BUFLENGTH 32
-char buf[BUFLENGTH]; // character buffer for json message processing
-int bufCount; // counter for the string buffer.
+#include "ws2812.h"
+#include "Arduino.h"
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-void setup() {
-    firmataInitialize();
-    //Serial.begin(9600);
+char buf[BUFLENGTH]; // character buffer for json message processing
+int bufCount; // counter for the string buffer.
+
+void ws2812_initialise() {
+    // initialises the strip
     strip.begin();
     strip.show();
 }
 
-void loop() {
-
-//    if (Serial.available() > 10) {
-//        SerialParse();
-//    }
-    if (Firmata.available()) {
-        Firmata.processInput();
-    }
-
-    delay(1);
-
-}
-
-#define QUERY_FIRMWARE  0x79
-
-void firmataInitialize(void) {
-    Firmata.setFirmwareNameAndVersion("NeoPixel", 2, 3);
-
-    Firmata.attach(STRING_DATA, firmataStringCallback);
-    Firmata.attach(START_SYSEX, firmataSysexCallback);
-
-    Firmata.begin(57600);
-    Firmata.printFirmwareVersion();
-}
-
-void firmataStringCallback(char *string) {
-
-    String message = String(string);
-
-    // now we have a message, let's parse it.
-    int msg_index = message.lastIndexOf('{');
-    if (msg_index >= 0) {
-        parse_message(message, msg_index);
-    }
-    // Firmata bug: SysEx STRING_DATA handler uses malloc(), but not free()
-    // https://github.com/firmata/arduino/issues/74
-
-    free(string);
-    string = 0;
-}
-
-void firmataSysexCallback(byte  command, byte  argc, byte *argv) {
-
-    switch(command) {
-        case ANALOG_MAPPING_QUERY:
-            Serial.write(START_SYSEX);
-            Serial.write(ANALOG_MAPPING_RESPONSE);
-            Serial.write(END_SYSEX);
-            break;
-
-        case CAPABILITY_QUERY:
-            Serial.write(START_SYSEX);
-            Serial.write(CAPABILITY_RESPONSE);
-            Serial.write(END_SYSEX);
-            break;
-
-        case QUERY_FIRMWARE:
-            Firmata.printFirmwareVersion();
-            break;
-    }
-}
-
-
-void SerialParse(void) {
-    // processes the serial commands
-
-    bufCount = -1; // reset it
-    bufCount = Serial.readBytesUntil('\n', buf, BUFLENGTH);
-
-    if (bufCount > 0) {
-
-        String message = String(buf);
-        // now we have a message, let's parse it.
-        int msg_index = message.lastIndexOf('{');
-        if (msg_index >= 0) {
-            parse_message(message, msg_index);
-        }
-    }
-}
-
-
 void parse_message(String& message, int message_start) {
-    // processes the message off Serial
+    // processes the message that has come in
 
     String msg_string = message.substring(message_start);
     msg_string = msg_string.substring(1, msg_string.lastIndexOf("}"));
@@ -128,7 +27,7 @@ void parse_message(String& message, int message_start) {
 
     msg_string.toCharArray(buf, BUFLENGTH);
 
-    // iterate over the tokens of the message - assumed flat.
+    // iterate over the tokens of the message - assumed flat structure.
     char *p = buf;
     char *str;
 
