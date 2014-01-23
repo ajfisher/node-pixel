@@ -72,4 +72,8 @@ This library is under active development and planned modifications are:
 * Make a Johnny-Five library to abstract all of the low level control
 * Create a method for animating the strands
 * Enhance the protocol parser to be able to read multiple pixels in one message
-* Update the LED values then send a message to "show" it all in one go rather than by pixel right now.
+* Update the LED values then send a message to "show" it all in one go rather than by pixel right now
+
+## Acknowledgements
+
+This library wouldn't exist without the great work done by Adafruit on their NeoPixel libraries. Make sure you go buy pixels from them and support great open hardware.
