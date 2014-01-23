@@ -4,7 +4,6 @@
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 char buf[BUFLENGTH]; // character buffer for json message processing
-int bufCount; // counter for the string buffer.
 
 void ws2812_initialise() {
     // initialises the strip
@@ -93,6 +92,7 @@ void parse_message(String& message, int message_start) {
 
     // this just changes the value to the provided vals and limits if needed
     if (pos == -1) {
+        // set the whole strand the same colour
         for (uint16_t i = 0; i<STRIP_LENGTH; i++) {
             if (packed_colour) {
                 // used packed syntax
@@ -103,6 +103,7 @@ void parse_message(String& message, int message_start) {
             }
         }
     } else {
+        // set a pixel
         if (packed_colour) {
             // used packed syntax
             strip.setPixelColor(pos, colour);

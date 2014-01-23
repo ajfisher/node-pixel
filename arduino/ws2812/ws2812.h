@@ -12,6 +12,9 @@
 
 #ifndef WS2812_h
 #define WS2812_h
+
+#define DEBUG true
+
 #include "Arduino.h"
 #include <Adafruit_NeoPixel.h>
 
@@ -21,5 +24,6 @@
 
 void ws2812_initialise();
 void parse_message(String& message, int message_start);
+
 
 #endif
