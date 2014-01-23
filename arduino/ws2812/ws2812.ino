@@ -8,7 +8,6 @@
 #define LED_PIN 6
 #define STRIP_LENGTH 44
 
-
 /**
 
 TODO: 
@@ -24,20 +23,20 @@ in there quite happily.
 char buf[BUFLENGTH]; // character buffer for json message processing
 int bufCount; // counter for the string buffer.
 
-//Adafruit_NeoPixel *strip;
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
     firmataInitialize();
     //Serial.begin(9600);
-    //Adafruit_NeoPixel strip2= Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-    //strip = strip2;
     strip.begin();
     strip.show();
 }
 
 void loop() {
 
+//    if (Serial.available() > 10) {
+//        SerialParse();
+//    }
     if (Firmata.available()) {
         Firmata.processInput();
     }
@@ -138,6 +137,8 @@ void parse_message(String& message, int message_start) {
     uint8_t blue = 0;
     int16_t pos = -1;
     bool colour_change = false;
+    bool packed_colour = false; // used to pack the colour into one value.
+    uint32_t colour = 0;
 
     while ((str = strtok_r(p, ",", &p)) != NULL) { 
 #ifdef DEBUG
@@ -147,7 +148,7 @@ void parse_message(String& message, int message_start) {
         char *tp = str;
         char *key; char *val;
 
-        // get the key
+        // get the key and it's value.
         key = strtok_r(tp, ":", &tp);
         val = strtok_r(NULL, ":", &tp);
 
@@ -167,7 +168,10 @@ void parse_message(String& message, int message_start) {
             } else {
                 pos = atoi(val);
             }
-
+        }
+        if (*key == 'c' || *key == 'C') {
+            packed_colour = true;
+            colour = atol(val);
         }
     }
     // if it's a colour change then lets change the colour.
@@ -180,17 +184,32 @@ void parse_message(String& message, int message_start) {
     Serial.print(green);
     Serial.print(",");
     Serial.print(blue);
-    Serial.print(") P: ");
-    Serial.println(pos);    
+    Serial.print(") ");
+    Serial.print(" C: ");
+    Serial.print(colour);
+    Serial.print(" P: ");
+    Serial.println(pos);
+
 #endif
 
     // this just changes the value to the provided vals and limits if needed
     if (pos == -1) {
         for (uint16_t i = 0; i<STRIP_LENGTH; i++) {
-            strip.setPixelColor(i, red, green, blue);
+            if (packed_colour) {
+                // used packed syntax
+                strip.setPixelColor(i, colour);
+            } else {
+                // used long syntax
+                strip.setPixelColor(i, red, green, blue);
+            }
         }
     } else {
-        strip.setPixelColor(pos, red, green, blue);
+        if (packed_colour) {
+            // used packed syntax
+            strip.setPixelColor(pos, colour);
+        } else {
+            strip.setPixelColor(pos, red, green, blue);
+        }
     }
     strip.show();
 }

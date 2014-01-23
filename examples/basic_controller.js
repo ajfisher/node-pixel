@@ -22,6 +22,7 @@ var board = new firmata.Board(serialport, function (error) {
     context.sses = sendSysExString;
     context.sendPixel = sendPixel;
     context.rainbow = rainbow;
+    context.sendPackedPixel = sendPackedPixel;
 
     board.on('string', function(data) {
         var message = '';
@@ -52,16 +53,30 @@ function rainbow(pixels) {
 
     for (var i = 0; i< pixels; i++) {
         setTimeout(function(n){
-                r = Math.floor(Math.sin(freq*n + 0)*amp + centre);
-                g = Math.floor(Math.sin(freq*n + 2)*amp + centre);
-                b = Math.floor(Math.sin(freq*n + 4)*amp + centre);
-                console.log("i: " + n + " r: " + r + " g: " + g + " b: " + b);
-                sendPixel(r, g, b, n, true);
-        }, i*100, i);
+                var r = Math.floor(Math.sin(freq*n + 0)*amp + centre);
+                var g = Math.floor(Math.sin(freq*n + 2)*amp + centre);
+                var b = Math.floor(Math.sin(freq*n + 4)*amp + centre);
+                
+                var rgb = (r<<16) + (g<<8) + b
+                sendPackedPixel(rgb, n);
+        }, i*50, i);
     }
-
-    //console.log(msg);
 }
+
+var sendPackedPixel = function (rgb, pos) {
+    // sets a pixel using a packed rgb value. Easiest way to supply this is
+    // to send it as a hex value using 0xRRGGBB format.
+    
+    msg = "{p:" + pos + ",c:" + rgb + "}";
+
+    //if (send) {
+        sendSysExString(msg);
+    //} else {
+    //    return (msg);
+    //}
+
+}
+
 
 var sendPixel = function(red, green, blue, pos, send) {
     // sets a pixel colour at a particular position
