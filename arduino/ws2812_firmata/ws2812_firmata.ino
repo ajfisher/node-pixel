@@ -29,7 +29,6 @@ void loop() {
     }
 
     delay(1);
-
 }
 
 #define QUERY_FIRMWARE  0x79

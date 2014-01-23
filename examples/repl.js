@@ -19,7 +19,7 @@ var board = new firmata.Board(serialport, function (error) {
         );
 
     var context = repl.start("RGB>").context;
-    context.sses = sendSysExString;
+//    context.sses = sendSysExString;
     context.sendPixel = sendPixel;
     context.rainbow = rainbow;
     context.sendPackedPixel = sendPackedPixel;
@@ -78,11 +78,12 @@ var sendPackedPixel = function (rgb, pos) {
 }
 
 
-var sendPixel = function(red, green, blue, pos, send) {
+var sendPixel = function(red, green, blue, pos) {
     // sets a pixel colour at a particular position
     // if send is true then send it, if not then return it
 
-    var send = send || false;
+    //var send = send || false;
+    var send = true;
 
     msg = "{r:" + red +  ",g:" + green + ",b:" + blue + ",p:" + pos + "}";
     console.log(msg);
@@ -116,6 +117,5 @@ var sendSysExString = function(message) {
 
     board.sp.write(data);
 }
-
 
 
