@@ -1,8 +1,8 @@
 {
-  "name": "ws2812-nodebots",
+  "name": "node-pixel",
   "version": "0.1.0",
-  "description": "Library for controlling WS2812 LEDs (NeoPixels) from firmata or Johnny Five",
-  "main": "inidex.js",
+  "description": "Library for controlling addressable LEDs (such as NeoPixels) from firmata or Johnny Five",
+  "main": "index.js",
   "directories": {
     "example": "examples"
   },
@@ -11,26 +11,34 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ajfisher/rgbled.git"
+    "url": "git://github.com/ajfisher/node-pixel.git"
   },
   "keywords": [
     "nodebots",
     "johnny-five",
     "leds",
     "ws2812",
-    "firmata"
+    "ws2812b",
+    "firmata",
+    "neopixel",
+    "rgb led"
   ],
   "author": {
     "name": "Andrew Fisher (ajfisher)",
     "email": "ajfisher.td@gmail.com",
     "url": "http://twitter.com/ajfisher"
   },
-  "license": "BSD-3-Clause",
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/ajfisher/node-pixel/blob/master/LICENSE"
+  },
   "bugs": {
-    "url": "https://github.com/ajfisher/rgbled/issues"
+    "url": "https://github.com/ajfisher/node-pixel/issues"
   },
   "dependencies": {
-    "firmata": "~0.3.2",
-    "johnny-five": "~0.7.13"
+    "color-string": "^0.2.4",
+    "es6-collections": "^0.4.0",
+    "firmata": "^0.4.0",
+    "johnny-five": "^0.8.36"
   }
 }
