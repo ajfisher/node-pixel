@@ -1,5 +1,16 @@
 # node-pixel
 
+_important_ This library is currently in flux. Do not use this version. This will
+be fixed in a day or so. In the mean time do this:
+
+```
+git clone https://github.com/ajfisher/node-pixel.git
+git --reset HARD e6121a9473fbd8a07eb0b81179df5e6975050cca
+```
+
+This will put you at the last good commit state before all the work started.
+
+
 The purpose of this library is to provide a node js interface for addressable RGB LEDs.
 Most commonly these are known as Neo Pixels (if you shop at Adafruit) however 
 other devices will also be supported as well.
