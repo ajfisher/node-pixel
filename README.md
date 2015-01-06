@@ -111,7 +111,7 @@ var board = new firmata.Board('path to usb',function(){
     strip = new pixel.Strip({
         data: 6,
         length: 4,
-        firmata: this.firmata
+        firmata: board,
     });
 });  
 ```
