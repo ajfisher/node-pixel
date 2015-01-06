@@ -1,21 +1,10 @@
 # node-pixel
 
-_important_ This library is currently in flux. Do not use this version. This will
-be fixed in a day or so. In the mean time do this:
-
-```
-git clone https://github.com/ajfisher/node-pixel.git
-git --reset HARD e6121a9473fbd8a07eb0b81179df5e6975050cca
-```
-
-This will put you at the last good commit state before all the work started.
-
-
 The purpose of this library is to provide a node js interface for addressable RGB LEDs.
 Most commonly these are known as Neo Pixels (if you shop at Adafruit) however 
 other devices will also be supported as well.
 
-As of this current iteration the implementation requires a specific version of
+As of this current iteration, the implementation requires a specific version of
 firmata to be used in order to provide an interface to talk to the "pixels". This
 is done using the [Adafruit NeoPixel library](https://github.com/adafruit/Adafruit_NeoPixel). 
 
@@ -31,18 +20,18 @@ It is assumed you have an [Arduino](http://arduino.cc/en/Guide/HomePage) and the
 
 For the purposes of this I will assume you're using Adafruit NeoPixels and I'm going
 to assume you've read the [NeoPixel Uber Guide](http://learn.adafruit.com/adafruit-neopixel-uberguide/overview)
-as it has just about everything you need to know in it.
+as it has just about everything you need to know in it from a hardware perspective.
 
 I'm going to assume you have NodeJS all ready to go too.
 
 ### Firmware installation.
 
 Until the backpacks are sorted you'll need a special version of Firmata to make
-your NeoPixels work. There are two ways to set this up. 
+your NeoPixels work. There are two ways to set this up:
 
-#### Option 1: Clone repo
+#### Option 1: Clone this repo
 
-Simply clone the repo and everything is here for you.
+Simply clone this repo and everything is here for you.
 
 ```
 git clone https://github.com/ajfisher/node-pixel
@@ -146,7 +135,7 @@ Sequenced LEDs typically work by clocking data along their entire length and so
 you usually make the various changes you want to make to the strip then call show
 to propagate this data through the LEDs.
 
-#### color("hexvalue");
+#### color(_"hexvalue"_);
 
 All LEDs on the strip can be set using the .color() method. The color method will
 take a standard HTML hex value to designate the color. eg:
@@ -156,7 +145,7 @@ strip.color("#ff0000"); // turns entire strip red
 strip.show();
 ```
 
-#### color("color name");
+#### color(_"color name"_);
 
 You can use HTML CSS color names and RGB values will be created from them. eg:
 
@@ -165,7 +154,7 @@ strip.color("teal"); // sets strip to a blue-green color.
 strip.show();
 ```
 
-#### color("rgb(r, g, b)");
+#### color(_"rgb(r, g, b)"_);
 
 RGB values are also valid if you prefer to use them, eg:
 
@@ -174,24 +163,55 @@ strip.color("rgb(0, 255, 0)"); // sets strip to green.
 strip.show();
 ```
 
-#### pixel(address);
+#### pixel(_address_);
 
 Individual pixels can be addressed by the pixel method using their address in
 the sequence. eg:
 
 ```
-var p = strip.pixel(1); // get second LED
+var p = strip.pixel(1); // get the second LED
 ```
 
+### Pixel
 
+A pixel is an individual element in the strip. It is fairly basic and it's API
+is detailed below.
 
+#### color(_color string_);
 
+Colors work exactly the same way on individual pixels as per strips so see the
+color reference above.
 
-// and colors work just the same way on individual pixels too.
+```
+var p = strip.pixel(1); // get second LED
+
+p.color("#0000FF"); // set second pixel blue.
+```
+
+#### color()
+
+Returns an object representing the color of this pixel. This comes back with the
+following structure:
+
+```
+{
+    r: 0,               // red component
+    g: 0,               // green component
+    b: 0,               // blue component
+    hexcode: "#000000", // hexcode of color
+    color: "black",     // keyword name of color if matching
+    rgb: [0,0,0],       // RGB component array
+}
+```
+
+For example:
+
+```
+var p = strip.pixel(1); // get second LED
+
 p.color("#0000FF"); // set second pixel blue.
 
-// calling color() by itself will return an object with the current color
-p.color(); // returns {r:0, g:0, b:255, hexcode:"#0000ff", color:"blue"}
+p.color(); // returns {r:0, g:0, b:255, hexcode:"#0000ff", color:"blue", rgb[0,0,255]}
 ```
 
 ## TODO and roadmap
