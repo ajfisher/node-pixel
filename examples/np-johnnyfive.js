@@ -10,13 +10,15 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
+var fps = 25; // how many frames per second do you want to try?
+
 board.on("ready", function() {
 
     console.log("Board ready, lets add light");
 
     strip = new pixel.Strip({
         data: 6,
-        length: 4,
+        length: 17,
         board: this
     });
 
@@ -35,5 +37,5 @@ board.on("ready", function() {
         strip.pixel(pos).color(colors[current_color]);
 
         strip.show();
-    }, 1000/2);
+    }, 1000/fps);
 });

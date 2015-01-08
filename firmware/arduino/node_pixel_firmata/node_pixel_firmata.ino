@@ -29,7 +29,7 @@
  * TODO: use Program Control to load stored profiles from EEPROM
  */
 
-/** MODIFIED BY AJFISHER to support the SimpleBotShield v1 **/
+/** MODIFIED BY AJFISHER to support NeoPixel library **/
 
 #include <Servo.h>
 #include <Wire.h>
@@ -50,8 +50,6 @@
 #define MINIMUM_SAMPLING_INTERVAL 10
 
 #define REGISTER_NOT_SPECIFIED -1
-
-#define PULSE_IN                0x74 // send a pulse in command
 
 /*==============================================================================
  * GLOBAL VARIABLES
@@ -603,6 +601,12 @@ void sysexCallback(byte command, byte argc, byte *argv)
       }
       Firmata.write(END_SYSEX);
       break;
+    case PIXEL_COMMAND:
+        if (argc > 0) {
+            // maybe bounce the first command off here.
+            process_command(argv[0], argc, argv);
+        }
+        break;
   }
 }
 
