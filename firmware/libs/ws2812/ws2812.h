@@ -34,7 +34,7 @@
 #define BUFLENGTH 64
 
 void ws2812_initialise();
-void process_command(byte command, byte argc, byte *argv);
+void process_command(byte argc, byte *argv);
 void parse_message(String& message, int message_start);
 void show();
 

@@ -11,23 +11,30 @@ void ws2812_initialise() {
     strip.show();
 }
 
-void process_command(byte command, byte argc, byte *argv){
+void process_command(byte argc, byte *argv){
     // this takes a pixel command that has been determined and then
     // processes it appropriately.
 
-    uint8_t argoffset = 1; // used because I haven't popped the initial arg off the front of argv
-
-    switch (command) {
-        case PIXEL_SHOW:
+    switch (argv[0]) {
+        case PIXEL_SHOW: {
             show();
             break;
-//        case PIXEL_SET_STRIP:
-            // TODO: Take the value and set the whole strip to that color.
-//            uint32_t strip_colour = argv[1] + (argv[2]<<7) + (argv[3]<<14);
-//            for (uint16_t i = 0; i<STRIP_LENGTH; i++) {
-//                strip.setPixelColor(i, strip_colour);
-//            }
-//            break; 
+        }
+        case PIXEL_SET_STRIP: {
+            // sets the entirety of the strip to one colour
+            uint32_t strip_colour = (uint32_t)argv[1] + ((uint32_t)argv[2]<<7) + ((uint32_t)argv[3]<<14) + ((uint32_t)argv[4] << 21);
+            for (uint16_t i = 0; i<STRIP_LENGTH; i++) {
+                strip.setPixelColor(i, strip_colour);
+            }
+            break;
+        }
+        case PIXEL_SET_PIXEL: {
+            // sets the pixel given by the index to the given colour
+            uint16_t index = (uint16_t)argv[1] + ((uint16_t)argv[2]<<7);
+            uint32_t colour = (uint32_t)argv[3] + ((uint32_t)argv[4]<<7) + ((uint32_t)argv[5]<<14) + ((uint32_t)argv[6] << 21);
+            strip.setPixelColor(index, colour);
+            break;
+        }
     }
 }
 

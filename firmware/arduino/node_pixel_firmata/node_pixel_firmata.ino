@@ -604,7 +604,7 @@ void sysexCallback(byte command, byte argc, byte *argv)
     case PIXEL_COMMAND:
         if (argc > 0) {
             // maybe bounce the first command off here.
-            process_command(argv[0], argc, argv);
+            process_command(argc, argv);
         }
         break;
   }
@@ -685,6 +685,7 @@ void systemResetCallback()
 
 void setup()
 {
+
   Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
 
   Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
