@@ -98,22 +98,6 @@ byte servoCount = 0;
  * CUSTOM CALLBACKS for NP processing
  *============================================================================*/
 
-void pixelCallback(char *string) {
-
-    String message = String(string);
-
-    // now we have a message, let's parse it.
-    int msg_index = message.lastIndexOf('{');
-    if (msg_index >= 0) {
-        parse_message(message, msg_index);
-    }
-    // Firmata bug: SysEx STRING_DATA handler uses malloc(), but not free()
-    // https://github.com/firmata/arduino/issues/74
-
-    //free(string);
-    string = 0;
-}
-
 /*==============================================================================
  * FUNCTIONS
  *============================================================================*/
@@ -696,7 +680,7 @@ void setup()
   Firmata.attach(START_SYSEX, sysexCallback);
   Firmata.attach(SYSTEM_RESET, systemResetCallback);
 
-  Firmata.attach(STRING_DATA, pixelCallback);
+//  Firmata.attach(STRING_DATA, pixelCallback);
 
   Firmata.begin(57600);
   systemResetCallback();  // reset to default config
