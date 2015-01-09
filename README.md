@@ -41,6 +41,8 @@ npm install
 
 #### Option 2: NPM
 
+_This doesn't work yet until I release it - use the above method_
+
 This will put everything in the node_modules folder and will include the firmware
 so you just need to know where to look to find it.
 
