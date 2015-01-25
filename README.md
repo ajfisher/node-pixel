@@ -1,5 +1,7 @@
 # node-pixel
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ajfisher/node-pixel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The purpose of this library is to provide a node js interface for addressable RGB LEDs.
 Most commonly these are known as Neo Pixels (if you shop at Adafruit) however 
 other devices will also be supported as well.
