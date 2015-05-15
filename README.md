@@ -52,7 +52,7 @@ so you just need to know where to look to find it.
 npm install node-pixel
 ```
 
-Now you have the files, go look at the (firmware installation guide)[https://github.com/ajfisher/node-pixel/tree/master/firmware]
+Now you have the files, go look at the [firmware installation guide](https://github.com/ajfisher/node-pixel/tree/master/firmware)
 as setting up the firmware is a bit detailed and this will also comprise the
 instructions for updating the I2C backpack firmware too.
 
