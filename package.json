@@ -36,9 +36,9 @@
     "url": "https://github.com/ajfisher/node-pixel/issues"
   },
   "dependencies": {
-    "color-string": "^0.2.4",
-    "es6-collections": "^0.4.0",
-    "firmata": "^0.4.0",
-    "johnny-five": "^0.8.36"
+    "color-string": "^0.3.0",
+    "es6-collections": "^0.5.1",
+    "firmata": "^0.5.1",
+    "johnny-five": "^0.8.74"
   }
 }

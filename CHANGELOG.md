@@ -4,7 +4,7 @@
 
 * Restructure of the firmware folder ahead of providing backpack and native
 firmata controllers
-
+* Updated all of the package versions.
 
 
 ## 0.2.2
