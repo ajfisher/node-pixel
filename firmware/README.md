@@ -18,7 +18,18 @@ folder and open up `node_pixel_firmata.ino`. This will bring in all the requirem
 
 Simply compile and upload to your arduino. Assuming no errors, you're good to go.
 
+### Using Arduino CLI
+
+You may also use the arduino CLI to compile and upload the firmware to an arduino
+do this using the instructions given here: https://github.com/arduino/Arduino/blob/ide-1.5.x/build/shared/manpage.adoc
+
+
 ## Using the INO build tool
+
+_Note_ This method is now considered deprecated in favour of using the arduino
+IDE or CLI as it's now possible to automate this process. Also the board manager
+makes this considerably easier to manage. This instruction will be left until
+version 0.5.0 in order to migrate.
 
 You will need to use ino tool to compile and upload this to the board so 
 [follow the getting started directions](http://inotool.org/#installation) for
