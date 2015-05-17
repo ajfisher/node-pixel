@@ -1,5 +1,12 @@
 # node-pixel changelog
 
+## 0.2.3
+
+* Restructure of the firmware folder ahead of providing backpack and native
+firmata controllers
+
+
+
 ## 0.2.2
 
 * Migration of all protocol messages to use firmata SYSEX commands with custom

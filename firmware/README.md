@@ -1,10 +1,10 @@
 # Firmware build instructions
 
-Currently pixel is only supporting using a direct firmata replacement. To 
+Currently pixel is only supported using a direct firmata replacement. To 
 use pixel you _will_ require a custom firmata installed on your arduino that has
 the relevant additional libraries added into firmata.
 
-Everything you need ships as part of this repo in the firmware directory. 
+Everything you need ships as part of this repo in the firmware/firmata directory. 
 
 There are two methods of building.
 
@@ -13,7 +13,7 @@ There are two methods of building.
 If you just want to "go" and you have a pretty standard arduino (ie one that
 plugs in via a USB cable) then this should work fine.
 
-Open up the arduino IDE, navigate to the `firmware/arduino/node_pixel_firmata/`
+Open up the arduino IDE, navigate to the `firmware/firmata/arduino/node_pixel_firmata/`
 folder and open up `node_pixel_firmata.ino`. This will bring in all the requirements.
 
 Simply compile and upload to your arduino. Assuming no errors, you're good to go.
@@ -31,7 +31,7 @@ cd ~
 git clone https://github.com/ajfisher/node-pixel
 cd node-pixel
 npm install
-cd firmware/ino/
+cd firmware/firmata/ino/
 ino clean && ino build -m uno
 ```
 
@@ -133,5 +133,5 @@ avrdude: safemode: Fuses OK
 avrdude done.  Thank you.
 ```
 
-If there's no errors then you now have the modified firmata on your shield and
+If there's no errors then you now have the modified firmata on your ardunio and
 you can now start using it.
