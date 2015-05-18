@@ -22,35 +22,38 @@ board.on("ready", function() {
         board: this
     });
 
-    var pos = 0;
-    var pos2 = 1;
-    var pos3 = 2;
-    var colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "white"];
-    var current_color = 0;
-    var current_color2 = 1;
-    var current_color3 = 2;
+    strip.on("ready", function() {
 
-    var blinker = setInterval(function() {
+        var pos = 0;
+        var pos2 = 1;
+        var pos3 = 2;
+        var colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "white"];
+        var current_color = 0;
+        var current_color2 = 1;
+        var current_color3 = 2;
 
-        strip.color("#000"); // blanks it out
+        var blinker = setInterval(function() {
 
-        if (++pos >= strip.stripLength()) {
-            pos = 0;
-            if (++current_color>= colors.length) current_color = 0;
-        }
-        strip.pixel(pos).color(colors[current_color]);
+            strip.color("#000"); // blanks it out
 
-        if (++pos2 >= strip.stripLength()) {
-            pos2 = 0;
-            if (++current_color2>= colors.length) current_color2 = 0;
-        }
-        strip.pixel(pos2).color(colors[current_color2]);
+            if (++pos >= strip.stripLength()) {
+                pos = 0;
+                if (++current_color>= colors.length) current_color = 0;
+            }
+            strip.pixel(pos).color(colors[current_color]);
 
-        if (++pos3 >= strip.stripLength()) {
-            pos3 = 0;
-            if (++current_color3>= colors.length) current_color3 = 0;
-        }
-        strip.pixel(pos3).color(colors[current_color3]);
-        strip.show();
-    }, 1000/fps);
+            if (++pos2 >= strip.stripLength()) {
+                pos2 = 0;
+                if (++current_color2>= colors.length) current_color2 = 0;
+            }
+            strip.pixel(pos2).color(colors[current_color2]);
+
+            if (++pos3 >= strip.stripLength()) {
+                pos3 = 0;
+                if (++current_color3>= colors.length) current_color3 = 0;
+            }
+            strip.pixel(pos3).color(colors[current_color3]);
+            strip.show();
+        }, 1000/fps);
+    });
 });
