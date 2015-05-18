@@ -1,13 +1,20 @@
 # node-pixel changelog
 
-## 0.2.3
+## 0.3.0
+
+* Added pin selection to the constructor in order to be able to set which pin
+you are using for the strip.
+* Added custom I2C controller
+
+
+### 0.2.3
 
 * Restructure of the firmware folder ahead of providing backpack and native
-firmata controllers
+firmata controllers.
 * Updated all of the package versions.
 
 
-## 0.2.2
+### 0.2.2
 
 * Migration of all protocol messages to use firmata SYSEX commands with custom
 command set that will be viable when moving to I2C / SPI.
@@ -17,7 +24,7 @@ command set that will be viable when moving to I2C / SPI.
 * documentation of protocol as it's being created.
 
 
-## 0.2.1
+### 0.2.1
 
 * First implementation of Pixel library on JS side against firmata API
 * big restructure of entire code base to work properly in ino and arduino
