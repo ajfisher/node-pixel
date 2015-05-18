@@ -35,6 +35,15 @@ void process_command(byte argc, byte *argv){
             strip.setPixelColor(index, colour);
             break;
         }
+        case PIXEL_CONFIG: {
+            // Sets the pin that the neopixel strip is on.
+            strip.setPin((uint8_t)argv[1]);
+
+            // TODO: Sort out the strand length stuff here.
+
+            break;
+
+        }
     }
 }
 
