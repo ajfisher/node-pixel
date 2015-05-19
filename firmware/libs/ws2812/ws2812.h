@@ -30,7 +30,7 @@
 
 
 #define LED_PIN 6
-#define STRIP_LENGTH 128
+#define STRIP_LENGTH 256
 #define BUFLENGTH 64
 
 void ws2812_initialise();
