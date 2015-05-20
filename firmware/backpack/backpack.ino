@@ -1,12 +1,11 @@
 #include "includes.h"
 
-
 #define I2C_SENSOR_ADDRESS  0x42
 #define MAX_RECEIVED_BYTES  16
 
 #if defined(__AVR_ATtiny85__) 
 
-    // FOR NOW YOU WILL NEED TO COMMENT THESE THINGS IN OR OUT
+/**    // FOR NOW YOU WILL NEED TO COMMENT THESE THINGS IN OR OUT
 //      TODO Write a make sed script that does this based on board type
     #include <TinyWireS.h>
     #include <avr/power.h>
@@ -16,19 +15,19 @@
     SendOnlySoftwareSerial Serial(3);
     #define STRIP_LENGTH 17
     #define LED_PIN 1
-
+**/
 #endif
 
 
 // used to specify the backpack as being a full arduino
 #if defined(ARDUINO_AVR_NANO) || defined (ARDUINO_AVR_UNO)
-/**
-//    #include <Wire.h>
-//    #define STRIP_LENGTH 17
-//    #define LED_PIN 6
+
+    #include <Wire.h>
+    #define STRIP_LENGTH 17
+    #define LED_PIN 6
     // set this to use it later.
-//    #define ATMEGA true
-**/
+    #define ATMEGA true
+
 #endif
 
 #include "./Adafruit_NeoPixel.h"
