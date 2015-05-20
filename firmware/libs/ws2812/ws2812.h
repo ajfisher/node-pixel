@@ -28,7 +28,6 @@
 #define PIXEL_SET_PIXEL     0x03 // set the color value of pixel n using 32bit packed color value        
 #define PIXEL_SET_STRIP     0x04 // set color of whole strip
 
-
 #define LED_PIN 6
 #define STRIP_LENGTH 256
 #define BUFLENGTH 64
