@@ -1,7 +1,5 @@
 #include "includes.h"
 
-#include "./Adafruit_NeoPixel.h"
-#include "./ws2812.h"
 
 #define I2C_SENSOR_ADDRESS  0x42
 #define MAX_RECEIVED_BYTES  16
@@ -10,28 +8,31 @@
 
     // FOR NOW YOU WILL NEED TO COMMENT THESE THINGS IN OR OUT
 //      TODO Write a make sed script that does this based on board type
-//    #include <TinyWireS.h>
-//    #include <avr/power.h>
+    #include <TinyWireS.h>
+    #include <avr/power.h>
 
-//    #include <SendOnlySoftwareSerial.h>
+    #include <SendOnlySoftwareSerial.h>
 
-    //SendOnlySoftwareSerial Serial(3);
-    #define LED_PIN 4
+    SendOnlySoftwareSerial Serial(3);
+    #define STRIP_LENGTH 17
+    #define LED_PIN 1
 
 #endif
 
 
 // used to specify the backpack as being a full arduino
 #if defined(ARDUINO_AVR_NANO) || defined (ARDUINO_AVR_UNO)
-
-    #include <Wire.h>
-    #define STRIP_LENGTH 17
-    #define LED_PIN 6
+/**
+//    #include <Wire.h>
+//    #define STRIP_LENGTH 17
+//    #define LED_PIN 6
     // set this to use it later.
-    #define ATMEGA true
-
+//    #define ATMEGA true
+**/
 #endif
 
+#include "./Adafruit_NeoPixel.h"
+#include "./ws2812.h"
 
 void setup() {
 
@@ -39,7 +40,6 @@ void setup() {
     // Set prescaler so CPU runs at 16MHz
     if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
 
-  
     // Use TinyWire for ATTINY
     TinyWireS.begin(I2C_SENSOR_ADDRESS);
     TinyWireS.onReceive(receiveData);
@@ -60,7 +60,6 @@ void setup() {
     ws2812_initialise();
 }
 
-
 void loop() {
 
 #if defined( __AVR_ATtiny85__ )
@@ -71,25 +70,34 @@ void loop() {
 #endif
 }
 
-void receiveData(int numbytes) {
+void receiveData(receiveint numbytes) {
+
+    #if _DEBUG
+        Serial.println("\nRD");
+        Serial.print("NB: ");
+        Serial.print(numbytes);
+        Serial.println();
+    #endif
 
     byte received_bytes[MAX_RECEIVED_BYTES];
 
     // read the data off the wire and then send it to get parsed.
     for (uint8_t i=0; i < numbytes; i++) {
         if (i < MAX_RECEIVED_BYTES) {
-            received_bytes[i] = Wire.read();
+            #if defined( __AVR_ATtiny85__ )
+                received_bytes[i] = TinyWireS.receive();
+            #else
+                received_bytes[i] = Wire.read();
+            #endif
         } else {
-            Wire.read();
+            #if defined( __AVR_ATtiny85__ )
+                TinyWireS.receive();
+            #else
+                Wire.read();
+            #endif
         }
     }
 
     process_command(numbytes, received_bytes);
 
-#if _DEBUG
-    Serial.println("\nReceived Data");
-    Serial.print("Num bytes: ");
-    Serial.print(numbytes);
-    Serial.println();
-#endif
 }

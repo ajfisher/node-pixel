@@ -10,15 +10,15 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
-var fps = 100; // how many frames per second do you want to try?
+var fps = 0.2; // how many frames per second do you want to try?
 
 board.on("ready", function() {
 
     console.log("Board ready, lets add light");
 
     strip = new pixel.Strip({
-        data: 6,
-        length: 150,
+        //data: 6,
+        length: 17,
         board: this,
         controller: "I2CBACKPACK"
     });
@@ -29,8 +29,8 @@ board.on("ready", function() {
 
         var colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "white"];
         var current_colors = [0,1,2,3,4, 0,1,2,3,4];
-        var current_pos = [0,1,2,3,4,75,76,77,78,79]
-
+        //var current_pos = [0,1,2,3,4,75,76,77,78,79]
+        var current_pos = [0,1,2,3,4,10,11,12,13,14];
         var blinker = setInterval(function() {
 
             strip.color("#000"); // blanks it out

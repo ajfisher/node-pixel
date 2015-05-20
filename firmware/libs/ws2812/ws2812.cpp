@@ -23,7 +23,6 @@ void process_command(byte argc, byte *argv){
         case PIXEL_SET_STRIP: {
             // sets the entirety of the strip to one colour
             uint32_t strip_colour = (uint32_t)argv[1] + ((uint32_t)argv[2]<<7) + ((uint32_t)argv[3]<<14) + ((uint32_t)argv[4] << 21);
-            Serial.println(strip_colour);
             for (uint16_t i = 0; i<STRIP_LENGTH; i++) {
                 strip.setPixelColor(i, strip_colour);
             }
