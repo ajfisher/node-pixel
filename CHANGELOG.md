@@ -5,6 +5,9 @@
 * Added pin selection to the constructor in order to be able to set which pin
 you are using for the strip.
 * Added custom I2C controller
+* added custom I2C Backpack firmware.
+* Removed ATTIny85 support due to bugginess.
+
 
 
 ### 0.2.3
