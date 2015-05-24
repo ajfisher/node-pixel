@@ -1,12 +1,15 @@
 # Protocol used to talk to the pixel strip using firmata
 
-## Custom Firmata protocol
+## Custom Firmata protocol definitions
 
+```
 #define PIXEL_OFF           0x00 // set strip to be off
 #define PIXEL_CONFIG        0x01 // set pin number and max length
 #define PIXEL_SHOW          0x02 // latch the pixels and show them
 #define PIXEL_SET_PIXEL     0x03 // set the color value of pixel n using 32bit packed color value        
 #define PIXEL_SET_STRIP     0x04 // set color of whole strip
+```
+
 
 ### Config
 
