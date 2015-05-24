@@ -4,84 +4,57 @@
 
 The purpose of this library is to provide a node js interface for addressable RGB LEDs.
 Most commonly these are known as Neo Pixels (if you shop at Adafruit) however 
-other devices will also be supported as well.
+any WS2812b addressable LED should work with this. 
 
-As of this current iteration, the implementation requires a specific version of
-firmata to be used in order to provide an interface to talk to the "pixels". This
-is done using the [Adafruit NeoPixel library](https://github.com/adafruit/Adafruit_NeoPixel). 
+The current iteration supports two methods of set up:
 
-The pixel library can be used with both Johnny-Five or stock Node Firmata.
+* a custom version of firmata that provides an interface to talk to the "pixels". 
+* an I2C "backpack" using an arduino pro mini or nano that provides the interface
+and then uses standard firmata.
 
-The firmware to run on your arduino is included in this repo in the firmware
-folder and has a dedicated readme attached to that to describe the installation
-process.
+Both of these mechanisms presently rely on the [Adafruit NeoPixel library](https://github.com/adafruit/Adafruit_NeoPixel). 
+
+The pixel library can be used with both Johnny-Five or stock Node Firmata and
+can be used by any board that provides an IO interface with I2C support such as
+a Raspberry PI.
+
+Both fimwares are provided in this repo in the firmware directory.
 
 ## Installation
 
-It is assumed you have an [Arduino](http://arduino.cc/en/Guide/HomePage) and the IDE installed.
-
-For the purposes of this I will assume you're using Adafruit NeoPixels and I'm going
-to assume you've read the [NeoPixel Uber Guide](http://learn.adafruit.com/adafruit-neopixel-uberguide/overview)
-as it has just about everything you need to know in it from a hardware perspective.
-
-I'm going to assume you have NodeJS all ready to go too.
-
-### Firmware installation.
-
-Until the backpacks are sorted you'll need a special version of Firmata to make
-your NeoPixels work. There are two ways to set this up:
-
-#### Option 1: Clone this repo
-
-Simply clone this repo and everything is here for you.
-
-```
-git clone https://github.com/ajfisher/node-pixel
-cd node-pixel
-npm install
-```
-
-#### Option 2: NPM
-
-_This doesn't work yet until I release it - use the above method_
-
-This will put everything in the node_modules folder and will include the firmware
-so you just need to know where to look to find it.
-
-```
-npm install node-pixel
-```
-
-Now you have the files, go look at the [firmware installation guide](https://github.com/ajfisher/node-pixel/tree/master/firmware)
-as setting up the firmware is a bit detailed and this will also comprise the
-instructions for updating the I2C backpack firmware too.
-
-### Attach your LEDs
-
-With the hardware off, attach your pixels to the arduino. Usually this involves 
-getting a 5V source, a ground and then attaching the data line to an arduino 
-digital pin. Right now the library only supports PIN 6 (but this will become configurable).
-
-## Use the library
-
-Now you're set up, it's time to use some JS to manipulate the LEDs.
-
-To use the library, require it per normal:
-
-```
-var pixel = require("pixel");
-```
-
+Both methods of installation are covered in detail in the [Installation Guide](docs/installation.md).
 
 ## Pixel API
 
-Now you have a strip of LEDs you want to do something with them. 
+The Pixel API is provided below. 
 
 ### Strip
 
 A sequence of LEDs all joined together is called a `strip` and you need to tell
-the strip which `pin` it is on and how many LEDs are in the sequence. In addition
-you need to provide the strip with a firmata or Johnny-five instance.
+the strip which `pin` (`data`) it is on and how many LEDs are in the sequence. 
+In addition you need to provide the strip with a controller to tell it to use 
+the custom firmata or I2C backpack.
+
+#### Parameters
+
+* **options** An object of property parameters
+
+Property    | Type      | Value / Description   | Default   | Required
+------------|-----------|-----------------------|-----------|----------
+data        | Number    | Digital Pin. Used to set which pin the signal line to the pixels is being used. | 6   | yes
+length      | Number    | Number of pixels to be set in the strip. Note excess of 256 will mean a firmware change. | 128 | no
+board       | IO Object | IO Board object to use with Johnny Five  | undefined | yes(1)
+firmata     | Firmata board | Firmata board object to use with Firmata directly | undefined | yes(1)
+cotnroller  | String    | I2CBACKPACK, FIRMATA  | FIRMATA   | no
+
+(1) A board or firmata object is required but only one of these needs to be set.
+
+#### Events
+
+* `onready()` -  emits when the `strip` is configured. 
+* `onerror()` - returns the error that occurred.
+
+#### Examples
 
 _Johnny-Five instantiation_
 
@@ -97,10 +70,13 @@ board.on("ready", function() {
     strip = new pixel.Strip({
         data: 6,
         length: 4,
-        board: this
+        board: this,
+        controller: "FIRMATA",
     });
 
-    // do stuff with the strip here.
+    strip.on("ready", function() {
+        // do stuff with the strip here.
+    });
 });
 ```
 
@@ -116,64 +92,108 @@ var board = new firmata.Board('path to usb',function(){
         data: 6,
         length: 4,
         firmata: board,
+        controller: "FIRMATA",
+    });
+
+    strip.on("ready", function() {
+        // do stuff with the strip here.
+    });
+});  
+```
+
+_Johnny Five with backpack_
+
+```
+pixel = require("pixel");
+five = require("johnny-five");
+
+var board = new five.Board(opts);
+    
+board.on("ready", function() {
+    strip = new pixel.Strip({
+        length: 4,
+        board: this,
+        controller: "I2CBACKPACK",
+    });
+
+    strip.on("ready", function() {
+        // do stuff with the strip here.
+
     });
 });  
 ```
 
 Note that Johnny-Five uses the board option and firmata uses the firmata option.
-This is because the pixel library will support any Johnny-Five capable board
-in the future using the backpacks.
+This is because the pixel library supports and Board capable of presenting an
+IO interface. The library will work out the right thing to do based on the 
+board being passed and the controller being set.
 
-#### show();
+#### Methods
 
-This should be applied at the point you want to "set" the frame on the pixels.
+##### show();
 
-eg:
+The show method should be called at the point you want to "set" the frame on 
+the strip of pixels and show them.
+
+###### Example
 
 ```
-// make pixel modifications
-strip.show(); // send the frame for the strip
+// ... make pixel modifications
+
+strip.show(); // make the strip latch and update the LEDs
 ```
 
-Sequenced LEDs typically work by clocking data along their entire length and so
-you usually make the various changes you want to make to the strip then call show
+Addressable LEDs work by clocking data along their entire length and so
+you make the various changes you want to the strip then call `show()`
 to propagate this data through the LEDs.
 
-#### color(_"hexvalue"_);
+##### color( *colourstring* );
 
-All LEDs on the strip can be set using the .color() method. The color method will
-take a standard HTML hex value to designate the color. eg:
+All LEDs on the strip can be set to the same colour using the `.color()` method. 
+
+###### Parameters
+
+* **colourstring** A `String` as a standard HTML hex colour or a CSS colour name,
+or a CSS rgb(r, g, b) value used to specify the colour of the strip.
+
+TODO: Refactor to use new version
+
+###### Example
+
+_Set strip using a hex value_
 
 ```
-strip.color("#ff0000"); // turns entire strip red
+strip.color("#ff0000"); // turns entire strip red using a hex colour
 strip.show();
 ```
 
-#### color(_"color name"_);
-
-You can use HTML CSS color names and RGB values will be created from them. eg:
+_Update strip using a named CSS colour_
 
 ```
-strip.color("teal"); // sets strip to a blue-green color.
+strip.color("teal"); // sets strip to a blue-green color using a named colour
 strip.show();
 ```
 
-#### color(_"rgb(r, g, b)"_);
-
-RGB values are also valid if you prefer to use them, eg:
+_You can also use CSS RGB values_
 
 ```
-strip.color("rgb(0, 255, 0)"); // sets strip to green.
+strip.color("rgb(0, 255, 0)"); // sets strip to green using rgb values
 strip.show();
 ```
 
-#### pixel(_address_);
+##### pixel( *address* );
 
 Individual pixels can be addressed by the pixel method using their address in
-the sequence. eg:
+the sequence.
+
+###### Parameter
+
+* **address** A `Number` indexing the pixel you want. Returns a `Pixel` object.
+
+###### Example
 
 ```
-var p = strip.pixel(1); // get the second LED
+var p = strip.pixel(1); // get the second LED. p is now a Pixel object
 ```
 
 ### Pixel
@@ -181,21 +201,40 @@ var p = strip.pixel(1); // get the second LED
 A pixel is an individual element in the strip. It is fairly basic and it's API
 is detailed below.
 
-#### color(_color string_);
+#### Methods
+
+##### color( *color string* )
 
 Colors work exactly the same way on individual pixels as per strips so see the
-color reference above.
+`strip.color` reference above.
+
+###### Parameters
+
+* **color string** A `String` providing the hex colour, CSS colour name or CSS
+rgb() values to be used to set the individual pixel a certain colour
+
+###### Examples
 
 ```
-var p = strip.pixel(1); // get second LED
+var p = strip.pixel(1);     // get second LED
+p.color("#0000FF");         // set second pixel blue.
 
-p.color("#0000FF"); // set second pixel blue.
+p = strip.pixel(2);         // get third LED
+p.color("orange");          // set third pixel red/yellow
+
+p = strip.pixel(3);         // get fourth LED
+p.color("rgb(0, 255, 0)");  // set fourth LED green
 ```
 
-#### color()
+##### color()
 
-Returns an object representing the color of this pixel. This comes back with the
-following structure:
+Returns an object representing the color of this pixel with the shape below.
+
+###### Parameters
+
+* none
+
+###### Shape
 
 ```
 {
@@ -208,7 +247,9 @@ following structure:
 }
 ```
 
-For example:
+###### Example
+
+Get a pixel, set it's colour and then query it's current state.
 
 ```
 var p = strip.pixel(1); // get second LED
@@ -224,9 +265,7 @@ This library is under active development and planned modifications are:
 
 * Make the pin definition and strand length configurable without changing firmware
 * Remove the dependency on the Adafruit NeoPixel library and reduce complexity
-* Create an I2C "backpack" that will allow NeoPixels and others to work seamlessly
-over standard I2C (how it should have been done to begin with) and remove 
-the firmata modification requirement.
-* Work with SPI (using the same principle as above).
-
+* Make ability to have multiple strips on different pins
+* Provide methods of having different shapes to the strips
+* Alias all color() methods and properties to be colour() as well.
 

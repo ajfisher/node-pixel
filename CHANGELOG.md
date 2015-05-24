@@ -4,10 +4,10 @@
 
 * Added pin selection to the constructor in order to be able to set which pin
 you are using for the strip.
-* Added custom I2C controller
+* Added custom I2C controller in pixel.js
 * added custom I2C Backpack firmware.
 * Removed ATTIny85 support due to bugginess.
-
+* Updated all documentation including firmware install support etc.
 
 
 ### 0.2.3
