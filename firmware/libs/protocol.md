@@ -23,6 +23,8 @@ Sets the pin that the pixel strip uses and length of strip (10 bits, 1023 pixels
 4   10 bit strand length LSB 
 5   10 bit strand length MSB (upper 4 bits future reserved)
 6   END_SYSEX           0xF7
+```
+
 
 ### Show
 
