@@ -3,7 +3,7 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ajfisher/node-pixel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The purpose of this library is to provide a node js interface for addressable RGB LEDs.
-Most commonly these are known as Neo Pixels (if you shop at Adafruit) however 
+Most commonly these are known as Nfeo Pixels (if you shop at Adafruit) however 
 any WS2812b addressable LED should work with this. 
 
 The current iteration supports two methods of set up:
@@ -59,7 +59,7 @@ cotnroller  | String    | I2CBACKPACK, FIRMATA  | FIRMATA   | no
 _Johnny-Five instantiation_
 
 ```
-pixel = require("pixel");
+pixel = require("node-pixel");
 five = require("johnny-five");
 
 var board = new five.Board(opts);
@@ -83,7 +83,7 @@ board.on("ready", function() {
 _Firmata instantiation_
 
 ```
-pixel = require("pixel");
+pixel = require("node-pixel");
 var firmata = require('firmata');
 
 var board = new firmata.Board('path to usb',function(){
@@ -104,7 +104,7 @@ var board = new firmata.Board('path to usb',function(){
 _Johnny Five with backpack_
 
 ```
-pixel = require("pixel");
+pixel = require("node-pixel");
 five = require("johnny-five");
 
 var board = new five.Board(opts);
