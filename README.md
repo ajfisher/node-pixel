@@ -59,7 +59,7 @@ cotnroller  | String    | I2CBACKPACK, FIRMATA  | FIRMATA   | no
 _Johnny-Five instantiation_
 
 ```
-pixel = require("pixel");
+pixel = require("node-pixel");
 five = require("johnny-five");
 
 var board = new five.Board(opts);
@@ -83,7 +83,7 @@ board.on("ready", function() {
 _Firmata instantiation_
 
 ```
-pixel = require("pixel");
+pixel = require("node-pixel");
 var firmata = require('firmata');
 
 var board = new firmata.Board('path to usb',function(){
@@ -104,7 +104,7 @@ var board = new firmata.Board('path to usb',function(){
 _Johnny Five with backpack_
 
 ```
-pixel = require("pixel");
+pixel = require("node-pixel");
 five = require("johnny-five");
 
 var board = new five.Board(opts);
