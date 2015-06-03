@@ -1,7 +1,7 @@
 {
   "name": "node-pixel",
   "version": "0.3.1",
-  "description": "Library for controlling addressable LEDs (such as NeoPixels) from firmata or Johnny Five",
+  "description": "Library for controlling addressable LEDs (such as NeoPixels) from firmata or Johnny Five.",
   "main": "index.js",
   "directories": {
     "example": "examples"

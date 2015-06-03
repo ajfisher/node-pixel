@@ -1,3 +1,4 @@
+
 // This example shows how to use node-pixel using Johnny Five as the 
 // hook for the board.
 
@@ -10,7 +11,7 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
-var fps = 10; // how many frames per second do you want to try?
+var fps = 0.5; // how many frames per second do you want to try?
 
 board.on("ready", function() {
 
@@ -18,7 +19,7 @@ board.on("ready", function() {
 
     strip = new pixel.Strip({
         data: 6,
-        length: 64,
+        length: 128,
         board: this,
         controller: "FIRMATA",
 //        controller: "I2CBACKPACK"
@@ -29,21 +30,11 @@ board.on("ready", function() {
         console.log("Strip ready, let's go");
 
         var colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "white"];
-        var current_colors = [0,1,2,3,4];
-        //var current_pos = [0,1,2,3,4,75,76,77,78,79]
-        var current_pos = [0,1,2,3,4];
+        var current_colors = 0;
         var blinker = setInterval(function() {
 
-            strip.color("#000"); // blanks it out
-
-            for (var i=0; i< current_pos.length; i++) {
-                if (++current_pos[i] >= strip.stripLength()) {
-                    current_pos[i] = 0;
-                    if (++current_colors[i] >= colors.length) current_colors[i] = 0;
-                }
-                strip.pixel(current_pos[i]).color(colors[current_colors[i]]);
-            }
-
+            if (++current_colors >= colors.length) current_colors = 0;
+            strip.color(colors[current_colors]); // blanks it out
             strip.show();
         }, 1000/fps);
     });
