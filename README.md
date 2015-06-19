@@ -45,7 +45,7 @@ data        | Number    | Digital Pin. Used to set which pin the signal line to 
 length      | Number    | Number of pixels to be set in the strip. Note excess of 256 will mean a firmware change. | 128 | no
 board       | IO Object | IO Board object to use with Johnny Five  | undefined | yes(1)
 firmata     | Firmata board | Firmata board object to use with Firmata directly | undefined | yes(1)
-cotnroller  | String    | I2CBACKPACK, FIRMATA  | FIRMATA   | no
+controller  | String    | I2CBACKPACK, FIRMATA  | FIRMATA   | no
 
 (1) A board or firmata object is required but only one of these needs to be set.
 
