@@ -1,5 +1,21 @@
 # node-pixel changelog
 
+### 0.3.3
+
+* @pierceray contributed two examples porting "rainbow" behaviour with a static 
+rainbow effect and a dynamic moving one.
+
+### 0.3.2
+
+* Various documentation updates to clean up errors.
+* npm installation fixes - thanks @frxnz
+
+### 0.3.1
+
+* Documentation updates and bug fixes around Baudrate on backpack for RPi installation
+* Thanks to @frxnz
+
+
 ## 0.3.0
 
 * Added pin selection to the constructor in order to be able to set which pin
