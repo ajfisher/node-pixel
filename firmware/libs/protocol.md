@@ -8,6 +8,7 @@
 #define PIXEL_SHOW          0x02 // latch the pixels and show them
 #define PIXEL_SET_PIXEL     0x03 // set the color value of pixel n using 32bit packed color value        
 #define PIXEL_SET_STRIP     0x04 // set color of whole strip
+#define PIXEL_SHIFT         0x05 // shift all the pixels n places along the strip
 ```
 
 
@@ -67,4 +68,21 @@ Sets a given pixel to a particular color
 7   24 bit packed RGB color value upper middle bits
 8   24 bit packed RGB color value MSB
 9   END_SYSEX           0xF7
+```
+
+### Shift pixels - PROPOSAL
+
+Shifts the pixels along the strip N places. Direction flag specifies direction
+and wrap flag determines if pixels move off the "end" of the strip are placed
+back on the other end.
+
+```
+0   START_SYSEX         0xF0
+1   PIXEL_COMMAND       0x51
+2   PIXEL_SHIFT         0x05
+3   Shift 
+3     bits 0-5 provide number of LEDs to shift (range 0-31), 
+3     bit 6 direction 0=add to current position, 1=subtract
+3     bit 7 wrap behaviour 0=no wrapping, 1= wrapping
+4   END_SYSEX           0xF7
 ```
