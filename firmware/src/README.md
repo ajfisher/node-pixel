@@ -47,4 +47,9 @@ to put the files in the appropriate locations.
 If there are any mods to the src files then run `grunt build` to make sure
 everything is updated properly.
 
+## TODO
+
+* Get issue fixed with arduino cli in order to build hex files automatically for
+all major boards.
+* Use the skt500 programmer to be able to install hex files directly without arduino
 

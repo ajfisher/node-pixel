@@ -1,6 +1,6 @@
 ARDUINO_DIST=~/Downloads/NArduino.app/Contents/MacOS/Arduino
 
-#include ../../../config.mk
+include ../../../config.mk
 
 FIRMATA_FIRMWARE=node_pixel_firmata.ino
 BOARD=arduino:avr:uno

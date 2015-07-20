@@ -1,14 +1,10 @@
-ARDUINO_DIST=~/Downloads/NArduino.app/Contents/MacOS/Arduino
-
-#include ../../../config.mk
-
-FIRMATA_FIRMWARE=node_pixel_firmata.ino
-BOARD=arduino:avr:uno
-PORT=/dev/tty.wchusbserial1410
+ARDUINO_DIST=~/arduino-1.6.4/arduino
+FIRMATA_FIRMWARE=backpack.ino
+BOARD=arduino:avr:nano:cpu=atmega328
+#BOARD=adafruit:avr:trinket5
+PORT=/dev/ttyUSB0
 
 build:
-
-	echo $(ARDUINO_DIST)
 
 ifneq ($(board), "") 
 	BOARD=$(board)
@@ -24,5 +20,4 @@ ifneq ($(board), "")
 endif
 
 	$(ARDUINO_DIST) $(FIRMATA_FIRMWARE) --board $(BOARD) --port $(PORT) --verbose --upload
-
 

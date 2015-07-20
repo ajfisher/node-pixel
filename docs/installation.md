@@ -45,6 +45,8 @@ cd node-pixel
 npm install
 ```
 
+Firmware will be located in `firmware/build/`
+
 #### Option 2: NPM
 
 This will put everything in the node_modules folder and will include the firmware
@@ -54,14 +56,14 @@ so you just need to know where to look to find it.
 npm install node-pixel
 ```
 
-Firmware will be located in `node_modules/node-pixel/firmware`
+Firmware will be located in `node_modules/node-pixel/firmware/build`
 
 ## Custom Firmata Installation
 
 This installation method assumes you have a single Arduino and you install the
 custom firmata on it.
 
-Open up the arduino IDE, navigate to the `firmware/firmata/arduino/node_pixel_firmata/`
+Open up the arduino IDE, navigate to the `firmware/build/node_pixel_firmata/`
 folder and open up `node_pixel_firmata.ino`. This will bring in all the requirements you
 need as well.
 
@@ -82,7 +84,7 @@ _Wiring diagram_
 This installation method installs a custom "Backpack" firmware onto an arduino
 Nano or Pro Mini which is then connected to the board using I2C connections.
 
-Open up the arduino IDE, navigate to `firmware/backpack/` and open `backpack.ino`.
+Open up the arduino IDE, navigate to `firmware/build/backpack/` and open `backpack.ino`.
 This will bring in all the required dependencies.
 
 Note that before you compile you may need to change your board type and port
@@ -106,7 +108,9 @@ will need to look at your board and backpack pin out diagrams to see what these 
 Depending on your Board you may be able to power the Backpack by providing 5V out
 to the 5v pin on the Backpack or you may need to supply that separately.
 
-*Note: Because of an [I2C bug](http://www.advamation.com/knowhow/raspberrypi/rpi-i2c-bug.html) you must change the I2C baudrate on the Raspberry Pi and Pi 2. Edit `/boot/config.txt` to include the following line and reboot your Pi:*
+*Note: Because of an [I2C bug](http://www.advamation.com/knowhow/raspberrypi/rpi-i2c-bug.html) 
+you must change the I2C baudrate on the Raspberry Pi and Pi 2. Edit `/boot/config.txt` 
+to include the following line and reboot your Pi:*
 
 ```bash
 dtparam=i2c_arm_baudrate=10000
@@ -122,9 +126,8 @@ Now you're set up, it's time to use some JS to manipulate the LEDs.
 To use the library, require it per normal:
 
 ```
-var pixel = require("pixel");
+var pixel = require("node-pixel");
 ```
 
 The [main readme](../README.md) has more detailed instructions around the api.
-
 

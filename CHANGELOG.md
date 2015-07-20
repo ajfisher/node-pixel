@@ -1,5 +1,19 @@
 # node-pixel changelog
 
+## 0.4
+
+* Major refactor to deal with install and symlinking issues. Updates mean a Grunt
+task which is used to build the destination trees properly so the firmware can be
+compiled. This means better cross-platform support as well as no symlinking when
+npm installed the package. More details here 
+[https://github.com/ajfisher/node-pixel/issues/34](https://github.com/ajfisher/node-pixel/issues/34)
+* New documentation added and installation instruction fixed.
+* Grunt file used to do all building operations from a source tree to produce the
+relevant files in the right place for building
+* renamed the examples to be more sensical.
+
+
+
 ### 0.3.3
 
 * @pierceray contributed two examples porting "rainbow" behaviour with a static 
