@@ -12,8 +12,6 @@ npm installed the package. More details here
 relevant files in the right place for building
 * renamed the examples to be more sensical.
 
-
-
 ### 0.3.3
 
 * @pierceray contributed two examples porting "rainbow" behaviour with a static 
