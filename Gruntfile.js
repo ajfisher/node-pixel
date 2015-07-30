@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             backpack: {
                 cwd: 'firmware/src/',
                 flatten: true,
-                src: [ 'libs/**', '!libs/protocol.md', 'controller_src/backpack/*' ],
+                src: [ 'libs/neopixel/*', 'libs/ws2812/*', '!libs/protocol.md', 'controller_src/backpack/*' ],
                 dest: 'firmware/build/backpack/',
                 expand: true,
                 filter: 'isFile',
