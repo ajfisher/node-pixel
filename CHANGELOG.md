@@ -1,5 +1,10 @@
 # node-pixel changelog
 
+### 0.4.1
+
+* Fixed bug in backpack firmware that meant it was doing full scale serial debugging
+by default.
+
 ## 0.4
 
 * Major refactor to deal with install and symlinking issues. Updates mean a Grunt
