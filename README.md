@@ -20,6 +20,12 @@ a Raspberry PI.
 
 Both fimwares are provided in this repo in the firmware directory.
 
+## Getting help
+
+If you need some help getting your pixel strip working with johnny five jump into
+the [Gitter Chat](https://gitter.im/ajfisher/node-pixel) or reach out to
+[ajfisher on twitter](http://twitter.com/ajfisher) or just raise an issue here.
+
 ## Installation
 
 Both methods of installation are covered in detail in the [Installation Guide](docs/installation.md).
