@@ -17,10 +17,10 @@ have npm installed the development dependencies for this to work.
     |-- ws2812
 ```
 
-The `controller_src` directory contains target firmwares. These are all in one
-location for convenience. The `libs` directory comtains the common library
-dependencies for the firmware. These are pulled into the relevant locations
-during the build process.
+The `controller_src` directory contains target firmwares that need to be made. 
+These are all in one location for convenience. The `libs` directory comtains 
+the common library dependencies for the firmware. These are pulled into the 
+relevant locations during the build process.
 
 ## Dev environment set up
 
