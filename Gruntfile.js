@@ -2,6 +2,11 @@ module.exports = function(grunt) {
  
     // configure the tasks
     grunt.initConfig({
+        nodeunit: {
+            tests: [
+                "test/*js",
+                ],
+        },
         copy: {
             options: {
                 timestamp: true,
@@ -37,7 +42,11 @@ module.exports = function(grunt) {
     // load the tasks
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
     grunt.registerTask('build', ['clean', 'copy']);
+
+    grunt.registerTask('test', ['nodeunit', ]);
+
 
 };

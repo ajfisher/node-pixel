@@ -28,13 +28,14 @@
 #define PIXEL_SET_PIXEL     0x03 // set the color value of pixel n using 32bit packed color value        
 #define PIXEL_SET_STRIP     0x04 // set color of whole strip
 
+#define MAX_STRIPS 8
 #define LED_PIN 6
-#define STRIP_LENGTH 256
+#define STRIP_LENGTH 128
 #define BUFLENGTH 64
 
 void ws2812_initialise();
 void process_command(byte argc, byte *argv);
 void parse_message(String& message, int message_start);
-void show();
+void show(uint8_t strip);
 
 #endif

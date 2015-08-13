@@ -680,8 +680,6 @@ void setup()
   Firmata.attach(START_SYSEX, sysexCallback);
   Firmata.attach(SYSTEM_RESET, systemResetCallback);
 
-//  Firmata.attach(STRING_DATA, pixelCallback);
-
   Firmata.begin(57600);
   systemResetCallback();  // reset to default config
 
