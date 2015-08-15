@@ -6,10 +6,6 @@
 #include "./Adafruit_NeoPixel.h"
 #include "./ws2812.h"
 
-
-#define STRIP_LENGTH 17
-#define LED_PIN 6
-
 #include "includes.h"
 
 

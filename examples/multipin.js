@@ -87,6 +87,6 @@ board.on("ready", function() {
             if (++current_colors >= colors.length) current_colors = 0;
             strip3.color(colors[current_colors]); // blanks it out
             strip3.show();
-        }, 2000);
+        }, 1500);
     });
 });

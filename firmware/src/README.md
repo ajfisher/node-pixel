@@ -42,6 +42,12 @@ A `Gruntfile` is included that comprises a watcher on the `src` directory. When
 files here change then the targets are rebuilt appropriately with copy commands 
 to put the files in the appropriate locations.
 
+To ease your development process use:
+
+```
+grunt watch
+```
+
 ## Building for deployment
 
 If there are any mods to the src files then run `grunt build` to make sure

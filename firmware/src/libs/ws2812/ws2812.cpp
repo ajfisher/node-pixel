@@ -4,18 +4,26 @@
 // TODO Fix this absolutely disgusting hack
 
 Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_1 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_2 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_3 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_4 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_5 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_6 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_7 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
 
-Adafruit_NeoPixel strips[] = {strip_0, strip_1, strip_2, strip_3,strip_4, strip_5,strip_6, strip_7};
-int8_t strip_pins[MAX_STRIPS];
+#if SINGLE_STRIP
 
-bool showing = false;
+    Adafruit_NeoPixel strips[] = {strip_0};
+    int8_t strip_pins[MAX_STRIPS];
+
+#else
+
+    Adafruit_NeoPixel strip_1 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+    Adafruit_NeoPixel strip_2 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+    Adafruit_NeoPixel strip_3 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+    Adafruit_NeoPixel strip_4 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+    Adafruit_NeoPixel strip_5 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+    Adafruit_NeoPixel strip_6 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+    Adafruit_NeoPixel strip_7 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+
+    Adafruit_NeoPixel strips[] = {strip_0, strip_1, strip_2, strip_3,strip_4, strip_5,strip_6, strip_7};
+    int8_t strip_pins[MAX_STRIPS];
+#endif
+
 
 void ws2812_initialise() {
     // initialises the strips
@@ -41,7 +49,7 @@ void process_command(byte argc, byte *argv){
         case PIXEL_SHOW: {
             for (uint8_t i = 0; i< MAX_STRIPS; i++) {
                 if (strip_pins[i] > 0) {
-                    delay(2); // TODO: Fix this as it's basically a latching wait.
+                    delay(10); // TODO: Fix this as it's basically a latching wait.
                     strips[strip].show();
                 }
             }
@@ -67,7 +75,7 @@ void process_command(byte argc, byte *argv){
             strips[strip].setPin((uint8_t)argv[1]);
             strip_pins[strip] = (int8_t)argv[1];
 
-            // TODO: Sort out the strand length stuff here.
+            // TODO: Sort out the strand length stuff.
 
             break;
 

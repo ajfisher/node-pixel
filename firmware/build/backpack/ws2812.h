@@ -26,9 +26,20 @@
 #define PIXEL_SET_PIXEL     0x03 // set the color value of pixel n using 32bit packed color value        
 #define PIXEL_SET_STRIP     0x04 // set color of whole strip
 
-#define MAX_STRIPS 8
-#define LED_DEFAULT_PIN 14
-#define STRIP_LENGTH 128
+#define SINGLE_STRIP false
+
+//TODO remove all of this and consolidate properly.
+
+#if SINGLE_STRIP
+    #define MAX_STRIPS 1
+    #define LED_DEFAULT_PIN 6
+    #define STRIP_LENGTH 256
+#else
+    #define MAX_STRIPS 8
+    #define LED_DEFAULT_PIN 14
+    #define STRIP_LENGTH 64
+#endif
+
 #define BUFLENGTH 64
 
 void ws2812_initialise();
