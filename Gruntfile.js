@@ -49,6 +49,34 @@ module.exports = function(grunt) {
                 },
             },
         },
+        todo: {
+            options: {
+                title: "Current tasks",
+                logOutput: true,
+                marks: [
+                    {
+                        name: "FIX",
+                        pattern: "/FIXME/",
+                        color: "red"
+                    },
+                    {
+                        name: "TODO",
+                        pattern: /TODO/,
+                        color: "yellow"
+                    }
+                ],
+                file: "todo.md",
+                githubBoxes: false,
+                colophon: true,
+                usePackage: true
+            },
+            src: [
+                'firmware/src/**',
+                'test/**',
+                'examples/**',
+                'lib/*',
+            ]
+        },
     });
  
     // load the tasks
@@ -56,10 +84,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-todo');
 
     grunt.registerTask('build', ['clean', 'copy']);
 
     grunt.registerTask('test', ['nodeunit', ]);
-
-
 };
