@@ -10,7 +10,7 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
-var fps = 20; // how many frames per second do you want to try?
+var fps = 40; // how many frames per second do you want to try?
 
 board.on("ready", function() {
 
@@ -30,7 +30,6 @@ board.on("ready", function() {
 
         var colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "white"];
         var current_colors = [0,1,2,3,4];
-        //var current_pos = [0,1,2,3,4,75,76,77,78,79]
         var current_pos = [0,1,2,3,4];
         var blinker = setInterval(function() {
 

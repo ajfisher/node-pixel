@@ -3,21 +3,25 @@
 
 // TODO Fix this absolutely disgusting hack
 
-Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_1 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_2 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_3 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_4 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_5 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_6 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip_7 = Adafruit_NeoPixel(STRIP_LENGTH, LED_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_1 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_2 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_3 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_4 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_5 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_6 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip_7 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
 
 Adafruit_NeoPixel strips[] = {strip_0, strip_1, strip_2, strip_3,strip_4, strip_5,strip_6, strip_7};
+int8_t strip_pins[MAX_STRIPS];
+
+bool showing = false;
 
 void ws2812_initialise() {
-    // initialises the strip
+    // initialises the strips
 
     for (uint8_t i=0; i< MAX_STRIPS; i++) {  
+        strip_pins[i] = -1;
         strips[i].begin();
         strips[i].show();
     }
@@ -32,10 +36,15 @@ void process_command(byte argc, byte *argv){
     uint8_t strip = argv[0] >> 4;
     uint8_t command = 0xF & argv[0];
 
+    // now process the command.
     switch (command) {
         case PIXEL_SHOW: {
-            //show(strip);
-            strips[strip].show();
+            for (uint8_t i = 0; i< MAX_STRIPS; i++) {
+                if (strip_pins[i] > 0) {
+                    delay(2); // TODO: Fix this as it's basically a latching wait.
+                    strips[strip].show();
+                }
+            }
             break;
         }
         case PIXEL_SET_STRIP: {
@@ -56,6 +65,7 @@ void process_command(byte argc, byte *argv){
         case PIXEL_CONFIG: {
             // Sets the pin that the neopixel strip is on.
             strips[strip].setPin((uint8_t)argv[1]);
+            strip_pins[strip] = (int8_t)argv[1];
 
             // TODO: Sort out the strand length stuff here.
 
@@ -65,12 +75,3 @@ void process_command(byte argc, byte *argv){
     }
 }
 
-void parse_message(String& message, int message_start) {
-    // this is now a NOOP
-
-}
-
-void show(uint8_t strip) {
-    // simply runs the frame
-    strips[strip].show();
-}

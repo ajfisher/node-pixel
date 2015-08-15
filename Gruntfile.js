@@ -3,6 +3,9 @@ module.exports = function(grunt) {
     // configure the tasks
     grunt.initConfig({
         nodeunit: {
+            options: {
+                reporter: "verbose",
+            },
             tests: [
                 "test/*js",
                 ],
@@ -37,12 +40,22 @@ module.exports = function(grunt) {
                      ]
             },
         },
+        watch: {
+            scripts: {
+                files: ['firmware/src/**/*'],
+                tasks: ['build'],
+                options: {
+                    spawn: false,
+                },
+            },
+        },
     });
  
     // load the tasks
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('build', ['clean', 'copy']);
 

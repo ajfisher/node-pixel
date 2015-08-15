@@ -13,8 +13,6 @@
 #ifndef WS2812_h
 #define WS2812_h
 
-#define DEBUG true
-
 #include "Arduino.h"
 #include "Adafruit_NeoPixel.h"
 
@@ -29,13 +27,11 @@
 #define PIXEL_SET_STRIP     0x04 // set color of whole strip
 
 #define MAX_STRIPS 8
-#define LED_PIN 6
+#define LED_DEFAULT_PIN 14
 #define STRIP_LENGTH 128
 #define BUFLENGTH 64
 
 void ws2812_initialise();
 void process_command(byte argc, byte *argv);
-void parse_message(String& message, int message_start);
-void show(uint8_t strip);
 
 #endif

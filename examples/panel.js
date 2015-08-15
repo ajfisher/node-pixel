@@ -19,11 +19,13 @@ board.on("ready", function() {
 
     strip = new pixel.Strip({
         data: 6,
-        length: 128,
+        length: 17,
         board: this,
         controller: "FIRMATA",
 //        controller: "I2CBACKPACK"
     });
+
+
 
     strip.on("ready", function() {
 
@@ -38,4 +40,5 @@ board.on("ready", function() {
             strip.show();
         }, 1000/fps);
     });
+
 });
