@@ -30,6 +30,20 @@ the [Gitter Chat](https://gitter.im/ajfisher/node-pixel) or reach out to
 
 Both methods of installation are covered in detail in the [Installation Guide](docs/installation.md).
 
+### A note on multiple strips
+
+Multiple strips up to 8 on one arduino or backpack can be used. 8 is a maximum
+defined by the number of bits left in the config message. It's also about the
+max you can have before you start running into memory issues (all those pixels
+need memory allocated to track their colour state). Each strip is limited to 
+64 pixels each.
+
+One thing to note is that currently because the memory and strips are
+preallocated if you want to do tight timings with multiple strips working independently
+you may run into some blocking conflicts. These are discussed in 
+[this issue](https://github.com/ajfisher/node-pixel/issues/15). 
+
+
 ## Pixel API
 
 The Pixel API is provided below. 
@@ -40,6 +54,7 @@ A sequence of LEDs all joined together is called a `strip` and you need to tell
 the strip which `pin` (`data`) it is on and how many LEDs are in the sequence. 
 In addition you need to provide the strip with a controller to tell it to use 
 the custom firmata or I2C backpack.
+
 
 #### Parameters
 
@@ -52,6 +67,7 @@ length      | Number    | Number of pixels to be set in the strip. Note excess o
 board       | IO Object | IO Board object to use with Johnny Five  | undefined | yes(1)
 firmata     | Firmata board | Firmata board object to use with Firmata directly | undefined | yes(1)
 controller  | String    | I2CBACKPACK, FIRMATA  | FIRMATA   | no
+strip_id    | Number    | [0-7] Indicating which strip to use | 0 | no
 
 (1) A board or firmata object is required but only one of these needs to be set.
 
@@ -78,6 +94,7 @@ board.on("ready", function() {
         length: 4,
         board: this,
         controller: "FIRMATA",
+        strip_id: 0,
     });
 
     strip.on("ready", function() {
@@ -99,6 +116,7 @@ var board = new firmata.Board('path to usb',function(){
         length: 4,
         firmata: board,
         controller: "FIRMATA",
+        strip_id: 1
     });
 
     strip.on("ready", function() {
