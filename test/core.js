@@ -134,7 +134,7 @@ exports["Strip - Firmata"] = {
             };
             
             strip.color([0, 255, 0]);
-            test.deepEqual(strip.pixel(3).color(), colourcheck, "Colour set using options");
+            test.deepEqual(strip.pixel(3).color(), colourcheck, "Colour set using RGB array");
 
 
             test.done();
@@ -216,9 +216,8 @@ exports["Pixel - Firmata"] = {
                 rgb: [0, 255, 0],
             };
             
-            //FIXME This is incorrect and needs to be linked the right way.
-            this.strip.pixel.color([0, 255, 0]);
-            test.deepEqual(this.strip.pixel(3).color(), colourcheck, "Colour set using options");
+            this.strip.pixel(3).color([0, 255, 0]);
+            test.deepEqual(this.strip.pixel(3).color(), colourcheck, "Colour set using RGB array");
 
             test.done();
 
