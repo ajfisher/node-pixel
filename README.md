@@ -178,9 +178,9 @@ All LEDs on the strip can be set to the same colour using the `.color()` method.
 ###### Parameters
 
 * **colourstring** A `String` as a standard HTML hex colour or a CSS colour name,
-or a CSS rgb(r, g, b) value used to specify the colour of the strip.
+or a CSS rgb(r, g, b) value used to specify the colour of the strip. Alternatively
+an `Array` object as an rgb value eg `[r, g, b]`
 
-TODO: Refactor to use new version
 
 ###### Example
 
@@ -202,6 +202,13 @@ _You can also use CSS RGB values_
 
 ```
 strip.color("rgb(0, 255, 0)"); // sets strip to green using rgb values
+strip.show();
+```
+
+_Or set using an array of RGB values_
+
+```
+strip.color([255, 255, 0]); // Sets strip using an array
 strip.show();
 ```
 
@@ -235,7 +242,8 @@ Colors work exactly the same way on individual pixels as per strips so see the
 ###### Parameters
 
 * **color string** A `String` providing the hex colour, CSS colour name or CSS
-rgb() values to be used to set the individual pixel a certain colour
+rgb() values to be used to set the individual pixel a certain colour. You can also
+pass in an `Array` object that is a set of RGB values as [r, g, b].
 
 ###### Examples
 
@@ -248,6 +256,9 @@ p.color("orange");          // set third pixel red/yellow
 
 p = strip.pixel(3);         // get fourth LED
 p.color("rgb(0, 255, 0)");  // set fourth LED green
+
+p = strip.pixel(4);         // get fifth LED
+p.color([255, 0, 255]);     // set fifth LED magenta
 ```
 
 ##### color()
@@ -287,9 +298,7 @@ p.color(); // returns {r:0, g:0, b:255, hexcode:"#0000ff", color:"blue", rgb[0,0
 
 This library is under active development and planned modifications are:
 
-* Make the pin definition and strand length configurable without changing firmware
+* Make the strand length configurable without changing firmware
 * Remove the dependency on the Adafruit NeoPixel library and reduce complexity
-* Make ability to have multiple strips on different pins
 * Provide methods of having different shapes to the strips
-* Alias all color() methods and properties to be colour() as well.
 
