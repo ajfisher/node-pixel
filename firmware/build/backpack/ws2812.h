@@ -26,7 +26,7 @@
 #define PIXEL_SET_PIXEL     0x03 // set the color value of pixel n using 32bit packed color value        
 #define PIXEL_SET_STRIP     0x04 // set color of whole strip
 
-#define SINGLE_STRIP false
+//#define SINGLE_STRIP true
 
 //TODO remove all of this and consolidate properly.
 
@@ -46,5 +46,6 @@
 void ws2812_initialise();
 void ws2812_initialise(bool backpack);
 void process_command(byte argc, byte *argv);
+
 
 #endif

@@ -1,6 +1,8 @@
 #include "ws2812.h"
 #include "Arduino.h"
 
+bool isBackpack = false;
+
 // TODO Fix this absolutely disgusting hack
 
 Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
@@ -38,6 +40,8 @@ void ws2812_initialise() {
 void ws2812_initialise(bool backpack) {
     // if backpack is true then set the strips up a little differently
 
+    isBackpack = backpack;
+    // TODO Fix this to look it up the right way and initialise properly.
     for (uint8_t i=0; i<MAX_STRIPS; i++) {
         strips[i].setPin(STRIP_START_PIN + i);        
     }
@@ -87,9 +91,7 @@ void process_command(byte argc, byte *argv){
             strip_pins[strip] = (int8_t)argv[1];
 
             // TODO: Sort out the strand length stuff.
-
             break;
-
         }
     }
 }

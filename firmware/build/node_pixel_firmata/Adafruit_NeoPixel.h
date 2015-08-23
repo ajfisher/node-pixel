@@ -34,12 +34,6 @@
 #define NEO_COLMASK 0x01
 #define NEO_KHZ800  0x02 // 800 KHz datastream
 #define NEO_SPDMASK 0x02
-// Trinket flash space is tight, v1 NeoPixels aren't handled by default.
-// Remove the ifndef/endif to add support -- but code will be bigger.
-// Conversely, can comment out the #defines to save space on other MCUs.
-#ifndef __AVR_ATtiny85__
-#define NEO_KHZ400  0x00 // 400 KHz datastream
-#endif
 
 class Adafruit_NeoPixel {
 
@@ -53,19 +47,8 @@ class Adafruit_NeoPixel {
     begin(void),
     show(void),
     setPin(uint8_t p),
-    setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b),
     setPixelColor(uint16_t n, uint32_t c),
-    setBrightness(uint8_t),
     clear();
-  uint8_t
-   *getPixels(void) const,
-    getBrightness(void) const;
-  uint16_t
-    numPixels(void) const;
-  static uint32_t
-    Color(uint8_t r, uint8_t g, uint8_t b);
-  uint32_t
-    getPixelColor(uint16_t n) const;
   inline bool
     canShow(void) { return (micros() - endTime) >= 50L; }
 
@@ -76,7 +59,6 @@ class Adafruit_NeoPixel {
     numBytes;      // Size of 'pixels' buffer below
   uint8_t
     pin,           // Output pin number
-    brightness,
    *pixels,        // Holds LED color values (3 bytes each)
     rOffset,       // Index of red byte within each 3-byte pixel
     gOffset,       // Index of green byte
