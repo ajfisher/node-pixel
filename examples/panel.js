@@ -1,5 +1,4 @@
-
-// This example shows how to use node-pixel using Johnny Five as the 
+// This example shows how to use node-pixel using Johnny Five as the
 // hook for the board.
 
 var five = require("johnny-five");
@@ -21,8 +20,7 @@ board.on("ready", function() {
         data: 6,
         length: 128,
         board: this,
-        controller: "FIRMATA",
-//        controller: "I2CBACKPACK"
+        controller: "FIRMATA"
     });
 
     strip.on("ready", function() {
