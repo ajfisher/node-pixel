@@ -38,11 +38,13 @@
     #define MAX_STRIPS 8
     #define LED_DEFAULT_PIN 14
     #define STRIP_LENGTH 64
+    #define STRIP_START_PIN 4
 #endif
 
 #define BUFLENGTH 64
 
 void ws2812_initialise();
+void ws2812_initialise(bool backpack);
 void process_command(byte argc, byte *argv);
 
 #endif

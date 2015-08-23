@@ -35,6 +35,17 @@ void ws2812_initialise() {
     }
 }
 
+void ws2812_initialise(bool backpack) {
+    // if backpack is true then set the strips up a little differently
+
+    for (uint8_t i=0; i<MAX_STRIPS; i++) {
+        strips[i].setPin(STRIP_START_PIN + i);        
+    }
+
+    ws2812_initialise();
+
+}
+
 void process_command(byte argc, byte *argv){
     // this takes a pixel command that has been determined and then
     // processes it appropriately.

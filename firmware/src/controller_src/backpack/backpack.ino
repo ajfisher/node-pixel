@@ -20,7 +20,8 @@ void setup() {
     Serial.println("NeoPixel I2C");
 #endif
 
-    ws2812_initialise();
+
+    ws2812_initialise(true);
 }
 
 void loop() {
