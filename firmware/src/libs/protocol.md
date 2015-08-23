@@ -1,41 +1,58 @@
 # Protocol used to talk to the pixel strip using firmata
 
+This is the definition of the protocol used to talk to the LED strips. The 
+protocol is largely the same whether you are using custom firmata or I2C 
+backpack in order to keep things simple.
+
 ## Protocol Pixel Command Instructions.
 
-The pixel instructions are passed as the lower 4 bits in the message following
-`PIXEL_COMMAND`. This leaves the top 3 bits free which are used to specify
-which strip you are sending the message to. These top 3 bits are ORed with the
-pixel commmand in order to keep the message tight. This also implies that 
-max strips can only be 8.
-
-For backwards compatibility this means the top three bits as 000 will always
-point to the first strip.
-
 ```
-#define PIXEL_OFF           0x00 // set strip to be off
-#define PIXEL_CONFIG        0x01 // set pin number and max length
-#define PIXEL_SHOW          0x02 // latch the pixels and show them
-#define PIXEL_SET_PIXEL     0x03 // set the color value of pixel n using 32bit packed color value        
-#define PIXEL_SET_STRIP     0x04 // set color of whole strip
-#define PIXEL_SHIFT         0x05 // shift all the pixels n places along the strip
-//      PIXEL_RESERVED      0x06-0x0F // Reserved for future instructions.
+#define PIXEL_OFF               0x00 // set strip to be off
+#define PIXEL_CONFIG            0x01 // deprecated will be removed and recycled
+#define PIXEL_SHOW              0x02 // latch the pixels and show them
+#define PIXEL_SET_PIXEL         0x03 // set the color value of pixel n using 32bit packed color value        
+#define PIXEL_SET_STRIP         0x04 // set color of whole strip
+#define PIXEL_SHIFT             0x05 // shift all the pixels n places along the strip
+#define PIXEL_FIRMATA_CONFIG    0x06 // configure Firmata based strips and pins
+#define PIXEL_BACKPACK_CONFIG   0x07 // configure backpack strip lengths.
+//      PIXEL_RESERVED          0x08-0x0F // Reserved for future instructions.
 ```
 
-### Config
+### Firmata Config
 
-Sets the pin that the pixel strip uses and length of strip (10 bits, 1023 pixels)
+Sets the pins that the pixel strips use and length of the strips (10 bits, 1023 pixels)
 
 ```
-0   START_SYSEX         0xF0
-1   PIXEL_COMMAND       0x51
-2   Strip ID (int using 3 upper bits to designate strips 0-7)
-2   PIXEL_CONFIG        0x01
+0   START_SYSEX             0xF0
+1   PIXEL_COMMAND           0x51
+2   PIXEL_FIRMATA_CONFIG    0x06
 3   Pin Number (int value use lower 5 bits Pin 0-31, top 2 future reserved)
 4   10 bit strand length LSB 
 5   10 bit strand length MSB (upper 4 bits future reserved)
-6   END_SYSEX           0xF7
+6   Pin Number (int value use lower 5 bits Pin 0-31, top 2 future reserved)
+7   10 bit strand length LSB
+8   10 bit strand length MSB
+... Repeat up to 8 LED strips
+N   END_SYSEX               0xF7
 ```
 
+### Backpack Config
+
+Sets the number of pins that will be used and the lengths of those strips for each
+one.
+
+```
+0   START_SYSEX             0xF0
+1   PIXEL_COMMAND           0x51
+2   PIXEL_BACKPACK_CONFIG   0x07
+3   Number of pins (in val use lower 3 bits gives up to 8 pins in use. Top 4 reserved)
+4   10 bit strand length LSB (for first LED strip) 
+5   10 bit strand length MSB (for first LED strip) 
+6   10 bit strand length LSB (for 2nd LED strip) 
+7   10 bit strand length MSB (for 2nd LED strip) 
+... Repeat up to 8 LED strips
+N   END_SYSEX               0xF7
+```
 
 ### Show
 
@@ -44,7 +61,6 @@ Latches the frame and triggers sending the data down the wire.
 ```
 0   START_SYSEX         0xF0
 1   PIXEL_COMMAND       0x51
-2   Strip ID (int using 3 upper bits to designate strips 0-7)
 2   PIXEL_SHOW          0x02
 3   END_SYSEX           0xF7
 ```
@@ -56,7 +72,6 @@ Sets the whole strip to a particular color
 ```
 0   START_SYSEX         0xF0
 1   PIXEL_COMMAND       0x51
-2   Strip ID (int using 3 upper bits to designate strips 0-7)
 2   PIXEL_SET_STRIP     0x04
 3   24 bit packed RGB color value LSB
 4   24 bit packed RGB color value lower middle bits
@@ -72,7 +87,6 @@ Sets a given pixel to a particular color
 ```
 0   START_SYSEX         0xF0
 1   PIXEL_COMMAND       0x51
-2   Strip ID (int using 3 upper bits to designate strips 0-7)
 2   PIXEL_SET_PIXEL     0x03
 3   max 14 bit index of pixel in strip LSB
 4   max 14 bit index of pixel in strip MSB
@@ -92,7 +106,6 @@ back on the other end.
 ```
 0   START_SYSEX         0xF0
 1   PIXEL_COMMAND       0x51
-2   Strip ID (int using 3 upper bits to designate strips 0-7)
 2   PIXEL_SHIFT         0x05
 3   Shift 
 3     bits 0-5 provide number of LEDs to shift (range 0-31), 
