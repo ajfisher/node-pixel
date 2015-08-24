@@ -46,10 +46,8 @@ one.
 1   PIXEL_COMMAND           0x51
 2   PIXEL_BACKPACK_CONFIG   0x07
 3   Number of pins (in val use lower 3 bits gives up to 8 pins in use. Top 4 reserved)
-4   10 bit strand length LSB (for first LED strip) 
-5   10 bit strand length MSB (for first LED strip) 
-6   10 bit strand length LSB (for 2nd LED strip) 
-7   10 bit strand length MSB (for 2nd LED strip) 
+4   7 bit strand length (for first LED strip) 
+5   7 bit strand length (for 2nd LED strip) 
 ... Repeat up to 8 LED strips
 N   END_SYSEX               0xF7
 ```
