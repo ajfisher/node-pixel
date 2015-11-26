@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
- 
+
     // configure the tasks
     grunt.initConfig({
         nodeunit: {
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         },
         clean: {
             build: {
-                src: [  
+                src: [
                         'firmware/build/node_pixel_firmata',
                         'firmware/build/backpack',
                      ]
@@ -44,6 +44,16 @@ module.exports = function(grunt) {
             scripts: {
                 files: ['firmware/src/**/*'],
                 tasks: ['build'],
+                options: {
+                    spawn: false,
+                },
+            },
+            todo: {
+                files: [
+                    'firmware/src/**/*',
+                    'lib/*',
+                ],
+                tasks: ['todo'],
                 options: {
                     spawn: false,
                 },
@@ -75,10 +85,12 @@ module.exports = function(grunt) {
                 'test/**',
                 'examples/**',
                 'lib/*',
+                '!firmware/src/libs/firmata/*',
+                '!firmware/src/libs/neopixel/*',
             ]
         },
     });
- 
+
     // load the tasks
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
