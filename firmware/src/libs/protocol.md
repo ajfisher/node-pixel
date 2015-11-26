@@ -1,16 +1,26 @@
 # Protocol used to talk to the pixel strip using firmata
 
-This is the definition of the protocol used to talk to the LED strips. The 
-protocol is largely the same whether you are using custom firmata or I2C 
+This is the definition of the protocol used to talk to the LED strips. The
+protocol is largely the same whether you are using custom firmata or I2C
 backpack in order to keep things simple.
+
+There are some exceptions to this, notably around configuration.
+
+## Multi strip protocol consideration.
+
+In the instance of multiple physical strips being attached to multiple pins on
+the board, the protocol interface remains the same however the strips are
+_logically_ joined end to end in the order they are allocated during the config
+phase. It is up to the caller to pass the appropriate pixel value in order
+to ensure that the strips are mapped to the correct sequence.
 
 ## Protocol Pixel Command Instructions.
 
 ```
 #define PIXEL_OFF               0x00 // set strip to be off
-#define PIXEL_CONFIG            0x01 // deprecated will be removed and recycled
+#define PIXEL_CONFIG            0x01 // DEPRECATED will be removed and recycled
 #define PIXEL_SHOW              0x02 // latch the pixels and show them
-#define PIXEL_SET_PIXEL         0x03 // set the color value of pixel n using 32bit packed color value        
+#define PIXEL_SET_PIXEL         0x03 // set the color value of pixel n using 32bit packed color value
 #define PIXEL_SET_STRIP         0x04 // set color of whole strip
 #define PIXEL_SHIFT             0x05 // shift all the pixels n places along the strip
 #define PIXEL_FIRMATA_CONFIG    0x06 // configure Firmata based strips and pins
@@ -20,14 +30,15 @@ backpack in order to keep things simple.
 
 ### Firmata Config
 
-Sets the pins that the pixel strips use and length of the strips (10 bits, 1023 pixels)
+Sets the pins that the pixel strips use and length of the strips. This is given
+using 10 bits thus providing for 1023 pixels.
 
 ```
 0   START_SYSEX             0xF0
 1   PIXEL_COMMAND           0x51
 2   PIXEL_FIRMATA_CONFIG    0x06
 3   Pin Number (int value use lower 5 bits Pin 0-31, top 2 future reserved)
-4   10 bit strand length LSB 
+4   10 bit strand length LSB
 5   10 bit strand length MSB (upper 4 bits future reserved)
 6   Pin Number (int value use lower 5 bits Pin 0-31, top 2 future reserved)
 7   10 bit strand length LSB
@@ -39,15 +50,16 @@ N   END_SYSEX               0xF7
 ### Backpack Config
 
 Sets the number of pins that will be used and the lengths of those strips for each
-one.
+one. Note that the length is given as a 10 bit value so it can support up to
+1023 pixels on each pin. This is a theoretical maximum.
 
 ```
 0   START_SYSEX             0xF0
 1   PIXEL_COMMAND           0x51
 2   PIXEL_BACKPACK_CONFIG   0x07
 3   Number of pins (in val use lower 3 bits gives up to 8 pins in use. Top 4 reserved)
-4   7 bit strand length (for first LED strip) 
-5   7 bit strand length (for 2nd LED strip) 
+4   7 bit strand length (for first LED strip)
+5   7 bit strand length (for 2nd LED strip)
 ... Repeat up to 8 LED strips
 N   END_SYSEX               0xF7
 ```
@@ -105,8 +117,8 @@ back on the other end.
 0   START_SYSEX         0xF0
 1   PIXEL_COMMAND       0x51
 2   PIXEL_SHIFT         0x05
-3   Shift 
-3     bits 0-5 provide number of LEDs to shift (range 0-31), 
+3   Shift
+3     bits 0-5 provide number of LEDs to shift (range 0-31),
 3     bit 6 direction 0=add to current position, 1=subtract
 3     bit 7 wrap behaviour 0=no wrapping, 1= wrapping
 4   END_SYSEX           0xF7
