@@ -30,7 +30,7 @@ Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO
 void ws2812_initialise() {
     // initialises the strips
 
-    for (uint8_t i=0; i< MAX_STRIPS; i++) {  
+    for (uint8_t i=0; i< MAX_STRIPS; i++) {
         strip_pins[i] = -1;
         strips[i].begin();
         strips[i].show();
@@ -43,7 +43,7 @@ void ws2812_initialise(bool backpack) {
     isBackpack = backpack;
     // TODO Fix this to look it up the right way and initialise properly.
     for (uint8_t i=0; i<MAX_STRIPS; i++) {
-        strips[i].setPin(STRIP_START_PIN + i);        
+        strips[i].setPin(STRIP_START_PIN + i);
     }
 
     ws2812_initialise();
@@ -92,6 +92,19 @@ void process_command(byte argc, byte *argv){
 
             // TODO: Sort out the strand length stuff.
             break;
+        }
+        case PIXEL_CONFIG_FIRMATA: {
+            // Sets the pin and length of the specific strip
+            Serial.print("ArgC: ");
+            Serial.println(argc);
+            break;
+
+        }
+        case PIXEL_CONFIG_BACKPACK: {
+            // Sets the pin and length of the specific strip
+
+            break;
+
         }
     }
 }
