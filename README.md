@@ -32,11 +32,18 @@ Both methods of installation are covered in detail in the [Installation Guide](d
 
 ### A note on multiple strips
 
-Multiple strips up to 8 on one arduino or backpack can be used. 8 is a maximum
-defined by the number of bits left in the config message. It's also about the
-max you can have before you start running into memory issues (all those pixels
-need memory allocated to track their colour state). Each strip is limited to 
-64 pixels each.
+Multiple led strips on one arduino or backpack are supported up to a maximum
+of 8. This maximum is about the max you can have before you start running into 
+memory issues (all those pixels need memory allocated to track their colour 
+state). In this case each strip is limited to 64 pixels each.
+
+Multiple strips connected to a single board or backpack are for the purposes
+of node-pixel considered to be a single strip and are joined together.
+
+On a backpack, the strips are defined sequentially from pin 4-12 on the backpack.
+
+On an arduino, each strip can be defined with an individual pin which doesn't
+need to be sequential.
 
 One thing to note is that currently because the memory and strips are
 preallocated if you want to do tight timings with multiple strips working independently
@@ -60,16 +67,23 @@ the custom firmata or I2C backpack.
 
 * **options** An object of property parameters
 
-Property    | Type      | Value / Description   | Default   | Required
-------------|-----------|-----------------------|-----------|----------
-data        | Number    | Digital Pin. Used to set which pin the signal line to the pixels is being used. | 6   | yes
-length      | Number    | Number of pixels to be set in the strip. Note excess of 256 will mean a firmware change. | 128 | no
-board       | IO Object | IO Board object to use with Johnny Five  | undefined | yes(1)
-firmata     | Firmata board | Firmata board object to use with Firmata directly | undefined | yes(1)
-controller  | String    | I2CBACKPACK, FIRMATA  | FIRMATA   | no
-strip_id    | Number    | [0-7] Indicating which strip to use | 0 | no
+| Property | Type | Value / Description | Default | Required |
+|----------|------|---------------------|---------|----------|
+| pin | Number | Digital Pin. Used to set which pin the signal line to the pixels is being used when using a single strip. | 6 | yes |
+| length | Number | Number of pixels to be set on a single strip. | 128 | no |
+| pins | Array | Array of pin and length objects or array of length objects | 6 | no (2)(3) |
+| board | IO Object | IO Board object to use with Johnny Five | undefined | yes(1) |
+| firmata | Firmata board | Firmata board object to use with Firmata directly | undefined | yes(1) |
+| controller | String | I2CBACKPACK, FIRMATA | FIRMATA | no |
 
 (1) A board or firmata object is required but only one of these needs to be set.
+
+(2) If using a backpack use an array of lengths eg `[8, 8, 8]` which would set
+pins 4, 5 & 6 on the backpack to have strips of length 8 each on them.
+
+(3) If using custom firmata then use an array of objects eg 
+`[ {pin: 4, length: 8}, {pin: 10, length: 8}, {pin: 11, length: 8} ]`
+which would set pins 4, 10 & 11 to have strips of length 8 on each of them.
 
 #### Events
 
@@ -90,11 +104,10 @@ var strip = null;
 board.on("ready", function() {
 
     strip = new pixel.Strip({
-        data: 6,
+        pin: 6,
         length: 4,
         board: this,
         controller: "FIRMATA",
-        strip_id: 0,
     });
 
     strip.on("ready", function() {
@@ -112,11 +125,10 @@ var firmata = require('firmata');
 var board = new firmata.Board('path to usb',function(){
     
     strip = new pixel.Strip({
-        data: 6,
+        pin: 6,
         length: 4,
         firmata: board,
         controller: "FIRMATA",
-        strip_id: 1
     });
 
     strip.on("ready", function() {
