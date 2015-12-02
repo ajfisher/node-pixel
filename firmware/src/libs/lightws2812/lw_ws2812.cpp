@@ -16,8 +16,18 @@
 #include <stdlib.h>
 
 WS2812::WS2812(uint16_t num_leds) {
+    // used when we know the lengths up front.
+    init(num_leds);
+}
 
-    updateLength(num_leds);
+WS2812::WS2812() {
+    // used as an empty constructor for setup.
+    init(0);
+}
+
+void WS2812::init(uint16_t num_leds) {
+
+    set_length(num_leds);
 	#ifdef RGB_ORDER_ON_RUNTIME
 		offsetGreen = 0;
 		offsetRed = 1;
@@ -25,7 +35,7 @@ WS2812::WS2812(uint16_t num_leds) {
 	#endif
 }
 
-void WS2812::updateLength(uint16_t num_leds) {
+void WS2812::set_length(uint16_t num_leds) {
     // frees the memory appropriately based on what is sent through.
     //
     if (pixels) {
@@ -41,6 +51,11 @@ void WS2812::updateLength(uint16_t num_leds) {
         }
     }
 }
+
+uint16_t WS2812::get_length() {
+    return count_led;
+}
+
 uint8_t WS2812::set_rgb_at(uint16_t index, uint32_t px_value) {
     // takes a packed 24 bit value and sets the pixel appropriately.
     if (index < count_led) {
