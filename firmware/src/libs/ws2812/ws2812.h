@@ -14,7 +14,7 @@
 #define WS2812_h
 
 #include "Arduino.h"
-#include "Adafruit_NeoPixel.h"
+#include "lw_ws2812.h"
 
 // define the firmata commands needed
 #define PIXEL_COMMAND           0x51 // firmata command used for a pixel
@@ -28,7 +28,7 @@
 #define PIXEL_CONFIG_FIRMATA    0x05 // sets the pin and the strip length attached to it in firmata mode
 #define PIXEL_CONFIG_BACKPACK   0x06 // sets the pin and strip length attached to it for backpack mode
 
-#define SINGLE_STRIP false
+#define SINGLE_STRIP true
 #define STRIP_START_PIN 4
 
 //TODO remove all of this and consolidate properly.

@@ -5,14 +5,16 @@ bool isBackpack = false;
 
 // TODO Fix this absolutely disgusting hack
 
-Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
+//Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
 
-#if SINGLE_STRIP
+WS2812 strip_0(STRIP_LENGTH);
 
-    Adafruit_NeoPixel strips[] = {strip_0};
+//#if SINGLE_STRIP
+
+//    Adafruit_NeoPixel strips[] = {strip_0};
     int8_t strip_pins[MAX_STRIPS];
 
-#else
+/**#else
 
     Adafruit_NeoPixel strip_1 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
     Adafruit_NeoPixel strip_2 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
@@ -24,17 +26,18 @@ Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO
 
     Adafruit_NeoPixel strips[] = {strip_0, strip_1, strip_2, strip_3,strip_4, strip_5,strip_6, strip_7};
     int8_t strip_pins[MAX_STRIPS];
-#endif
+#endif**/
 
 
 void ws2812_initialise() {
     // initialises the strips
 
-    for (uint8_t i=0; i< MAX_STRIPS; i++) {
+    strip_0.setOutput(LED_DEFAULT_PIN);
+/**    for (uint8_t i=0; i< MAX_STRIPS; i++) {
         strip_pins[i] = -1;
         strips[i].begin();
         strips[i].show();
-    }
+    }**/
 }
 
 void ws2812_initialise(bool backpack) {
@@ -42,10 +45,10 @@ void ws2812_initialise(bool backpack) {
 
     isBackpack = backpack;
     // TODO Fix this to look it up the right way and initialise properly.
-    for (uint8_t i=0; i<MAX_STRIPS; i++) {
+ /**   for (uint8_t i=0; i<MAX_STRIPS; i++) {
         strips[i].setPin(STRIP_START_PIN + i);
     }
-
+**/
     ws2812_initialise();
 
 }
@@ -62,19 +65,21 @@ void process_command(byte argc, byte *argv){
     // now process the command.
     switch (command) {
         case PIXEL_SHOW: {
-            for (uint8_t i = 0; i< MAX_STRIPS; i++) {
+            strip_0.sync();
+            /**for (uint8_t i = 0; i< MAX_STRIPS; i++) {
                 if (strip_pins[i] > 0) {
                     delay(10); // TODO: Fix this as it's basically a latching wait.
                     strips[strip].show();
                 }
-            }
+            }**/
             break;
         }
         case PIXEL_SET_STRIP: {
             // sets the entirety of the strip to one colour
             uint32_t strip_colour = (uint32_t)argv[1] + ((uint32_t)argv[2]<<7) + ((uint32_t)argv[3]<<14) + ((uint32_t)argv[4] << 21);
             for (uint16_t i = 0; i<STRIP_LENGTH; i++) {
-                strips[strip].setPixelColor(i, strip_colour);
+                strip_0.set_rgb_at(i, strip_colour);
+                //strips[strip].setPixelColor(i, strip_colour);
             }
             break;
         }
@@ -82,14 +87,16 @@ void process_command(byte argc, byte *argv){
             // sets the pixel given by the index to the given colour
             uint16_t index = (uint16_t)argv[1] + ((uint16_t)argv[2]<<7);
             uint32_t colour = (uint32_t)argv[3] + ((uint32_t)argv[4]<<7) + ((uint32_t)argv[5]<<14) + ((uint32_t)argv[6] << 21);
-            strips[strip].setPixelColor(index, colour);
+            strip_0.set_rgb_at(index, colour);
+            //strips[strip].setPixelColor(index, colour);
             break;
         }
         case PIXEL_CONFIG: {
             // Sets the pin that the neopixel strip is on.
-            strips[strip].setPin((uint8_t)argv[1]);
-            strip_pins[strip] = (int8_t)argv[1];
-
+            // TODO make this work with the strand length...
+            //strips[strip].setPin((uint8_t)argv[1]);
+            //strip_pins[strip] = (int8_t)argv[1];
+            ;
             // TODO: Sort out the strand length stuff.
             break;
         }

@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             firmata: {
                 cwd: 'firmware/src/',
                 flatten: true,
-                src: [ 'libs/**', '!libs/protocol.md', 'controller_src/firmata/*' ],
+                src: [ 'libs/**', '!libs/protocol.md', '!libs/neopixel/*', 'controller_src/firmata/*' ],
                 dest: 'firmware/build/node_pixel_firmata/',
                 expand: true,
                 filter: 'isFile',
