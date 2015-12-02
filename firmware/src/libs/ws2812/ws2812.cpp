@@ -5,9 +5,7 @@ bool isBackpack = false;
 
 // TODO Fix this absolutely disgusting hack
 
-//Adafruit_NeoPixel strip_0 = Adafruit_NeoPixel(STRIP_LENGTH, LED_DEFAULT_PIN, NEO_GRB + NEO_KHZ800);
-
-WS2812 strip_0(STRIP_LENGTH);
+WS2812 strip_0(0);
 
 //#if SINGLE_STRIP
 
@@ -94,10 +92,26 @@ void process_command(byte argc, byte *argv){
         case PIXEL_CONFIG: {
             // Sets the pin that the neopixel strip is on.
             // TODO make this work with the strand length...
-            //strips[strip].setPin((uint8_t)argv[1]);
-            //strip_pins[strip] = (int8_t)argv[1];
-            ;
-            // TODO: Sort out the strand length stuff.
+
+            // get the bottom 5 bits off for the pin value
+            uint8_t pin = (uint8_t)argv[1] & 0x31;
+            // get the top two bits for the colour order type.
+            uint8_t colour_type = (uint8_t)argv[1]>>5;
+            switch (colour_type) {
+                case PIXEL_COLOUR_GRB:
+                    strip_0.setColorOrderGRB();
+                    break;
+                case PIXEL_COLOUR_RGB:
+                    strip_0.setColorOrderRGB();
+                    break;
+                case PIXEL_COLOUR_BRG:
+                    strip_0.setColorOrderBRG();
+                    break;
+            }
+
+            strip_0.updateLength(8);
+            //strip_0.setOutput(pin);
+
             break;
         }
         case PIXEL_CONFIG_FIRMATA: {

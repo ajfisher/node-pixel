@@ -28,6 +28,11 @@
 #define PIXEL_CONFIG_FIRMATA    0x05 // sets the pin and the strip length attached to it in firmata mode
 #define PIXEL_CONFIG_BACKPACK   0x06 // sets the pin and strip length attached to it for backpack mode
 
+// define the colour element layouts
+#define PIXEL_COLOUR_GRB        0x0
+#define PIXEL_COLOUR_RGB        0x1
+#define PIXEL_COLOUR_BRG        0x2
+
 #define SINGLE_STRIP true
 #define STRIP_START_PIN 4
 

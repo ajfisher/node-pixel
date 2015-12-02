@@ -30,12 +30,9 @@
 
 #include <Arduino.h>
 
-//Easier to change cRGB into any other rgb struct
-#include "cRGB.h"
-
 // If you want to use the setColorOrder functions, enable this line
 // TODO get this to work in setup
-//#define RGB_ORDER_ON_RUNTIME
+#define RGB_ORDER_ON_RUNTIME
 
 #ifdef RGB_ORDER_ON_RUNTIME
 	#define OFFSET_R(r) r+offsetRed
@@ -50,12 +47,12 @@
 
 class WS2812 {
 public:
-	WS2812(uint16_t num_led);
+    WS2812(uint16_t num_led);
 	~WS2812();
 
 	void setOutput(uint8_t pin);
+    void updateLength(uint16_t num_leds);
 
-	cRGB get_crgb_at(uint16_t index);
     uint8_t set_rgb_at(uint16_t index, uint32_t px_value);
 
 	void sync();

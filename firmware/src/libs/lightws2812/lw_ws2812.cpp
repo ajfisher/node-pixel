@@ -16,9 +16,8 @@
 #include <stdlib.h>
 
 WS2812::WS2812(uint16_t num_leds) {
-	count_led = num_leds;
 
-	pixels = (uint8_t*)malloc(count_led*3);
+    updateLength(num_leds);
 	#ifdef RGB_ORDER_ON_RUNTIME
 		offsetGreen = 0;
 		offsetRed = 1;
@@ -26,23 +25,22 @@ WS2812::WS2812(uint16_t num_leds) {
 	#endif
 }
 
-cRGB WS2812::get_crgb_at(uint16_t index) {
+void WS2812::updateLength(uint16_t num_leds) {
+    // frees the memory appropriately based on what is sent through.
+    //
+    if (pixels) {
+        free (pixels);
+    }
 
-	cRGB px_value;
-
-	if(index < count_led) {
-
-		uint16_t tmp;
-		tmp = index * 3;
-
-		px_value.r = pixels[OFFSET_R(tmp)];
-		px_value.g = pixels[OFFSET_G(tmp)];
-		px_value.b = pixels[OFFSET_B(tmp)];
-	}
-
-	return px_value;
+    count_led = num_leds;
+    if (count_led > 0) {
+        if (pixels = (uint8_t *)malloc(count_led*3)) {
+            memset(pixels, 0, count_led*3);
+        } else {
+            count_led = 0;
+        }
+    }
 }
-
 uint8_t WS2812::set_rgb_at(uint16_t index, uint32_t px_value) {
     // takes a packed 24 bit value and sets the pixel appropriately.
     if (index < count_led) {
@@ -85,9 +83,8 @@ void WS2812::setColorOrderBRG() {
 #endif
 
 WS2812::~WS2812() {
-
-
 }
+
 
 #ifndef ARDUINO
 void WS2812::setOutput(const volatile uint8_t* port, volatile uint8_t* reg, uint8_t pin) {

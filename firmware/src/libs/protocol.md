@@ -37,14 +37,26 @@ using 10 bits thus providing for 1023 pixels.
 0   START_SYSEX             0xF0
 1   PIXEL_COMMAND           0x51
 2   PIXEL_FIRMATA_CONFIG    0x06
-3   Pin Number (int value use lower 5 bits Pin 0-31, top 2 future reserved)
+3   Colour order (int value use upper 2 bits 0-3 GRB=0 default)
+3   Pin Number (int value use lower 5 bits Pin 0-31)
 4   10 bit strand length LSB
 5   10 bit strand length MSB (upper 4 bits future reserved)
+6   Colour order (int value use upper 2 bits 0-3 GRB=0 default)
 6   Pin Number (int value use lower 5 bits Pin 0-31, top 2 future reserved)
 7   10 bit strand length LSB
 8   10 bit strand length MSB
 ... Repeat up to 8 LED strips
 N   END_SYSEX               0xF7
+```
+
+#### Colour order definitions.
+
+Colour ordering is given by:
+
+```
+0x00    GRB (Default)
+0x01    RGB
+0x02    BRG
 ```
 
 ### Backpack Config
