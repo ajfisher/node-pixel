@@ -94,7 +94,7 @@ void process_command(byte argc, byte *argv){
             // TODO make this work with the strand length...
 
             // get the bottom 5 bits off for the pin value
-            uint8_t pin = (uint8_t)argv[1] & 0x31;
+            uint8_t pin = (uint8_t)argv[1] & 0x1F;
             // get the top two bits for the colour order type.
             uint8_t colour_type = (uint8_t)argv[1]>>5;
             switch (colour_type) {
@@ -110,7 +110,7 @@ void process_command(byte argc, byte *argv){
             }
 
             strip_0.updateLength(8);
-            //strip_0.setOutput(pin);
+            strip_0.setOutput(pin);
 
             break;
         }
