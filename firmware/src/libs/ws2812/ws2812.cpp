@@ -53,6 +53,7 @@ void process_command(byte argc, byte *argv){
             uint32_t strip_colour = (uint32_t)argv[1] + ((uint32_t)argv[2]<<7) + ((uint32_t)argv[3]<<14) + ((uint32_t)argv[4] << 21);
             for (uint16_t j = 0; j<strip_lengths[0]; j++) {
                 strips[0].set_rgb_at(j, strip_colour);
+                strips[1].set_rgb_at(j, strip_colour);
             }
             break;
         }
