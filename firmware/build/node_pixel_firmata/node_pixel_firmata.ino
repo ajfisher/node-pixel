@@ -35,7 +35,8 @@
 #include <Wire.h>
 #include "./Firmata.h"
 
-#include "./Adafruit_NeoPixel.h"
+//#include "./Adafruit_NeoPixel.h"
+#include "./lw_ws2812.h"
 #include "./ws2812.h"
 
 // move the following defines to Firmata.h?
