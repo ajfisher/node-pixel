@@ -66,12 +66,12 @@ void process_command(byte argc, byte *argv){
             uint16_t index = (uint16_t)argv[1] + ((uint16_t)argv[2]<<7);
             uint32_t colour = (uint32_t)argv[3] + ((uint32_t)argv[4]<<7) + ((uint32_t)argv[5]<<14) + ((uint32_t)argv[6] << 21);
 
-            int8_t strip = 0;
+            int8_t strip = -1;
             for (uint8_t i = 0; i < MAX_STRIPS; i++) {
-                if (strip_lengths[i] == 0) {
+                /**if (strip_lengths[i] == 0) {
                     // we are outside of the number of pixels we have so break
                     break;
-                }
+                }**/
                 if (index < strip_lengths[i]) {
                     strip = i;
                     break;
@@ -79,7 +79,13 @@ void process_command(byte argc, byte *argv){
             }
 
             if (strip >= 0) {
-                strips[strip].set_rgb_at(index, colour);
+                if (strip == 0) {
+                    strips[strip].set_rgb_at(index, colour);
+                } else {
+                    // calculate the index value for the strip we're actually
+                    // looking at relative to the overall strip details
+                    strips[strip].set_rgb_at(index-strip_lengths[strip-1], colour);
+                }
                 strip_changed[strip] = true;
             }
             //strips[1].set_rgb_at(index, colour);
