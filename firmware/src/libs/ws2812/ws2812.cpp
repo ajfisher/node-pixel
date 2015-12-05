@@ -36,15 +36,11 @@ void process_command(byte argc, byte *argv){
     switch (command) {
         case PIXEL_SHOW: {
             // FIXME update this to use strips and iterate over it.
-            strips[0].sync();
-            delay(100);
-            strips[1].sync();
-/**            for (uint8_t i = 0; i< MAX_STRIPS; i++) {
+            for (uint8_t i = 0; i< MAX_STRIPS; i++) {
                 if (strips[i].get_length() > 0) {
-                    delay(100);
                     strips[i].sync();
                 }
-            }**/
+            }
             break;
         }
         case PIXEL_SET_STRIP: {

@@ -33,26 +33,18 @@
 #define PIXEL_COLOUR_RGB        0x1
 #define PIXEL_COLOUR_BRG        0x2
 
-#define SINGLE_STRIP true
 #define STRIP_START_PIN 4
 
 //TODO remove all of this and consolidate properly.
 
-#if SINGLE_STRIP
-    #define MAX_STRIPS 1
-    #define LED_DEFAULT_PIN 6
-    #define STRIP_LENGTH 256
-#else
-    #define MAX_STRIPS 8
-    #define LED_DEFAULT_PIN 14
-    #define STRIP_LENGTH 64
-#endif
+#define MAX_STRIPS 8
+#define LED_DEFAULT_PIN 6
+#define STRIP_LENGTH 64
 
 #define BUFLENGTH 64
 
 void ws2812_initialise();
 void ws2812_initialise(bool backpack);
 void process_command(byte argc, byte *argv);
-
 
 #endif
