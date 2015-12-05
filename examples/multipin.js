@@ -17,27 +17,9 @@ board.on("ready", function() {
     console.log("Board ready, lets add light");
 
     strip = new pixel.Strip({
-        data: 8,
-        length: 8,
         board: this,
         controller: "FIRMATA",
-        strip_id: 0,
-    });
-
-    strip2 = new pixel.Strip({
-        data: 6,
-        length: 8,
-        board: this,
-        controller: "FIRMATA",
-        strip_id: 1,
-    });
-
-    strip3 = new pixel.Strip({
-        data: 4,
-        length: 8,
-        board: this,
-        controller: "FIRMATA",
-        strip_id: 2,
+        strips: [ {pin: 6, length: 17}, {pin: 9, length: 8} ]
     });
 
     strip.on("ready", function() {
@@ -60,33 +42,5 @@ board.on("ready", function() {
 
             strip.show();
         }, 150);
-    });
-
-    strip2.on("ready", function() {
-
-        console.log("Strip 2 ready");
-
-        var colors = ["black", "white"];
-        var current_colors = 0;
-
-        var blinker2 = setInterval(function() {
-            if (++current_colors >= colors.length) current_colors = 0;
-            strip2.color(colors[current_colors]); // blanks it out
-            strip2.show();
-        }, 1000);
-    });
-
-    strip3.on("ready", function() {
-
-        console.log("Strip 3 ready");
-
-        var colors = ["magenta", "yellow", "orange", "cyan"];
-        var current_colors = 0;
-
-        var blinker3 = setInterval(function() {
-            if (++current_colors >= colors.length) current_colors = 0;
-            strip3.color(colors[current_colors]); // blanks it out
-            strip3.show();
-        }, 1500);
     });
 });
