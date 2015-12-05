@@ -47,9 +47,13 @@ void process_command(byte argc, byte *argv){
             // sets the entirety of the strip to one colour
             // FIXME this needs to operate over all the strips as well.
             uint32_t strip_colour = (uint32_t)argv[1] + ((uint32_t)argv[2]<<7) + ((uint32_t)argv[3]<<14) + ((uint32_t)argv[4] << 21);
-            for (uint16_t j = 0; j<strip_lengths[0]; j++) {
-                strips[0].set_rgb_at(j, strip_colour);
-                strips[1].set_rgb_at(j, strip_colour);
+            for (uint8_t i = 0; i < MAX_STRIPS; i++) {
+                if (strips[i].get_length() > 0) {
+            // TODO put detection in for colour off and then do a memset on it.
+                    for (uint16_t j = 0; j<strips[i].get_length(); j++) {
+                        strips[i].set_rgb_at(j, strip_colour);
+                    }
+                }
             }
             break;
         }
@@ -62,11 +66,8 @@ void process_command(byte argc, byte *argv){
             // FIXME this needs to figure out which strip to use and set it.
             break;
         }
-        case PIXEL_CONFIG: {
+        case PIXEL_CONFIG_FIRMATA: {
             // Sets the pin that the neopixel strip is on as well as it's length
-            // TODO Make this multipin compatible.
-            // Iterate over the list of strips that are set and then set it out.
-            // get the bottom 5 bits off for the pin value
 
             // check to ensure we have at least 3 arg bytes (1 for pin & 2 for len)
             if (argc >= 3) {
@@ -96,13 +97,17 @@ void process_command(byte argc, byte *argv){
 
                     // now get the strand length
                     strips[i].set_length((uint16_t)(argv[argv_offset+2]+(argv[argv_offset+3]<<7)));
-                    strip_lengths[i] = strips[i].get_length();
+                    uint16_t prev_strip_length = 0;
+                    if (i > 0) {
+                        prev_strip_length = strip_lengths[i-1];
+                    }
+                    strip_lengths[i] = strips[i].get_length() + prev_strip_length;
                 }
             }
 
             break;
         }
-        case PIXEL_CONFIG_FIRMATA: {
+        case PIXEL_CONFIG: {
             // Sets the pin and length of the specific strip
             Serial.print("ArgC: ");
             Serial.println(argc);
