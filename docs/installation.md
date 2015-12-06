@@ -10,15 +10,15 @@ to add addressable LED support to the way firmata works already. This is a good
 option if you want to play with NeoPixels and you aren't doing much more than
 controlling LEDs. The downside of this approach is that Firmata has a lot of
 support already in it for a range of devices so you will be limited in the number
-of pixels you can control. In addition, the neopixel libary can block so your
+of pixels you can control. In addition, the pixel libary will block at times, so your
 framerate will always be limited.
 
-The `backpack` method provides I2C support to a strip of neopixels and will work
+The `backpack` method provides I2C support to a strip of WS2812 pixels and will work
 with any [board that has I2C IO support](http://johnny-five.io/platform-support/).
 The benefit of this approach is that it offloads the LED processing to a dedicated
-board and can support more pixels and higher framerate. The downside is you will
+board and can support more pixels and much higher framerate. The downside is you will
 require an arduino or other atmega board of some type (eg Pro Mini, Nano etc) to
-run the pixels. These boards can be had for <$2 with a bit of searching.
+run the pixels. These boards can be had for about $2 with a bit of searching.
 
 ## Prerequisites
 
@@ -77,7 +77,7 @@ digital pin. The default configuration assumes PIN 6 however this is configurabl
 
 _Wiring diagram_
 
-![Custom Firmata Diagram](custom_firmata_bb.png)
+![Custom Firmata Diagram](breadboard/custom_firmata_bb.png)
 
 ## I2C Backpack Installation
 
@@ -116,8 +116,7 @@ to include the following line and reboot your Pi:*
 dtparam=i2c_arm_baudrate=10000
 ```
 
-
-![I2C Backpack Diagram](i2c_backpack_bb.png)
+![I2C Backpack Diagram](breadboard/i2c_backpack_bb.png)
 
 ## Using the library
 
