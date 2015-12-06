@@ -1,4 +1,4 @@
-// This example shows how to use node-pixel using Johnny Five as the 
+// This example shows how to use node-pixel using Johnny Five as the
 // hook for the board.
 var SerialPort = require("serialport").SerialPort;
 var five = require("johnny-five");
@@ -10,7 +10,7 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
-var fps = 40; // how many frames per second do you want to try?
+var fps = 20; // how many frames per second do you want to try?
 
 board.on("ready", function() {
 
@@ -18,10 +18,10 @@ board.on("ready", function() {
 
     strip = new pixel.Strip({
         data: 6,
-        length: 17,
+        length: 8,
+        color_order: pixel.COLOR_ORDER.GRB,
         board: this,
         controller: "FIRMATA",
-//        controller: "I2CBACKPACK"
     });
 
     strip.on("ready", function() {

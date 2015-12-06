@@ -11,21 +11,18 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
-var fps = 0.5; // how many frames per second do you want to try?
+var fps = 1; // how many frames per second do you want to try?
 
 board.on("ready", function() {
 
     console.log("Board ready, lets add light");
 
     strip = new pixel.Strip({
-        data: 6,
-        length: 8,
         board: this,
         controller: "FIRMATA",
-//        controller: "I2CBACKPACK"
+        data: 6,
+        length: 64,
     });
-
-
 
     strip.on("ready", function() {
 
@@ -40,5 +37,4 @@ board.on("ready", function() {
             strip.show();
         }, 1000/fps);
     });
-
 });

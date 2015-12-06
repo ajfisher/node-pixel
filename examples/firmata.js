@@ -1,4 +1,4 @@
-// This example shows how to use node-pixel using firmata as the 
+// This example shows how to use node-pixel using firmata as the
 // hook for the board.
 
 var firmata = require("firmata");

@@ -18,8 +18,9 @@ board.on("ready", function() {
 
     strip = new pixel.Strip({
         board: this,
-        controller: "FIRMATA",
-        strips: [ {pin: 9, length: 8}, {pin: 2, length: 17},]
+        controller: "I2CBACKPACK",
+        color_order: pixel.COLOR_ORDER.GRB,
+        strips: [ 17,8 ]
     });
 
     strip.on("ready", function() {

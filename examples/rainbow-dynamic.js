@@ -16,12 +16,8 @@ var strip = null;
 
 /**
  * how many frames per second do you want to try?
- *
- * This number will fluctuate with the number of pixels that you are trying to
- * update. With a NeoPixel Arduino Shield https://www.adafruit.com/product/1430
- * 13 is the max fps I've gotten to work.  You milage may vary.
  */
-var fps = 13;
+var fps = 20;
 
 board.on("ready", function() {
 
@@ -30,7 +26,7 @@ board.on("ready", function() {
     // setup the node-pixel strip.
     strip = new pixel.Strip({
         data: 6,
-        length: 40, // number of pixels in the strip.
+        length: 17, // number of pixels in the strip.
         board: this,
         controller: "FIRMATA"
     });

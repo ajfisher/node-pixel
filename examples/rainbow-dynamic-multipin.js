@@ -1,8 +1,8 @@
 /**
- * This example shows how to use node-pixel to display a set of rainbow colors
- * on your NeoPixel strip using Johnny-Five.
+ * This example shows how to use node-pixel to cycle colors through your
+ * NeoPixel strip using Johnny-Five.
  *
- * created by @pierceray in June 2015
+ * adapted from the examples by @pierceray
  */
 var five = require("johnny-five");
 var pixel = require("../lib/pixel.js");
@@ -13,37 +13,47 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
+/**
+ * how many frames per second do you want to try?
+ */
+var fps = 30;
+
 board.on("ready", function() {
 
     console.log("Board ready, lets add light");
 
     // setup the node-pixel strip.
     strip = new pixel.Strip({
-        data: 6,
-        length: 16, // number of pixels in the strip.
         board: this,
-        controller: "FIRMATA"
+        controller: "FIRMATA",
+        strips: [ {pin: 3, length: 8}, {pin: 6, length: 17}],
     });
 
     strip.on("ready", function() {
         console.log("Strip ready, let's go");
-
-        staticRainbow();
+        dynamicRainbow(fps);
     });
 
-    function staticRainbow(){
-        console.log('staticRainbow');
+    function dynamicRainbow( delay ){
+        console.log( 'dynamicRainbow' );
 
         var showColor;
-        for(var i = 0; i < strip.stripLength(); i++) {
-            showColor = colorWheel( ( i*256 / strip.stripLength() ) & 255 );
-            strip.pixel( i ).color( showColor );
-        }
-        strip.show();
+        var cwi = 0; // colour wheel index (current position on colour wheel)
+        var foo = setInterval(function(){
+            if (++cwi > 255) {
+                cwi = 0;
+            }
+
+            for(var i = 0; i < strip.stripLength(); i++) {
+                showColor = colorWheel( ( cwi+i ) & 255 );
+                strip.pixel( i ).color( showColor );
+            }
+            strip.show();
+        }, 1000/delay);
     }
 
     // Input a value 0 to 255 to get a color value.
-    // The colours are a transition r - g - b - back to r.
+    // The colors are a transition r - g - b - back to r.
     function colorWheel( WheelPos ){
         var r,g,b;
         WheelPos = 255 - WheelPos;
