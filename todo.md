@@ -25,13 +25,9 @@
 
 -  **TODO** `(line 34)`  get this to work in setup
 
-## firmware/src/libs/ws2812/ws2812.cpp
-
--  **TODO** `(line 55)`  put detection in for colour off and then do a memset on it.
-
 ## firmware/src/libs/ws2812/ws2812.h
 
--  **TODO** `(line 38)`  remove all of this and consolidate properly.
+-  **TODO** `(line 36)`  remove all of this and consolidate properly.
 
 ## lib/pixel.js
 
@@ -40,4 +36,4 @@
 
 * * *
 
-Last generated: Sat Dec 05 2015 22:34:46 by [grunt-todo](https://github.com/leny/grunt-todo).
+Last generated: Sun Dec 06 2015 22:55:30 by [grunt-todo](https://github.com/leny/grunt-todo).

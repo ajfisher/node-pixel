@@ -1,5 +1,25 @@
 # node-pixel changelog
 
+## 0.5
+
+* Strip multipin! You can now use and define multiple strips on different pins
+in the firmata and I2C backpack versions of node-pixel.
+* Tests are starting to be laid in for any development. New features
+require tests to be built out as well from now on.
+* Removed the AdaFruit lib and switched to lightweight lib with a number of
+modifications from https://github.com/cpldcpu/light_ws2812 (mostly removals
+of things we don't need because the JS side will take care of it).
+* Added protocol changes to set the colour order of the strip so that you can
+use different types of pixels
+* Added protocol changes to define multiple strips of varying legnths
+* Interface to the virtual strip is singular and the C lib takes care of the mapping
+to the actual pixel required.
+* Added `set_off()` in order to rapidly and efficiently wipe an entire strip of
+values back to zero
+* Implemented error checking for too many strips and too many pixels that would 
+exceed memory limits in the firmware.
+* Updated new examples and updated examples documentation properly.
+
 ### 0.4.1
 
 * Fixed bug in backpack firmware that meant it was doing full scale serial debugging
@@ -10,7 +30,7 @@ by default.
 * Major refactor to deal with install and symlinking issues. Updates mean a Grunt
 task which is used to build the destination trees properly so the firmware can be
 compiled. This means better cross-platform support as well as no symlinking when
-npm installed the package. More details here 
+npm installed the package. More details here
 [https://github.com/ajfisher/node-pixel/issues/34](https://github.com/ajfisher/node-pixel/issues/34)
 * New documentation added and installation instruction fixed.
 * Grunt file used to do all building operations from a source tree to produce the
@@ -19,7 +39,7 @@ relevant files in the right place for building
 
 ### 0.3.3
 
-* @pierceray contributed two examples porting "rainbow" behaviour with a static 
+* @pierceray contributed two examples porting "rainbow" behaviour with a static
 rainbow effect and a dynamic moving one.
 
 ### 0.3.2
@@ -69,10 +89,10 @@ command set that will be viable when moving to I2C / SPI.
 
 * Removal of 95% of all custom firmata messages and compression of existing
 messages in order to speed things up.
-* Entire restructure of code library including ino support and structure to 
-support no-dependency firmware compilation. 
+* Entire restructure of code library including ino support and structure to
+support no-dependency firmware compilation.
 
-## 0.1.0 
+## 0.1.0
 
 * Firmata only implementation
 * Specific implementation in firmata to provide functions
