@@ -18,34 +18,30 @@ to ensure that the strips are mapped to the correct sequence.
 
 ```
 #define PIXEL_OFF               0x00 // set strip to be off
-#define PIXEL_CONFIG            0x01 // DEPRECATED will be removed and recycled
+#define PIXEL_CONFIG            0x01 // configure the strip
 #define PIXEL_SHOW              0x02 // latch the pixels and show them
 #define PIXEL_SET_PIXEL         0x03 // set the color value of pixel n using 32bit packed color value
 #define PIXEL_SET_STRIP         0x04 // set color of whole strip
 #define PIXEL_SHIFT             0x05 // shift all the pixels n places along the strip
-#define PIXEL_FIRMATA_CONFIG    0x06 // configure Firmata based strips and pins
-#define PIXEL_BACKPACK_CONFIG   0x07 // configure backpack strip lengths.
 //      PIXEL_RESERVED          0x08-0x0F // Reserved for future instructions.
 ```
 
-### Firmata Config
+### Config
 
 Sets the pins that the pixel strips use and length of the strips. This is given
-using 10 bits thus providing for 1023 pixels.
+using 10 bits thus providing for 1023 pixels on each strip (note this is a
+theoretical maximum). If using firmata then a pin number will need to be supplied
+whereas a backpack does not.
 
 ```
 0   START_SYSEX             0xF0
 1   PIXEL_COMMAND           0x51
-2   PIXEL_FIRMATA_CONFIG    0x06
+2   PIXEL_CONFIG            0x01
 3   Colour order (int value use upper 2 bits 0-3 GRB=0 default)
-3   Pin Number (int value use lower 5 bits Pin 0-31)
+3   [Pin Number] OPTIONAL (int value use lower 5 bits Pin 0-31)
 4   10 bit strand length LSB
 5   10 bit strand length MSB (upper 4 bits future reserved)
-6   Colour order (int value use upper 2 bits 0-3 GRB=0 default)
-6   Pin Number (int value use lower 5 bits Pin 0-31, top 2 future reserved)
-7   10 bit strand length LSB
-8   10 bit strand length MSB
-... Repeat up to 8 LED strips
+... Repeat bytes 3..5 for up to 8 LED strips max
 N   END_SYSEX               0xF7
 ```
 
@@ -57,23 +53,6 @@ Colour ordering is given by:
 0x00    GRB (Default)
 0x01    RGB
 0x02    BRG
-```
-
-### Backpack Config
-
-Sets the number of pins that will be used and the lengths of those strips for each
-one. Note that the length is given as a 10 bit value so it can support up to
-1023 pixels on each pin. This is a theoretical maximum.
-
-```
-0   START_SYSEX             0xF0
-1   PIXEL_COMMAND           0x51
-2   PIXEL_BACKPACK_CONFIG   0x07
-3   Number of pins (in val use lower 3 bits gives up to 8 pins in use. Top 4 reserved)
-4   7 bit strand length (for first LED strip)
-5   7 bit strand length (for 2nd LED strip)
-... Repeat up to 8 LED strips
-N   END_SYSEX               0xF7
 ```
 
 ### Show
