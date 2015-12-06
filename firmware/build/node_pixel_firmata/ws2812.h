@@ -25,15 +25,13 @@
 #define PIXEL_SHOW              0x02 // latch the pixels and show them
 #define PIXEL_SET_PIXEL         0x03 // set the color value of pixel n using 32bit packed color value
 #define PIXEL_SET_STRIP         0x04 // set color of whole strip
-#define PIXEL_CONFIG_FIRMATA    0x05 // sets the pin and the strip length attached to it in firmata mode
-#define PIXEL_CONFIG_BACKPACK   0x06 // sets the pin and strip length attached to it for backpack mode
 
 // define the colour element layouts
 #define PIXEL_COLOUR_GRB        0x0
 #define PIXEL_COLOUR_RGB        0x1
 #define PIXEL_COLOUR_BRG        0x2
 
-#define STRIP_START_PIN 4
+#define STRIP_START_PIN 2
 
 //TODO remove all of this and consolidate properly.
 

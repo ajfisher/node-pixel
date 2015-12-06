@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             firmata: {
                 cwd: 'firmware/src/',
                 flatten: true,
-                src: [ 'libs/**', '!libs/protocol.md', '!libs/neopixel/*', 'controller_src/firmata/*' ],
+                src: [ 'libs/**', '!libs/protocol.md', 'controller_src/firmata/*' ],
                 dest: 'firmware/build/node_pixel_firmata/',
                 expand: true,
                 filter: 'isFile',
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
             backpack: {
                 cwd: 'firmware/src/',
                 flatten: true,
-                src: [ 'libs/neopixel/*', 'libs/ws2812/*', '!libs/protocol.md', 'controller_src/backpack/*' ],
+                src: [ 'libs/ws2812/*', 'libs/lightws2812/*', '!libs/protocol.md', 'controller_src/backpack/*' ],
                 dest: 'firmware/build/backpack/',
                 expand: true,
                 filter: 'isFile',
@@ -86,7 +86,6 @@ module.exports = function(grunt) {
                 'examples/**',
                 'lib/*',
                 '!firmware/src/libs/firmata/*',
-                '!firmware/src/libs/neopixel/*',
             ]
         },
     });

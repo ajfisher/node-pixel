@@ -3,7 +3,7 @@
 #define MAX_RECEIVED_BYTES  16
 
 #include <Wire.h>
-#include "./Adafruit_NeoPixel.h"
+#include "./lw_ws2812.h"
 #include "./ws2812.h"
 
 #include "includes.h"
@@ -17,7 +17,7 @@ void setup() {
 
 #if _DEBUG
     Serial.begin(9600);
-    Serial.println("NeoPixel I2C");
+    Serial.println("NodePixel I2C");
 #endif
 
 
