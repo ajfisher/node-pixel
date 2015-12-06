@@ -1,18 +1,20 @@
 # node-pixel
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ajfisher/node-pixel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![](https://img.shields.io/badge/version-0.5.0-blue.svg)
+[![Join the chat at https://gitter.im/ajfisher/node-pixel](https://img.shields.io/badge/Gitter-Join%20Chat-brightgreen.svg)](https://gitter.im/ajfisher/node-pixel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![](https://img.shields.io/badge/status-Not%20ready-red.svg)
+![](https://img.shields.io/david/ajfisher/node-pixel.svg)
+![](https://img.shields.io/github/issues/ajfisher/node-pixel.svg)
 
 The purpose of this library is to provide a node js interface for addressable RGB LEDs.
-Most commonly these are known as Neo Pixels (if you shop at Adafruit) however 
-any WS2812b addressable LED should work with this. 
+Most commonly these are known as Neo Pixels (if you shop at Adafruit) however
+any WS2812b addressable LED should work with this.
 
 The current iteration supports two methods of set up:
 
-* a custom version of firmata that provides an interface to talk to the "pixels". 
+* a custom version of firmata that provides an interface to talk to the "pixels".
 * an I2C "backpack" using an arduino pro mini or nano that provides the interface
 and then uses standard firmata.
-
-Both of these mechanisms presently rely on the [Adafruit NeoPixel library](https://github.com/adafruit/Adafruit_NeoPixel). 
 
 The pixel library can be used with both Johnny-Five or stock Node Firmata and
 can be used by any board that provides an IO interface with I2C support such as
@@ -33,33 +35,31 @@ Both methods of installation are covered in detail in the [Installation Guide](d
 ### A note on multiple strips
 
 Multiple led strips on one arduino or backpack are supported up to a maximum
-of 8. This maximum is about the max you can have before you start running into 
-memory issues (all those pixels need memory allocated to track their colour 
-state). In this case each strip is limited to 64 pixels each.
+of 8 individual strips. Each strip can be different lengths but you can only have
+a maximum of 256 pixels for Firmata and about 900 pixels for the backpack version.
 
 Multiple strips connected to a single board or backpack are for the purposes
-of node-pixel considered to be a single strip and are joined together.
+of node-pixel considered to be a single strip and are joined together in sequence.
 
-On a backpack, the strips are defined sequentially from pin 4-12 on the backpack.
+On a backpack, the strips are defined sequentially from pin 0-7 on the backpack.
 
 On an arduino, each strip can be defined with an individual pin which doesn't
 need to be sequential.
 
 One thing to note is that currently because the memory and strips are
 preallocated if you want to do tight timings with multiple strips working independently
-you may run into some blocking conflicts. These are discussed in 
-[this issue](https://github.com/ajfisher/node-pixel/issues/15). 
-
+you may run into some blocking conflicts. These are discussed in
+[this issue](https://github.com/ajfisher/node-pixel/issues/15).
 
 ## Pixel API
 
-The Pixel API is provided below. 
+The Pixel API is provided below.
 
 ### Strip
 
 A sequence of LEDs all joined together is called a `strip` and you need to tell
-the strip which `pin` (`data`) it is on and how many LEDs are in the sequence. 
-In addition you need to provide the strip with a controller to tell it to use 
+the strip which `pin` (`data`) it is on and how many LEDs are in the sequence.
+In addition you need to provide the strip with a controller to tell it to use
 the custom firmata or I2C backpack.
 
 
@@ -81,13 +81,13 @@ the custom firmata or I2C backpack.
 (2) If using a backpack use an array of lengths eg `[8, 8, 8]` which would set
 pins 4, 5 & 6 on the backpack to have strips of length 8 each on them.
 
-(3) If using custom firmata then use an array of objects eg 
+(3) If using custom firmata then use an array of objects eg
 `[ {pin: 4, length: 8}, {pin: 10, length: 8}, {pin: 11, length: 8} ]`
 which would set pins 4, 10 & 11 to have strips of length 8 on each of them.
 
 #### Events
 
-* `onready()` -  emits when the `strip` is configured. 
+* `onready()` -  emits when the `strip` is configured.
 * `onerror()` - returns the error that occurred.
 
 #### Examples
@@ -123,7 +123,7 @@ pixel = require("node-pixel");
 var firmata = require('firmata');
 
 var board = new firmata.Board('path to usb',function(){
-    
+
     strip = new pixel.Strip({
         pin: 6,
         length: 4,
@@ -134,7 +134,7 @@ var board = new firmata.Board('path to usb',function(){
     strip.on("ready", function() {
         // do stuff with the strip here.
     });
-});  
+});
 ```
 
 _Johnny Five with backpack_
@@ -144,7 +144,7 @@ pixel = require("node-pixel");
 five = require("johnny-five");
 
 var board = new five.Board(opts);
-    
+
 board.on("ready", function() {
     strip = new pixel.Strip({
         length: 4,
@@ -156,19 +156,19 @@ board.on("ready", function() {
         // do stuff with the strip here.
 
     });
-});  
+});
 ```
 
 Note that Johnny-Five uses the board option and firmata uses the firmata option.
 This is because the pixel library supports and Board capable of presenting an
-IO interface. The library will work out the right thing to do based on the 
+IO interface. The library will work out the right thing to do based on the
 board being passed and the controller being set.
 
 #### Methods
 
 ##### show();
 
-The show method should be called at the point you want to "set" the frame on 
+The show method should be called at the point you want to "set" the frame on
 the strip of pixels and show them.
 
 ###### Example
@@ -185,7 +185,7 @@ to propagate this data through the LEDs.
 
 ##### color( *colourstring* );
 
-All LEDs on the strip can be set to the same colour using the `.color()` method. 
+All LEDs on the strip can be set to the same colour using the `.color()` method.
 
 ###### Parameters
 
