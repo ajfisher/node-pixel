@@ -55,7 +55,7 @@ public:
     void set_length(uint16_t num_leds);
 
     uint8_t set_rgb_at(uint16_t index, uint32_t px_value);
-
+    void set_off();
 	void sync();
 
     uint16_t get_length();

@@ -56,6 +56,11 @@ uint16_t WS2812::get_length() {
     return count_led;
 }
 
+void WS2812::set_off() {
+    // turns the strip fully off.
+    memset(pixels, 0, count_led*3);
+}
+
 uint8_t WS2812::set_rgb_at(uint16_t index, uint32_t px_value) {
     // takes a packed 24 bit value and sets the pixel appropriately.
     if (index < count_led) {
