@@ -39,7 +39,7 @@
     "color-string": "^0.3.0",
     "es6-collections": "^0.5.5",
     "firmata": "^0.8.0",
-    "johnny-five": "^0.9.11"
+    "johnny-five": "^0.9.14"
   },
   "devDependencies": {
     "board-io": "^3.0.4",
