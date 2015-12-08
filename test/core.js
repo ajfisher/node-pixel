@@ -1,7 +1,8 @@
 global.IS_TEST_MODE = true;
+var mocks = require("mock-firmata");
+var MockFirmata = mocks.Firmata;
+var MockSerialPort = mocks.SerialPort;
 
-var MockFirmata = require("johnny-five/test/util/mock-firmata");
-var MockSerialPort = require("johnny-five/test/util/mock-serial").SerialPort;
 var sinon = require("sinon");
 
 var five = require("johnny-five");
@@ -11,7 +12,7 @@ var Board = five.Board;
 
 function newBoard() {
     var sp = new MockSerialPort("/dev/test");
-    var io = new MockFirmata(sp); 
+    var io = new MockFirmata(sp);
 
     io.emit("connect");
     io.emit("ready");
@@ -42,9 +43,26 @@ function restore(target) {
     }
 }
 
+exports["Test Mode configured"] = {
+    setUp: function(done) {
+        done();
+    },
+
+    tearDown: function(done) {
+        done();
+    },
+
+    testMode: function(test) {
+        // tests that the env variable is set properly
+        test.expect(1);
+        test.equal(process.env.IS_TEST_MODE, 'true', "Is test mode configured properly");
+        test.done();
+    },
+};
+
 exports["Strip - Firmata"] = {
     setUp: function(done){
-        
+
         this.write = sinon.stub(MockSerialPort.prototype, "write", function(buffer, callback) {
             if (typeof callback === "function") {
                 process.nextTick(callback);
@@ -122,32 +140,56 @@ exports["Strip - Firmata"] = {
                 color: "blue",
                 rgb: [0, 0, 255],
             };
-            
+
             strip.color("blue");
             test.deepEqual(strip.pixel(2).color(), colourcheck, "Colour set using name");
-            
+
             colourcheck = {
                 r: 0, g: 255, b: 0,
                 hexcode: "#00FF00",
                 color: "lime",
                 rgb: [0, 255, 0],
             };
-            
+
             strip.color([0, 255, 0]);
             test.deepEqual(strip.pixel(3).color(), colourcheck, "Colour set using RGB array");
 
 
             test.done();
         });
-
     },
 
+    numberOfStripsMax: function(test) {
+        // tests that the number of strips available is bounded.
+        test.expect(1);
+
+        try {
+            // this should fail.
+            var strip = new pixel.Strip({
+                board: this.board,
+                controller: "FIRMATA",
+                strips: [8, 8, 8, 8, 8, 8, 8, 8, 8]
+            });
+        } catch (e) {
+            if (e instanceof(RangeError)) {
+                test.ok(true, "Max exceeded out of range");
+                errFound = true;
+            } else {
+                test.ok(false, "Max exceeded error of incorrect type");
+            }
+            test.done();
+            return;
+        }
+        test.ok(false, "Maximum was exceeded and it let it through");
+        test.done();
+    },
 }
+
 
 
 exports["Pixel - Firmata"] = {
     setUp: function(done){
-        
+
         this.write = sinon.stub(MockSerialPort.prototype, "write", function(buffer, callback) {
             if (typeof callback === "function") {
                 process.nextTick(callback);
@@ -205,17 +247,17 @@ exports["Pixel - Firmata"] = {
                 color: "blue",
                 rgb: [0, 0, 255],
             };
-            
+
             this.strip.pixel(2).color("blue");
             test.deepEqual(this.strip.pixel(2).color(), colourcheck, "Colour set using name");
-            
+
             colourcheck = {
                 r: 0, g: 255, b: 0,
                 hexcode: "#00FF00",
                 color: "lime",
                 rgb: [0, 255, 0],
             };
-            
+
             this.strip.pixel(3).color([0, 255, 0]);
             test.deepEqual(this.strip.pixel(3).color(), colourcheck, "Colour set using RGB array");
 

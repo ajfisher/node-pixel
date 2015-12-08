@@ -50,6 +50,7 @@
     "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-todo": "^0.5.0",
+    "mock-firmata": "0.0.4",
     "nodeunit": "^0.9.1",
     "sinon": "^1.17.2"
   }
