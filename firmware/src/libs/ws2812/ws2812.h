@@ -31,9 +31,7 @@
 #define PIXEL_COLOUR_RGB        0x1
 #define PIXEL_COLOUR_BRG        0x2
 
-#define STRIP_START_PIN 2
-
-//TODO remove all of this and consolidate properly.
+#define STRIP_START_PIN 0
 
 #define MAX_STRIPS 8
 #define LED_DEFAULT_PIN 6
