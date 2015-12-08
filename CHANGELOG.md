@@ -15,10 +15,14 @@ use different types of pixels
 * Interface to the virtual strip is singular and the C lib takes care of the mapping
 to the actual pixel required.
 * Added `set_off()` in order to rapidly and efficiently wipe an entire strip of
-values back to zero
+values back to zero in the firmware.
 * Implemented error checking for too many strips and too many pixels that would 
 exceed memory limits in the firmware.
-* Updated new examples and updated examples documentation properly.
+* Updated new examples and updated examples documentation properly incuding the
+updates to the master readme and installation guides. All examples have code in
+them as well as proper wiring diagrams.
+* Package dependencies updated to bring into line.
+* New tests for pixel lengths, strip maximums, ensuring calculations are correct.
 
 ### 0.4.1
 
