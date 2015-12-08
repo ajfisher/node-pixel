@@ -183,6 +183,97 @@ exports["Strip - Firmata"] = {
         test.ok(false, "Maximum was exceeded and it let it through");
         test.done();
     },
+
+    numberOfPixelsMax: function(test) {
+        // test the number of pixels available is bounded properly.
+
+        test.expect(2);
+        var errFound = false;
+
+        // first try with a single strip pixels.
+        try {
+            // this should fail.
+            var strip1 = new pixel.Strip({
+                board: this.board,
+                controller: "FIRMATA",
+                strips: [ {pin: 6, length: 257}, ]
+            });
+        } catch (e) {
+            if (e instanceof(RangeError)) {
+                test.ok(true, "Max pixels exceeded range for one strip");
+                errFound = true;
+            } else {
+                test.ok(false, "Max pixels exceeded error of incorrect type");
+                errFound = true;
+            }
+        }
+
+        if (! errFound) {
+            test.ok(false, "Maximum pixels was exceeded and it let it through");
+        }
+
+        errFound = false;
+
+        // now we try with multiples.
+        try {
+            // this should fail.
+            var strip2 = new pixel.Strip({
+                board: this.board,
+                controller: "FIRMATA",
+                strips: [   {pin: 2, length: 64},
+                            {pin: 2, length: 64},
+                            {pin: 2, length: 64},
+                            {pin: 2, length: 64},
+                            {pin: 2, length: 64},
+                        ], // more than 256
+            });
+        } catch (e) {
+            if (e instanceof(RangeError)) {
+                test.ok(true, "Max pixels exceeded out of range multipin");
+                errFound = true;
+            } else {
+                test.ok(false, "Max pixels exceeded error of incorrect type");
+                errFound = true;
+            }
+            test.done();
+            return;
+        }
+        if (! errFound) {
+            test.ok(false, "Maximum pixels was exceeded on multipin and it let it through");
+        }
+
+        test.done();
+    },
+
+    stripLength: function(test) {
+        // tests length of the strip properly.
+        test.expect(3);
+
+        var strip = new pixel.Strip({
+            board: this.board,
+            controller: "FIRMATA",
+            strips: [{pin: 2, length: 100}]
+        });
+        test.equal(strip.stripLength(), 100, "Single strips length correct");
+
+        var strip2 = new pixel.Strip({
+            board: this.board,
+            controller: "FIRMATA",
+            strips: [{pin: 2, length: 100}, {pin: 3, length: 100}]
+        });
+        test.equal(strip2.stripLength(), 200, "Multiple strips length correct");
+
+        var strip3 = new pixel.Strip({
+            board: this.board,
+            controller: "FIRMATA",
+            pin: 3,
+            length: 150,
+        });
+        test.equal(strip3.stripLength(), 150, "Shorthand strips length correct");
+
+        test.done();
+
+    },
 }
 
 
