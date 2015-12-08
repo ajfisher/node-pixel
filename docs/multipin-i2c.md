@@ -8,24 +8,26 @@ To install the I2C backpack, see the [Installation Guide](installation.md).
 ## Wiring
 
 Wire the neopixel strip up as shown below. This can be done on any I2C compatible
-board that Johnny Five supports. This example uses a Raspberry Pi.
+board that Johnny Five supports. This example uses a Raspberry Pi with 2 strips
+attached to the backpack.
 
-![Wiring diagram](breadboard/i2c_backpack_bb.png)
+![Wiring diagram](breadboard/i2c_backpack_multipin_bb.png)
 
-TODO: Make this take 2 strips.
+The example below uses two strips attached to the backpack connected to the host
+Arduino Uno.
 
-TODO: Add an arduino as well.
+![Wiring diagram](breadboard/i2c_backpack_arduino_multipin_bb.png)
 
 ### I2C LED pins
 
 Note that you can't specify the pins to use when using I2C. As such you must
-start with pin 2 and work upwards from there to 10 max.
+start with pin 0 and work upwards from there to 8 max.
 
 ## Example code
 
 ```js
 var five = require("johnny-five");
-var pixel = require("../lib/pixel.js");
+var pixel = require("node-pixel.js");
 
 var opts = {};
 opts.port = process.argv[2] || "";

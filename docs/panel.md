@@ -8,9 +8,7 @@ To install the custom firmata, see the [Installation Guide](installation.md).
 
 Wire the neopixel panel up as shown below.
 
-TODO: Fix this to be a panel
-
-![Wiring diagram](breadboard/custom_firmata_bb.png)
+![Wiring diagram](breadboard/panel_bb.png)
 
 ## Example code
 

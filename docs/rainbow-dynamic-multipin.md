@@ -1,4 +1,4 @@
-# Creating a rainbow effect
+# Creating a rainbow effect with multiple strips
 
 This example uses a 16 LED strip and a custom rainbow calculator to create a
 nice rainbow that moves dynamically across multiple pins. This example uses a custom firmata.
@@ -9,9 +9,7 @@ To install the custom firmata, see the [Installation Guide](installation.md).
 
 Wire the neopixel strip up as shown below.
 
-TODO: Fix this to be multiple strips
-
-![Wiring diagram](breadboard/custom_firmata_bb.png)
+![Wiring diagram](breadboard/arduino_multipin_bb.png)
 
 ## Example code
 
@@ -38,7 +36,7 @@ board.on("ready", function() {
     strip = new pixel.Strip({
         board: this,
         controller: "FIRMATA",
-        strips: [ {pin: 3, length: 8}, {pin: 6, length: 17}],
+        strips: [ {pin: 2, length: 8}, {pin: 9, length: 17}],
     });
 
     strip.on("ready", function() {

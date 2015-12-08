@@ -9,9 +9,7 @@ To install the custom firmata, see the [Installation Guide](installation.md).
 
 Wire the neopixel strip up as shown below.
 
-![Wiring diagram](breadboard/custom_firmata_bb.png)
-
-TODO Fix this to have two strips.
+![Wiring diagram](breadboard/arduino_multipin_bb.png)
 
 ## Example code
 

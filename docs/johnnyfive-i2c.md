@@ -11,18 +11,20 @@ board that Johnny Five supports. This example uses a Raspberry Pi.
 
 ![Wiring diagram](breadboard/i2c_backpack_bb.png)
 
-TODO: Add an arduino as well.
+The example below uses and arduino Uno.
+
+![Wiring diagram](breadboard/i2c_backpack_arduino_bb.png)
 
 ### I2C LED pins
 
 Note that you can't specify the pins to use when using I2C. As such you must
-start with pin 2 and work upwards from there to 10 max.
+start with pin 0 and work upwards from there to 8 max.
 
 ## Example code
 
 ```js
 var five = require("johnny-five");
-var pixel = require("../lib/pixel.js");
+var pixel = require("node-pixel.js");
 
 var opts = {};
 opts.port = process.argv[2] || "";
