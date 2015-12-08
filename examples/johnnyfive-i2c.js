@@ -1,6 +1,5 @@
 // This example shows how to use node-pixel using Johnny Five as the
 // hook for the board.
-var SerialPort = require("serialport").SerialPort;
 var five = require("johnny-five");
 var pixel = require("../lib/pixel.js");
 

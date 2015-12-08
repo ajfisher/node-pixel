@@ -55,7 +55,6 @@ board.on("ready", function() {
 
 
         var iterator = setInterval(function() {
-
             strip.color("#000"); // blanks it out
 
             for (var i=0; i< current_pos.length; i++) {
@@ -68,7 +67,6 @@ board.on("ready", function() {
                     }
                 }
             }
-
             strip.show();
         }, 1000/fps);
     });
