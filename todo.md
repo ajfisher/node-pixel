@@ -25,10 +25,6 @@
 
 -  **TODO** `(line 34)`  get this to work in setup
 
-## firmware/src/libs/ws2812/ws2812.h
-
--  **TODO** `(line 36)`  remove all of this and consolidate properly.
-
 ## lib/pixel.js
 
 -  **TODO** `(line 3)` :
@@ -36,4 +32,4 @@
 
 * * *
 
-Last generated: Sun Dec 06 2015 22:55:30 by [grunt-todo](https://github.com/leny/grunt-todo).
+Last generated: Tue Dec 08 2015 22:02:54 by [grunt-todo](https://github.com/leny/grunt-todo).
