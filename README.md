@@ -1,8 +1,8 @@
 # Node Pixel
 
-![](https://img.shields.io/badge/version-0.5.0-blue.svg)
+![](https://img.shields.io/npm/v/node-pixel.svg)
 [![Join the chat at https://gitter.im/ajfisher/node-pixel](https://img.shields.io/badge/Gitter-Join%20Chat-brightgreen.svg)](https://gitter.im/ajfisher/node-pixel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-![](https://img.shields.io/badge/status-Beta-orange.svg)
+![](https://img.shields.io/badge/status-Ready-green.svg)
 ![](https://img.shields.io/david/ajfisher/node-pixel.svg)
 ![](https://img.shields.io/github/issues/ajfisher/node-pixel.svg)
 
