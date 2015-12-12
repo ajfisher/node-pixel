@@ -213,6 +213,18 @@ you make the various changes you want to the strip as you need to without
 triggering the display (like a frame buffer). Once you're ready you can then
 call `show()` to propagate this data through the LEDs and display the frame.
 
+##### off();
+
+All LEDs on the strip can be turned off by using the `.off()` method. This effectively clears the current colours set on the strip.
+
+`.clear()` is also aliased to the same method.
+
+###### Example
+
+```javascript
+strip.off(); // turn the strip off / clear pixel colours
+```
+
 ##### color( *colourstring* );
 
 All LEDs on the strip can be set to the same colour using the `.color()` method.
