@@ -154,6 +154,23 @@ exports["Strip"] = {
 
         test.done();
     },
+
+    off: function(test) {
+        // tests if setting strip off results in black pixel colour
+        test.expect(1);
+
+        var colourcheck = {
+            r: 0, g: 0, b: 0,
+            hexcode: "#000000",
+            color: "black",
+            rgb: [0, 0, 0],
+        };
+
+        this.strip.off();
+        test.deepEqual(this.strip.pixel(0).color(), colourcheck, "Check strip is off");
+
+        test.done();
+    },
 };
 
 exports["Pixel"] = {
