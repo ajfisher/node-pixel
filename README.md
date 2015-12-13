@@ -118,7 +118,7 @@ the `strips` array eg `[ {color_order: pixel.COLOR_ORDER.RGB}, ..]`
 
 _Johnny-Five instantiation_
 
-```
+```javascript
 pixel = require("node-pixel");
 five = require("johnny-five");
 
@@ -141,7 +141,7 @@ board.on("ready", function() {
 
 _Firmata instantiation_
 
-```
+```javascript
 pixel = require("node-pixel");
 var firmata = require('firmata');
 
@@ -162,7 +162,7 @@ var board = new firmata.Board('path to usb',function(){
 
 _Johnny Five with backpack_
 
-```
+```javascript
 pixel = require("node-pixel");
 five = require("johnny-five");
 
@@ -202,7 +202,7 @@ This gives you an upper limit as to how many frames you can drive per second.
 
 ###### Example
 
-```
+```javascript
 // ... make pixel modifications
 
 strip.show(); // make the strip latch and update the LEDs
@@ -229,28 +229,28 @@ an `Array` object as an rgb value eg `[r, g, b]`
 
 _Set strip using a hex value_
 
-```
+```javascript
 strip.color("#ff0000"); // turns entire strip red using a hex colour
 strip.show();
 ```
 
 _Update strip using a named CSS colour_
 
-```
+```javascript
 strip.colour("teal"); // sets strip to a blue-green color using a named colour
 strip.show();
 ```
 
 _You can also use CSS RGB values_
 
-```
+```javascript
 strip.color("rgb(0, 255, 0)"); // sets strip to green using rgb values
 strip.show();
 ```
 
 _Or set using an array of RGB values_
 
-```
+```javascript
 strip.color([255, 255, 0]); // Sets strip using an array
 strip.show();
 ```
@@ -269,7 +269,7 @@ the third pixel on the second physical strip.
 
 ###### Example
 
-```
+```javascript
 var p = strip.pixel(1); // get the second LED. p is now a Pixel object
 ```
 
@@ -295,7 +295,7 @@ pass in an `Array` object that is a set of RGB values as [r, g, b].
 
 ###### Examples
 
-```
+```javascript
 var p = strip.pixel(1);     // get second LED
 p.color("#0000FF");         // set second pixel blue.
 
@@ -321,7 +321,7 @@ Returns an object representing the color of this pixel with the shape below.
 
 ###### Shape
 
-```
+```javascript
 {
     r: 0,               // red component
     g: 0,               // green component
@@ -336,7 +336,7 @@ Returns an object representing the color of this pixel with the shape below.
 
 Get a pixel, set it's colour and then query it's current state.
 
-```
+```javascript
 var p = strip.pixel(1); // get second LED
 
 p.color("#0000FF"); // set second pixel blue.
