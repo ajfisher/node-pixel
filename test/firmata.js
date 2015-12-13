@@ -120,7 +120,7 @@ exports["Strip - Firmata"] = {
             var strip1 = new pixel.Strip({
                 board: this.board,
                 controller: "FIRMATA",
-                strips: [ {pin: 6, length: 257}, ]
+                strips: [ {pin: 6, length: 200}, ]
             });
         } catch (e) {
             if (e instanceof(RangeError)) {

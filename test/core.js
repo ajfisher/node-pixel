@@ -93,9 +93,9 @@ exports["Strip"] = {
         var strip2 = new pixel.Strip({
             board: this.board,
             controller: "FIRMATA",
-            strips: [{pin: 2, length: 100}, {pin: 3, length: 100}]
+            strips: [{pin: 2, length: 50}, {pin: 3, length: 50}]
         });
-        test.equal(strip2.stripLength(), 200, "Multiple strips length correct");
+        test.equal(strip2.stripLength(), 100, "Multiple strips length correct");
 
         var strip3 = new pixel.Strip({
             board: this.board,

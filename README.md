@@ -40,7 +40,7 @@ Instalaltion of both backpack and custom firmata are covered in detail in the
 
 Multiple led strips on one arduino or backpack are supported up to a maximum
 of 8 individual strips (8 pins in use at once). Each strip can be different
-lengths but you can only have a maximum of 256 pixels for Firmata and about
+lengths but you can only have a maximum of 192 pixels for Firmata and about
 500 pixels for the backpack version.
 
 Multiple strips connected to a single board or backpack are for the purposes
