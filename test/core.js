@@ -159,6 +159,8 @@ exports["Strip"] = {
         // tests if setting strip off results in black pixel colour
         test.expect(1);
 
+        this.strip.color("#FF0000");
+
         var colourcheck = {
             r: 0, g: 0, b: 0,
             hexcode: "#000000",
