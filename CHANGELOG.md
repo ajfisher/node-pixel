@@ -1,5 +1,17 @@
 # node-pixel changelog
 
+## 0.6.0
+
+* Added `strip.off()` functionality and tests - thanks again @noopkat
+
+### 0.5.2
+
+* Documentation fixes around syntax highlighting thanks to @noopkat
+
+### 0.5.1
+
+* Modified maximum firmata to 192 pixels after profiling and lack of memory issue
+
 ## 0.5
 
 * Strip multipin! You can now use and define multiple strips on different pins
