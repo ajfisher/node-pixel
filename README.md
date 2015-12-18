@@ -33,7 +33,7 @@ the [Gitter Chat](https://gitter.im/ajfisher/node-pixel) or reach out to
 
 ## Installation
 
-Instalaltion of both backpack and custom firmata are covered in detail in the
+Installation of both backpack and custom firmata are covered in detail in the
 [Installation Guide](docs/installation.md).
 
 ### A note on multiple strips
