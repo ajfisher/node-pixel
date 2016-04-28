@@ -1,5 +1,9 @@
 # node-pixel changelog
 
+### 0.6.1
+
+* Fixed some default I2C address issues - thanks @frxnz
+
 ## 0.6.0
 
 * Added `strip.off()` functionality and tests - thanks again @noopkat
