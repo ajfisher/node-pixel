@@ -20,7 +20,6 @@ void setup() {
     Serial.println("NodePixel I2C");
 #endif
 
-
     ws2812_initialise(true);
 }
 
@@ -44,6 +43,10 @@ void receiveData(receiveint numbytes) {
     for (uint8_t i=0; i < numbytes; i++) {
         if (i < MAX_RECEIVED_BYTES) {
                 received_bytes[i] = Wire.read();
+                #if _DEBUG
+                    Serial.print(received_bytes[i], HEX);
+                    Serial.print(" ");
+                #endif
         } else {
                 Wire.read();
         }
