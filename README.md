@@ -36,6 +36,19 @@ the [Gitter Chat](https://gitter.im/ajfisher/node-pixel) or reach out to
 Installation of both backpack and custom firmata are covered in detail in the
 [Installation Guide](docs/installation.md).
 
+Short version for node-pixel custom firmata.
+
+```
+npm install node-pixel
+npm install -g nodebots-interchange
+```
+
+Plug in your arduino
+
+```
+interchange install git+https://github.com/ajfisher/node-pixel -a uno --firmata
+```
+
 ### A note on multiple strips
 
 Multiple led strips on one arduino or backpack are supported up to a maximum
