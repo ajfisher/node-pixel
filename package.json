@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "color-string": "^1.2.0",
-    "es6-collections": "^0.5.5",
     "firmata": "^0.14.1",
     "johnny-five": "^0.10.0"
   },
