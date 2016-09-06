@@ -1,0 +1,10 @@
+{
+    "backpack": {
+        "bins": "/firmware/bin/backpack/",
+        "hexPath": "/backpack.ino.hex"
+    },
+    "firmata": {
+        "bins": "/firmware/bin/firmata/",
+        "hexPath": "/node_pixel_firmata.ino.hex"
+    }
+}

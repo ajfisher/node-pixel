@@ -1,3 +1,8 @@
+var arduino = process.env.ARDUINO_PATH;
+
+var boards = require("./firmware/boards.js");
+var boardlist = Object.keys(boards).toString();
+
 module.exports = function(grunt) {
 
     // configure the tasks
@@ -18,7 +23,13 @@ module.exports = function(grunt) {
             firmata: {
                 cwd: 'firmware/src/',
                 flatten: true,
-                src: [ 'libs/**', '!libs/protocol.md', 'controller_src/firmata/*' ],
+                src: [
+                    'libs/firmata/arduino/*.{cpp,h}',
+                    'libs/ws2812/*',
+                    'libs/lightws2812/*',
+                    '!libs/protocol.md',
+                    'controller_src/firmata/*'
+                ],
                 dest: 'firmware/build/node_pixel_firmata/',
                 expand: true,
                 filter: 'isFile',
@@ -26,18 +37,35 @@ module.exports = function(grunt) {
             backpack: {
                 cwd: 'firmware/src/',
                 flatten: true,
-                src: [ 'libs/ws2812/*', 'libs/lightws2812/*', '!libs/protocol.md', 'controller_src/backpack/*' ],
+                src: [
+                    'libs/ws2812/*',
+                    'libs/lightws2812/*',
+                    '!libs/protocol.md',
+                    'controller_src/backpack/*'
+                ],
                 dest: 'firmware/build/backpack/',
                 expand: true,
                 filter: 'isFile',
             },
         },
         clean: {
-            build: {
+            firmware_build: {
                 src: [
                         'firmware/build/node_pixel_firmata',
                         'firmware/build/backpack',
                      ]
+            },
+            compiled_bins: {
+                src: [
+                        'firmware/bin/backpack/*',
+                        'firmware/bin/firmata/*'
+                    ]
+            },
+            post_compile: {
+                src: [
+                        'firmware/bin/backpack/{' + boardlist + '}/!(*ino.hex)',
+                        'firmware/bin/firmata/{' + boardlist + '}/!(*ino.hex)'
+                ]
             },
         },
         watch: {
@@ -95,9 +123,27 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-todo');
 
-    grunt.registerTask('build', ['clean', 'copy']);
+    // dynamically create the compile targets for the various boards
+    Object.keys(boards).forEach(function(key) {
+        grunt.config(["exec", "firmata_" + key], {
+            command:function() {
+                return arduino + " --verify --verbose-build --board "  + boards[key].package +
+                " --pref build.path=firmware/bin/firmata/" + key +  " firmware/build/node_pixel_firmata/node_pixel_firmata.ino";
+            },
+        });
+        grunt.config(["exec", "backpack_" + key], {
+            command:function() {
+                return arduino + " --verify --verbose-build --board "  + boards[key].package +
+                " --pref build.path=firmware/bin/backpack/" + key +  " firmware/build/backpack/backpack.ino";
+            },
+        });
+    });
+
+    grunt.registerTask('build', ['clean:firmware_build', 'clean:compiled_bins', 'copy']);
+    grunt.registerTask('compile', ['build', 'exec', 'clean:post_compile']);
 
     grunt.registerTask('test', ['nodeunit', ]);
 };
