@@ -36,8 +36,8 @@ board.on("ready", function() {
 
         var showColor;
         for(var i = 0; i < strip.stripLength(); i++) {
-            showColor = colorWheel( ( i*256 / strip.stripLength() ) & 255 );
-            strip.pixel( i ).color( showColor );
+            showColor = colorWheel( ( (i+10)*256 / strip.stripLength() ) & 255 );
+            strip.pixel(i).color( showColor);
         }
         strip.show();
     }
