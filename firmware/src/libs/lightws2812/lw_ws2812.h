@@ -82,7 +82,7 @@ private:
     void init(uint16_t num_leds);
     void init(uint16_t num_leds, uint16_t offset);
 	void ws2812_sendarray_mask(
-            uint8_t *array, uint16_t start, uint16_t length,
+            uint8_t *array, uint16_t length,
             uint8_t pinmask,uint8_t *port, uint8_t *portreg
     );
 

@@ -75,7 +75,7 @@
 #define w_nop16 w_nop8 w_nop8
 
 void  WS2812::ws2812_sendarray_mask(
-        uint8_t *data, uint16_t start, uint16_t datlen,
+        uint8_t *data, uint16_t datlen,
         uint8_t maskhi,uint8_t *port, uint8_t *portreg
 ) {
   // data is a pointer to an array of bytes
@@ -89,9 +89,6 @@ void  WS2812::ws2812_sendarray_mask(
   maskhi |= *port;
   sreg_prev=SREG;
   cli();
-
-  // set the curbyte to the start
-  curbyte = *data + start;
 
   while (datlen--) {
     curbyte=*data++;
