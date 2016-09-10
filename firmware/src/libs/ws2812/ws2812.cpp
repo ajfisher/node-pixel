@@ -92,8 +92,8 @@ void process_command(byte argc, byte *argv){
 
             if (! writingFrame) {
                 writingFrame = true;
-                for (uint8_t i = 0; i< MAX_STRIPS; i++) {
-                    if (strips[i].get_length() > 0 && strip_changed[i]) {
+                for (uint8_t i = 0; i < strip_count; i++) {
+                    if (strip_changed[i]) {
                         strips[i].sync(px);
                     }
                     strip_changed[i] = false;
@@ -131,12 +131,10 @@ void process_command(byte argc, byte *argv){
 
             set_rgb_at(index, colour);
 
-            // TODO redo how we do this detection and how we mark a strip
-            // as being dirty and needing an update
             for (uint8_t i = 0; i < strip_count; i++) {
                 // find the strip where this pixel is located and
                 // then mark it dirty - but then bail out so you don't
-                // overprocess anything else.
+                // overprocess.
                 if (index < strip_lengths[i]) {
                     strip_changed[i] = true;
                     break;
