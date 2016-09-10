@@ -58,6 +58,7 @@ void setColorOrderBRG();
 
 #if DEBUG
 void print_pixels();
+int freeRam();
 #endif
 
 

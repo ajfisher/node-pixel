@@ -79,6 +79,60 @@ uint8_t set_rgb_at(uint16_t index, uint32_t px_value) {
     return 1;
 }
 
+void shift_pixels(uint8_t amt, bool shift_forwards, bool wrap) {
+    // take the pixel array and shift the items along the array
+    // shift forwards determines direction of travel and wrap determines
+    // if the values need to be wrapped around again.
+
+    uint8_t *tmp_px;
+    uint16_t slice_index = 0;
+    if (wrap) {
+        // need to allocate and then copy the memory from end of the array
+        // into temporary array before we move it.
+        if (amt > 0) {
+            if (tmp_px = (uint8_t *)malloc(amt*color_depth)) {
+                memset(tmp_px, 0, amt*color_depth);
+            }
+        }
+        if (shift_forwards) {
+            // grab from the end of the array;
+            slice_index = (px_count - amt);
+        } else {
+            // grab from the start of the array;
+            ;
+        }
+        memcpy(tmp_px, px+slice_index*color_depth, amt*color_depth);
+    }
+    // now memmove the data appropriately
+    if (shift_forwards) {
+        // memmove data down the array from 0 to length-amt
+        memmove(px+amt*color_depth, px, (px_count - amt) * color_depth);
+    } else {
+        // memmove data up the array from amt to length to pos 0
+        ;
+    }
+
+    if (wrap) {
+        if (shift_forwards) {
+            // mem cpy data from tmp array to pos 0
+            memcpy(px, tmp_px, amt*color_depth);
+        } else {
+            // mem cpy data from tmp array to pos length - amt
+            ;
+        }
+        free(tmp_px);
+    } else {
+        if (shift_forwards) {
+            // memset zeros from pos 0 to amt
+            ;
+        } else {
+            // memset zeros from pos length - amt to length
+            ;
+        }
+    }
+}
+
+
 void process_command(byte argc, byte *argv){
     // this takes a pixel command that has been determined and then
     // processes it appropriately.
@@ -204,14 +258,9 @@ void process_command(byte argc, byte *argv){
             // do we wrap around (bit 7)
             bool wrap = (bool) (argv[1] & 0x40);
 
-            Serial2.print("Pixel Shift:");
-            Serial2.print(" amt: ");
-            Serial2.print(shift_amt);
-            Serial2.print(" dir: ");
-            Serial2.print(direction);
-            Serial2.print(" wrap: ");
-            Serial2.println(wrap);
-
+            shift_pixels(shift_amt, direction, wrap);
+            // set all the strips dirty.
+            memset(strip_changed, true, strip_count);
             break;
         }
     }
@@ -252,5 +301,11 @@ void print_pixels() {
         Serial2.print(px[OFFSET_B(index)]);
         Serial2.println();
     }
+}
+
+int freeRam () {
+  extern int __heap_start, *__brkval;
+  int v;
+  return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
 }
 #endif
