@@ -47,16 +47,18 @@
 
 class WS2812 {
 public:
+    WS2812(uint16_t num_led, uint16_t offset);
     WS2812(uint16_t num_led);
     WS2812();
 	~WS2812();
 
 	void setOutput(uint8_t pin);
     void set_length(uint16_t num_leds);
+    void set_offset(uint16_t offset);
 
     uint8_t set_rgb_at(uint16_t index, uint32_t px_value);
     void set_off();
-	void sync();
+	void sync(uint8_t *px_array);
 
     uint16_t get_length();
 
@@ -67,7 +69,8 @@ public:
 #endif
 
 private:
-	uint16_t count_led;
+	uint16_t count_led; // how many LEDs being controlled
+    uint16_t offset; // any offsets needing to be applied
 	uint8_t *pixels;
 
 #ifdef RGB_ORDER_ON_RUNTIME
@@ -77,7 +80,11 @@ private:
 #endif
 
     void init(uint16_t num_leds);
-	void ws2812_sendarray_mask(uint8_t *array,uint16_t length, uint8_t pinmask,uint8_t *port, uint8_t *portreg);
+    void init(uint16_t num_leds, uint16_t offset);
+	void ws2812_sendarray_mask(
+            uint8_t *array, uint16_t start, uint16_t length,
+            uint8_t pinmask,uint8_t *port, uint8_t *portreg
+    );
 
 	const volatile uint8_t *ws2812_port;
 	volatile uint8_t *ws2812_port_reg;

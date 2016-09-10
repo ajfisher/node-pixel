@@ -771,6 +771,10 @@ void setup()
   // Serial1.begin(57600);
   // Firmata.begin(Serial1);
   // However do not do this if you are using SERIAL_MESSAGE
+#if DEBUG
+  Serial2.begin(9600);
+  Serial2.println("Setup");
+#endif
 
   Firmata.begin(57600);
   while (!Serial) {
