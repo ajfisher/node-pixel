@@ -1,9 +1,9 @@
 /**
  *
- * This the ws2812 library used for the various examples
+ * This the ws2812 library used to manage the strip(s)
  *
  * Most of its job is to parse messages correctly and hand off to the
- * Adafruit library for more serious tasking.
+ * light library for more serious tasking.
  *
  * You'll need to call ws2812_initialise() to begin with so it sets up
  * the strip appropriately
@@ -12,6 +12,8 @@
 
 #ifndef WS2812_h
 #define WS2812_h
+
+#define DEBUG true
 
 #include "Arduino.h"
 #include "lw_ws2812.h"
@@ -39,8 +41,23 @@
 
 #define BUFLENGTH 64
 
+#define OFFSET_R(r) r+offsetRed
+#define OFFSET_G(g) g+offsetGreen
+#define OFFSET_B(b) b+offsetBlue
+
 void ws2812_initialise();
 void ws2812_initialise(bool backpack);
 void process_command(byte argc, byte *argv);
+void initialise_pixels(uint16_t num_pixels);
+uint8_t set_rgb_at(uint16_t index, uint32_t px_value);
+
+void setColorOrderRGB();
+void setColorOrderGRB();
+void setColorOrderBRG();
+
+#if DEBUG
+void print_pixels();
+#endif
+
 
 #endif

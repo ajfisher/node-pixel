@@ -74,8 +74,14 @@
 #define w_nop8  w_nop4 w_nop4
 #define w_nop16 w_nop8 w_nop8
 
-void  WS2812::ws2812_sendarray_mask(uint8_t *data,uint16_t datlen,uint8_t maskhi,uint8_t *port, uint8_t *portreg)
-{
+void  WS2812::ws2812_sendarray_mask(
+        uint8_t *data, uint16_t datlen,
+        uint8_t maskhi,uint8_t *port, uint8_t *portreg
+) {
+  // data is a pointer to an array of bytes
+  // start is the offset from the start of the array
+  // datlen is how many bytes to go write.
+
   uint8_t curbyte,ctr,masklo;
   uint8_t sreg_prev;
 
