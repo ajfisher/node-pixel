@@ -30,21 +30,6 @@
 
 #include <Arduino.h>
 
-// If you want to use the setColorOrder functions, enable this line
-// TODO get this to work in setup
-#define RGB_ORDER_ON_RUNTIME
-
-#ifdef RGB_ORDER_ON_RUNTIME
-	#define OFFSET_R(r) r+offsetRed
-	#define OFFSET_G(g) g+offsetGreen
-	#define OFFSET_B(b) b+offsetBlue
-#else
-// CHANGE YOUR STATIC RGB ORDER HERE
-	#define OFFSET_R(r) r+1
-	#define OFFSET_G(g) g
-	#define OFFSET_B(b) b+2
-#endif
-
 class WS2812 {
 public:
     WS2812(uint16_t num_led, uint16_t offset);
@@ -56,28 +41,14 @@ public:
     void set_length(uint16_t num_leds);
     void set_offset(uint16_t offset);
 
-    uint8_t set_rgb_at(uint16_t index, uint32_t px_value);
-    void set_off();
-	void sync(uint8_t *px_array);
+	void sync(uint8_t *px_array, uint8_t pixel_depth);
 
     uint16_t get_length();
-
-#ifdef RGB_ORDER_ON_RUNTIME
-	void setColorOrderRGB();
-	void setColorOrderGRB();
-	void setColorOrderBRG();
-#endif
 
 private:
 	uint16_t count_led; // how many LEDs being controlled
     uint16_t offset; // any offsets needing to be applied
-	uint8_t *pixels;
 
-#ifdef RGB_ORDER_ON_RUNTIME
-	uint8_t offsetRed;
-	uint8_t offsetGreen;
-	uint8_t offsetBlue;
-#endif
 
     void init(uint16_t num_leds);
     void init(uint16_t num_leds, uint16_t offset);

@@ -94,7 +94,7 @@ void process_command(byte argc, byte *argv){
                 writingFrame = true;
                 for (uint8_t i = 0; i < strip_count; i++) {
                     if (strip_changed[i]) {
-                        strips[i].sync(px);
+                        strips[i].sync(px, color_depth);
                     }
                     strip_changed[i] = false;
                 }
