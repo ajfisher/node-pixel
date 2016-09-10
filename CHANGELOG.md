@@ -3,13 +3,14 @@
 ### 0.7.0
 
 * updated packages to bring dependency list up to scratch.
-* removed es6-collections shim
+* removed es6-collections shim YAY ES6.
 * Updated node-pixel-firmata with latest version of StandardFirmata (v2.5.3)
 * Updated lib to use new color string api.
 * Resolved issue with an osx segfault when trying to write too quickly after
 firmware returns
 * Update to grunt file to now build and compile hexes to target MCU architecture
 * Manifest file for interchange to be able to install to targets.
+* Update of examples as needed.
 
 ### 0.6.1
 
