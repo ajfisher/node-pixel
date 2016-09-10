@@ -194,6 +194,25 @@ void process_command(byte argc, byte *argv){
             }
 
             break;
+        }// end config case
+        case PIXEL_SHIFT: {
+
+            // grab the number of pixels to shift by (bottom 5 bits)
+            uint8_t shift_amt = argv[1] & 0x1F;
+            // do we go forwards or backwards (bit 6)
+            bool direction = (bool) (argv[1] & 0x20);
+            // do we wrap around (bit 7)
+            bool wrap = (bool) (argv[1] & 0x40);
+
+            Serial2.print("Pixel Shift:");
+            Serial2.print(" amt: ");
+            Serial2.print(shift_amt);
+            Serial2.print(" dir: ");
+            Serial2.print(direction);
+            Serial2.print(" wrap: ");
+            Serial2.println(wrap);
+
+            break;
         }
     }
 }

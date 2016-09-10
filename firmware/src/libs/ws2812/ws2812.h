@@ -27,6 +27,7 @@
 #define PIXEL_SHOW              0x02 // latch the pixels and show them
 #define PIXEL_SET_PIXEL         0x03 // set the color value of pixel n using 32bit packed color value
 #define PIXEL_SET_STRIP         0x04 // set color of whole strip
+#define PIXEL_SHIFT             0x05 // shift all pixels n places along the strip
 
 // define the colour element layouts
 #define PIXEL_COLOUR_GRB        0x0
