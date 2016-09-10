@@ -122,7 +122,22 @@ void process_command(byte argc, byte *argv){
                 ((uint32_t)argv[3]<<14) +
                 ((uint32_t)argv[4] << 21);
 
-            for (uint8_t i = 0; i < MAX_STRIPS; i++) {
+            if (strip_colour == 0) {
+                // TODO: set this correctly
+                memset(px, 0, px_count * color_depth);
+            } else {
+                for (uint16_t i = 0; i < px_count; i++) {
+                    set_rgb_at(i, strip_colour);
+                }
+                // set all the strips dirty for update
+                for (uint8_t j = 0; j < MAX_STRIPS; j++) {
+                    if (strips[j].get_length() > 0) {
+                        strip_changed[j] = true;
+                    }
+                }
+            }
+
+/**            for (uint8_t i = 0; i < MAX_STRIPS; i++) {
                 if (strips[i].get_length() > 0) {
                     // If this is a blank then call strip off which is a bit more efficient
                     if (strip_colour == 0) {
@@ -135,7 +150,7 @@ void process_command(byte argc, byte *argv){
                     }
                     strip_changed[i] = true;
                 }
-            }
+            }**/
             break;
         }
         case PIXEL_SET_PIXEL: {
@@ -221,9 +236,10 @@ void process_command(byte argc, byte *argv){
                     // set the strip's offset so it knows where it is in the
                     // 1D pixel array
                     strips[i].set_offset(strip_lengths[i]);
-                    px_count = px_count + strip_lengths[i];
-                    initialise_pixels(px_count);
+                    px_count = px_count + strips[i].get_length();
                 }
+                // now initialise our pixel count
+                initialise_pixels(px_count);
             }
 
             break;
