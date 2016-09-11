@@ -79,6 +79,63 @@ uint8_t set_rgb_at(uint16_t index, uint32_t px_value) {
     return 1;
 }
 
+void shift_pixels(uint8_t amt, bool shift_forwards, bool wrap) {
+    // take the pixel array and shift the items along the array
+    // shift forwards determines direction of travel and wrap determines
+    // if the values need to be wrapped around again.
+
+    uint8_t *tmp_px;
+    uint16_t slice_index;
+    uint8_t copy_byte_length;
+    if (wrap) {
+        // need to allocate and then copy the memory from end of the array
+        // into temporary array before we move it.
+        if (amt > 0) {
+            copy_byte_length = amt*color_depth;
+            if (tmp_px = (uint8_t *)malloc(copy_byte_length)) {
+                memset(tmp_px, 0, copy_byte_length);
+            }
+        }
+        if (shift_forwards) {
+            // grab from the end of the array;
+            slice_index = (px_count - amt);
+        } else {
+            // grab from the start of the array;
+            slice_index = 0;
+        }
+        memcpy(tmp_px, px+slice_index*color_depth, copy_byte_length);
+    }
+    // now memmove the data appropriately
+    if (shift_forwards) {
+        // memmove data down the array from 0 to length-amt
+        memmove(px+copy_byte_length, px, (px_count - amt) * color_depth);
+    } else {
+        // memmove data up the array from amt to length to pos 0
+        memmove(px, px+copy_byte_length, (px_count - amt) * color_depth);
+    }
+
+    if (wrap) {
+        uint16_t copy_index = 0;
+        if (! shift_forwards) {
+            // get the position at the end to drop this in on.
+            copy_index = px_count - amt;
+        }
+
+        memcpy(px+copy_index*color_depth, tmp_px, copy_byte_length);
+        free(tmp_px);
+    } else {
+        memset(px+slice_index*color_depth, 0, copy_byte_length);
+/**        if (shift_forwards) {
+            // memset zeros from pos 0 to amt
+            memset(px, 0, copy_byte_length);
+        } else {
+            // memset zeros from pos length - amt to length
+            memset(px+slice_index*color_depth, 0, amt*color_depth);
+        }**/
+    }
+}
+
+
 void process_command(byte argc, byte *argv){
     // this takes a pixel command that has been determined and then
     // processes it appropriately.
@@ -92,9 +149,9 @@ void process_command(byte argc, byte *argv){
 
             if (! writingFrame) {
                 writingFrame = true;
-                for (uint8_t i = 0; i< MAX_STRIPS; i++) {
-                    if (strips[i].get_length() > 0 && strip_changed[i]) {
-                        strips[i].sync(px);
+                for (uint8_t i = 0; i < strip_count; i++) {
+                    if (strip_changed[i]) {
+                        strips[i].sync(px, color_depth);
                     }
                     strip_changed[i] = false;
                 }
@@ -131,12 +188,10 @@ void process_command(byte argc, byte *argv){
 
             set_rgb_at(index, colour);
 
-            // TODO redo how we do this detection and how we mark a strip
-            // as being dirty and needing an update
             for (uint8_t i = 0; i < strip_count; i++) {
                 // find the strip where this pixel is located and
                 // then mark it dirty - but then bail out so you don't
-                // overprocess anything else.
+                // overprocess.
                 if (index < strip_lengths[i]) {
                     strip_changed[i] = true;
                     break;
@@ -196,6 +251,20 @@ void process_command(byte argc, byte *argv){
             }
 
             break;
+        }// end config case
+        case PIXEL_SHIFT: {
+
+            // grab the number of pixels to shift by (bottom 5 bits)
+            uint8_t shift_amt = argv[1] & 0x1F;
+            // do we go forwards or backwards (bit 6)
+            bool direction = (bool) (argv[1] & 0x20);
+            // do we wrap around (bit 7)
+            bool wrap = (bool) (argv[1] & 0x40);
+
+            shift_pixels(shift_amt, direction, wrap);
+            // set all the strips dirty.
+            memset(strip_changed, true, strip_count);
+            break;
         }
     }
 }
@@ -235,5 +304,11 @@ void print_pixels() {
         Serial2.print(px[OFFSET_B(index)]);
         Serial2.println();
     }
+}
+
+int freeRam () {
+  extern int __heap_start, *__brkval;
+  int v;
+  return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
 }
 #endif

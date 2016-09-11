@@ -280,6 +280,36 @@ strip.color([255, 255, 0]); // Sets strip using an array
 strip.show();
 ```
 
+##### shift( *amt*, *direction*, *wrap* );
+
+All LEDs on the strip can be shifted along the strip forwards or backwards
+by the given amount. This is very useful for long strip animation when you're
+moving the whole strip by a pixel in one direction each frame and means you
+don't have to send an update of `framelength` messages
+
+###### Parameters
+
+* **amt** A `Number` representing the number of pixels you want everything to
+shift by.
+* **direction** Either `Pixel.FORWARD` or `Pixel.BACKWARD` value which determines
+direction of travel. Forward direction is in the flow index values (ie index 1->2 etc).
+* **wrap** a `Boolean` representing whether to wrap the values that go off the
+"end" of the strip back around to the start - useful for circular displays.
+
+* **colourstring** A `String` as a standard HTML hex colour or a CSS colour name,
+or a CSS rgb(r, g, b) value used to specify the colour of the strip. Alternatively
+an `Array` object as an rgb value eg `[r, g, b]`
+
+###### Example
+
+```javascript
+strip.pixel(0).color("#000");
+strip.pixel(1).color("red");
+strip.shift(1, pixel.FORWARD, true);
+strip.pixel(1).color; // will now be nothing
+strip.pixel(2).color; // will now be red.
+```
+
 ##### pixel( *address* );
 
 Individual pixels can be addressed by the pixel method using their address in

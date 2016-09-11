@@ -30,6 +30,8 @@
 #include "./lw_ws2812.h"
 #include "./ws2812.h"
 
+#define serialport Serial2
+
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
 #define I2C_READ_CONTINUOUSLY       B00010000
@@ -772,8 +774,8 @@ void setup()
   // Firmata.begin(Serial1);
   // However do not do this if you are using SERIAL_MESSAGE
 #if DEBUG
-  Serial2.begin(9600);
-  Serial2.println("Setup");
+  serialport.begin(9600);
+  serialport.println("Setup");
 #endif
 
   Firmata.begin(57600);

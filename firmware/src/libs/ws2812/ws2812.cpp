@@ -2,6 +2,7 @@
 #include "Arduino.h"
 
 bool isBackpack = false;
+bool isShifting = false; // used when we're doing memory intensive shifting
 bool writingFrame = false;
 WS2812 strips[MAX_STRIPS];
 
@@ -20,13 +21,15 @@ uint8_t offsetBlue;
 void ws2812_initialise() {
     // initialises the strip defaults.
 
+    strip_count = 0;
+    px_count = 0;
     for (uint8_t i = 0; i < MAX_STRIPS; i++) {
         strip_lengths[i] = 0;
         strip_changed[i] = false;
     }
 
 #if DEBUG
-    Serial2.println("Initialising WS2812 library");
+    serialport.println("Initialising WS2812 library");
 #endif
 }
 
@@ -35,10 +38,11 @@ void ws2812_initialise(bool backpack) {
 
     isBackpack = backpack;
     ws2812_initialise();
-    for (uint8_t i = 0; i< MAX_STRIPS; i++) {
-        strips[i].setOutput(i+STRIP_START_PIN);
-    };
-
+    if (isBackpack) {
+        for (uint8_t i = 0; i< MAX_STRIPS; i++) {
+            strips[i].setOutput(i+STRIP_START_PIN);
+        };
+    }
 }
 
 void initialise_pixels(uint16_t num_pixels) {
@@ -46,21 +50,24 @@ void initialise_pixels(uint16_t num_pixels) {
 
     if (px) {
         free (px);
+        px_count = 0;
     }
 
     if (num_pixels > 0) {
         if (px = (uint8_t *)malloc(num_pixels*color_depth)) {
             memset(px, 0, num_pixels*color_depth);
+            px_count = num_pixels;
         } else {
             px_count = 0;
         }
     }
+
 #if DEBUG
-    Serial2.print("Initialising ");
-    Serial2.print(strip_count);
-    Serial2.print(" strips ");
-    Serial2.print(px_count);
-    Serial2.println(" pixels");
+    serialport.print("Initialising ");
+    serialport.print(strip_count);
+    serialport.print(" strips ");
+    serialport.print(px_count);
+    serialport.println(" pixels");
 #endif
 }
 
@@ -85,51 +92,63 @@ void shift_pixels(uint8_t amt, bool shift_forwards, bool wrap) {
     // if the values need to be wrapped around again.
 
     uint8_t *tmp_px;
-    uint16_t slice_index = 0;
+    uint16_t slice_index;
+    uint8_t copy_byte_length;
+    if (amt > 0) {
+        copy_byte_length = amt*color_depth;
+    } else {
+        return;
+    }
+
+    isShifting = true;
+
     if (wrap) {
         // need to allocate and then copy the memory from end of the array
         // into temporary array before we move it.
-        if (amt > 0) {
-            if (tmp_px = (uint8_t *)malloc(amt*color_depth)) {
-                memset(tmp_px, 0, amt*color_depth);
-            }
+        if (tmp_px = (uint8_t *)malloc(copy_byte_length)) {
+            memset(tmp_px, 0, copy_byte_length);
         }
+
         if (shift_forwards) {
             // grab from the end of the array;
             slice_index = (px_count - amt);
         } else {
             // grab from the start of the array;
-            ;
+            slice_index = 0;
         }
-        memcpy(tmp_px, px+slice_index*color_depth, amt*color_depth);
+        memcpy(tmp_px, px+slice_index*color_depth, copy_byte_length);
     }
     // now memmove the data appropriately
     if (shift_forwards) {
         // memmove data down the array from 0 to length-amt
-        memmove(px+amt*color_depth, px, (px_count - amt) * color_depth);
+        memmove(px+copy_byte_length, px, (px_count - amt) * color_depth);
     } else {
         // memmove data up the array from amt to length to pos 0
-        ;
+        memmove(px, px+copy_byte_length, (px_count - amt) * color_depth);
     }
 
     if (wrap) {
-        if (shift_forwards) {
-            // mem cpy data from tmp array to pos 0
-            memcpy(px, tmp_px, amt*color_depth);
-        } else {
-            // mem cpy data from tmp array to pos length - amt
-            ;
+        uint16_t copy_index = 0;
+        if (! shift_forwards) {
+            // get the position at the end to drop this in on.
+            copy_index = px_count - amt;
         }
+
+        memcpy(px+copy_index*color_depth, tmp_px, copy_byte_length);
         free(tmp_px);
     } else {
-        if (shift_forwards) {
-            // memset zeros from pos 0 to amt
-            ;
-        } else {
-            // memset zeros from pos length - amt to length
-            ;
+        // if we're not wrapping around then we'll need to fill the rest
+        // with 0s
+        uint16_t fill_index = 0;
+        if (! shift_forwards) {
+            // get position at the end to fill from
+            fill_index = px_count - amt;
         }
+
+        memset(px+fill_index*color_depth, 0, copy_byte_length);
     }
+
+    isShifting = false;
 }
 
 
@@ -144,7 +163,7 @@ void process_command(byte argc, byte *argv){
         case PIXEL_SHOW: {
             // iterate over the strips and show those required.
 
-            if (! writingFrame) {
+            if (! writingFrame && ! isShifting) {
                 writingFrame = true;
                 for (uint8_t i = 0; i < strip_count; i++) {
                     if (strip_changed[i]) {
@@ -164,17 +183,18 @@ void process_command(byte argc, byte *argv){
                 ((uint32_t)argv[3]<<14) +
                 ((uint32_t)argv[4] << 21);
 
-            if (strip_colour == 0) {
-                // set all of the pixels back to 0
-                memset(px, 0, px_count * color_depth);
-            } else {
-                for (uint16_t i = 0; i < px_count; i++) {
-                    set_rgb_at(i, strip_colour);
+            if (! isShifting) {
+                if (strip_colour == 0) {
+                    // set all of the pixels back to 0
+                    memset(px, 0, px_count * color_depth);
+                } else {
+                    for (uint16_t i = 0; i < px_count; i++) {
+                        set_rgb_at(i, strip_colour);
+                    }
                 }
+                // set all the strips dirty for update
+                memset(strip_changed, true, strip_count);
             }
-            // set all the strips dirty for update
-            memset(strip_changed, true, strip_count);
-
             break;
         }
         case PIXEL_SET_PIXEL: {
@@ -182,6 +202,10 @@ void process_command(byte argc, byte *argv){
             uint16_t index = (uint16_t)argv[1] + ((uint16_t)argv[2]<<7);
             uint32_t colour = (uint32_t)argv[3] + ((uint32_t)argv[4]<<7) +
                 ((uint32_t)argv[5]<<14) + ((uint32_t)argv[6] << 21);
+
+            if (isShifting) {
+                break;
+            }
 
             set_rgb_at(index, colour);
 
@@ -200,8 +224,18 @@ void process_command(byte argc, byte *argv){
         case PIXEL_CONFIG: {
             // Sets the pin that the strip is on as well as it's length and color type
 
+            if (argv[0] > 0x01) {
+                // you get a weird boundary case in I2C where sometimes a message
+                // is relayed from firmata without the command packet.
+                // Just ignore this and move along
+                break;
+            }
+
             // check to ensure we have at least 3 arg bytes (1 for pin & 2 for len)
             if (argc >= 3) {
+                // set everything back to initial state.
+                ws2812_initialise(isBackpack);
+
                 // loop over each group of 3 bytes and pull out the details
                 // around the pin and strand length.
                 for (uint8_t i = 0; i < (argc / 3); i ++) {
@@ -287,19 +321,19 @@ void setColorOrderBRG() {
 #if DEBUG
 void print_pixels() {
     // prints out the array of pixel values
-    Serial2.println(F("Pixel values"));
+    serialport.println(F("Pixel values"));
     for (uint8_t i=0; i < px_count; i++) {
 
         uint16_t index = i * color_depth;
 
-        Serial2.print(i);
-        Serial2.print(": ");
-        Serial2.print(px[OFFSET_R(index)]);
-        Serial2.print(" ");
-        Serial2.print(px[OFFSET_G(index)]);
-        Serial2.print(" ");
-        Serial2.print(px[OFFSET_B(index)]);
-        Serial2.println();
+        serialport.print(i);
+        serialport.print(": ");
+        serialport.print(px[OFFSET_R(index)]);
+        serialport.print(" ");
+        serialport.print(px[OFFSET_G(index)]);
+        serialport.print(" ");
+        serialport.print(px[OFFSET_B(index)]);
+        serialport.println();
     }
 }
 

@@ -1,5 +1,21 @@
 # node-pixel changelog
 
+### 0.8.0
+
+* Moved all strip manipulation up to the level of the ws2812 library
+in order to consolidate into a single array. This means that the `Strips` are now
+relatively dumb and just operate on the array they are passed which is ripe
+for further consolidation down the line. ( = more memory for pixels - YAY!)
+* Added a SHIFT operation to the protocol per [#32](https://github.com/ajfisher/node-pixel/issues/32)
+which is what required this large refactor above.
+* Begun deprecation of `strip.stripLength()` and move to `strip.length` as the
+more logic alternative. 0.8 generates warning, 0.9 will throw error, 0.10 will
+have function removed
+* Added example `examples/repl` that exposes `strip` object so you can manipulate
+it from a repl environment
+
+
+
 ### 0.7.1
 
 Thanks to @stevemao for the following:

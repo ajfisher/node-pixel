@@ -3,4 +3,5 @@
 
 typedef int receiveint;
 
-#define _DEBUG false
+#define DEBUG false
+#define DEBUG_I2C false

@@ -2,12 +2,13 @@
 #define I2C_SENSOR_ADDRESS  0x42
 #define MAX_RECEIVED_BYTES  16
 
+#define serialport Serial2
+
 #include <Wire.h>
 #include "./lw_ws2812.h"
 #include "./ws2812.h"
 
 #include "includes.h"
-
 
 void setup() {
 
@@ -15,9 +16,9 @@ void setup() {
     Wire.begin(I2C_SENSOR_ADDRESS);
     Wire.onReceive(receiveData);
 
-#if _DEBUG
-    Serial.begin(9600);
-    Serial.println("NodePixel I2C");
+#if DEBUG
+    serialport.begin(9600);
+    serialport.println("NodePixel I2C");
 #endif
 
     ws2812_initialise(true);
@@ -30,11 +31,11 @@ void loop() {
 
 void receiveData(receiveint numbytes) {
 
-    #if _DEBUG
-        Serial.println("\nRD");
-        Serial.print("NB: ");
-        Serial.print(numbytes);
-        Serial.println();
+    #if DEBUG_I2C
+        serialport.println("\nRD");
+        serialport.print("NB: ");
+        serialport.print(numbytes);
+        serialport.println();
     #endif
 
     byte received_bytes[MAX_RECEIVED_BYTES];
@@ -43,9 +44,9 @@ void receiveData(receiveint numbytes) {
     for (uint8_t i=0; i < numbytes; i++) {
         if (i < MAX_RECEIVED_BYTES) {
                 received_bytes[i] = Wire.read();
-                #if _DEBUG
-                    Serial.print(received_bytes[i], HEX);
-                    Serial.print(" ");
+                #if DEBUG_I2C
+                    serialport.print(received_bytes[i], HEX);
+                    serialport.print(" ");
                 #endif
         } else {
                 Wire.read();
@@ -53,5 +54,4 @@ void receiveData(receiveint numbytes) {
     }
 
     process_command(numbytes, received_bytes);
-
 }
