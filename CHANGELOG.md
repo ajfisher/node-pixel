@@ -1,6 +1,15 @@
 # node-pixel changelog
 
-### 0.7.0
+### 0.7.1
+
+Thanks to @stevemao for the following:
+
+* Updated strip color to consistently take arrays for the rgb model
+* Made `Strip.off()` behaviour intuitive so it latches as soon as it's set
+and turns the strip off.
+* Updated package file to be able to run `npm test`
+
+## 0.7.0
 
 * updated packages to bring dependency list up to scratch.
 * removed es6-collections shim YAY ES6.
