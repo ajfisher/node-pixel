@@ -13,7 +13,9 @@
 #ifndef WS2812_h
 #define WS2812_h
 
-#define DEBUG true
+#define DEBUG false
+
+#define serialport Serial2
 
 #include "Arduino.h"
 #include "lw_ws2812.h"
