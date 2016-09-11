@@ -9,7 +9,7 @@ opts.port = process.argv[2] || "";
 var board = new five.Board(opts);
 var strip = null;
 
-var fps = 20; // how many frames per second do you want to try?
+var fps = 1; // how many frames per second do you want to try?
 
 board.on("ready", function() {
 
