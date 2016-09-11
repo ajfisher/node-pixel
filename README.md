@@ -388,4 +388,3 @@ This library is under active development and planned modifications are:
 
 * Provide methods of having different shapes to the strips including 3D
 * Prvide method of pixel selection using polar coordinates for circles and hexes
-* Provide interchange support.
