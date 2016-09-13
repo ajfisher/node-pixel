@@ -1,5 +1,13 @@
 # node-pixel changelog
 
+### 0.8.1
+
+* Put in error check to make sure the firmata firmware is capable of doing
+node-pixel stuff. Fixes [#74](https://github.com/ajfisher/node-pixel/issues/74)
+* Put in I2C write check to deal with specifically time outs on high bandwidth
+writes that appear to happen on RPi. Fixes [#71](https://github.com/ajfisher/node-pixel/issues/71)
+and 
+
 ### 0.8.0
 
 * Moved all strip manipulation up to the level of the ws2812 library

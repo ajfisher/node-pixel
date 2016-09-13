@@ -613,6 +613,8 @@ void sysexCallback(byte command, byte argc, byte *argv)
           Firmata.write(1);
           Firmata.write((byte)OUTPUT);
           Firmata.write(1);
+          Firmata.write((byte)PIXEL_COMMAND);
+          Firmata.write(1);
         }
         if (IS_PIN_ANALOG(pin)) {
           Firmata.write(PIN_MODE_ANALOG);
