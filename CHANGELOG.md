@@ -14,8 +14,6 @@ have function removed
 * Added example `examples/repl` that exposes `strip` object so you can manipulate
 it from a repl environment
 
-
-
 ### 0.7.1
 
 Thanks to @stevemao for the following:
