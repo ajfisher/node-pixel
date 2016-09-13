@@ -122,6 +122,10 @@ which would set pins 4, 10 & 11 to have strips of length 8 on each of them.
 (6) If supplied it will apply to all `strips` unless overridden selectively in
 the `strips` array eg `[ {color_order: pixel.COLOR_ORDER.RGB}, ..]`
 
+#### Properties
+
+* `length` - number of pixels in the `strip`
+
 #### Events
 
 * `onready()` -  emits when the `strip` is configured.
