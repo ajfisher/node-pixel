@@ -14,12 +14,12 @@ board.on("ready", function() {
     console.log("Board ready, lets add light");
 
     strip = new pixel.Strip({
-        //data: 6,
-        //length: 8,
+        data: 6,
+        length: 8,
         color_order: pixel.COLOR_ORDER.GRB,
         board: this,
-        controller: "I2CBACKPACK",
-        strips: [8],
+        controller: "FIRMATA",
+        //strips: [8],
     });
 
     strip.on("ready", function() {

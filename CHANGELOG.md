@@ -6,7 +6,8 @@
 node-pixel stuff. Fixes [#74](https://github.com/ajfisher/node-pixel/issues/74)
 * Put in I2C write check to deal with specifically time outs on high bandwidth
 writes that appear to happen on RPi. Fixes [#71](https://github.com/ajfisher/node-pixel/issues/71)
-and 
+and
+* Added `.off()` option to individual pixels. Completed: [#61](https://github.com/ajfisher/node-pixel/issues/61)
 
 ### 0.8.0
 

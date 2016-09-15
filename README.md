@@ -72,11 +72,11 @@ pixels you can refresh quickly (each pixel is written "in turn"). As such,
 you may run into some blocking conflicts. These are discussed in
 [this issue](https://github.com/ajfisher/node-pixel/issues/15).
 
-## Pixel API
+# Pixel API
 
 The Pixel API is provided below.
 
-### Strip
+## Strip
 
 A sequence of LEDs collected together is called a `strip`. A strip has
 a controller to tell it to use the custom firmata or I2C backpack. A `strip`
@@ -90,7 +90,7 @@ one logical unit and the firmware will take care of writing data in the right
 order, performing optimisations for strips that have or haven't changed and
 writing in sequence or parallel as appropriate.
 
-#### Parameters
+### Parameters
 
 * **options** An object of property parameters
 
@@ -122,16 +122,16 @@ which would set pins 4, 10 & 11 to have strips of length 8 on each of them.
 (6) If supplied it will apply to all `strips` unless overridden selectively in
 the `strips` array eg `[ {color_order: pixel.COLOR_ORDER.RGB}, ..]`
 
-#### Properties
+### Properties
 
 * `length` - number of pixels in the `strip`
 
-#### Events
+### Events
 
 * `onready()` -  emits when the `strip` is configured.
 * `onerror()` - returns the error that occurred.
 
-#### Examples
+### Examples
 
 _Johnny-Five instantiation_
 
@@ -204,9 +204,9 @@ This is because the pixel library supports a Board capable of presenting an
 IO interface. The library will work out the right thing to do based on the
 board being passed and the controller being set.
 
-#### Methods
+### Methods
 
-##### show();
+#### show();
 
 The show method should be called at the point you want to "set" the frame on
 the strip of pixels and show them.
@@ -217,7 +217,7 @@ some time (assume 0.5ms per pixel) and is a blocking operation in most cases.
 
 This gives you an upper limit as to how many frames you can drive per second.
 
-###### Example
+Example
 
 ```javascript
 // ... make pixel modifications
@@ -230,31 +230,31 @@ you make the various changes you want to the strip as you need to without
 triggering the display (like a frame buffer). Once you're ready you can then
 call `show()` to propagate this data through the LEDs and display the frame.
 
-##### off();
+#### off();
 
 All LEDs on the strip can be turned off by using the `.off()` method. This effectively clears the current colours set on the strip.
 
 `.clear()` is also aliased to the same method.
 
-###### Example
+Example
 
 ```javascript
 strip.off(); // turn the strip off / clear pixel colours
 ```
 
-##### color( *colourstring* );
+#### color( *colourstring* );
 
 All LEDs on the strip can be set to the same colour using the `.color()` method.
 
 `.colour()` is also aliased to the same method.
 
-###### Parameters
+Parameters
 
 * **colourstring** A `String` as a standard HTML hex colour or a CSS colour name,
 or a CSS rgb(r, g, b) value used to specify the colour of the strip. Alternatively
 an `Array` object as an rgb value eg `[r, g, b]`
 
-###### Examples
+Examples
 
 _Set strip using a hex value_
 
@@ -284,14 +284,14 @@ strip.color([255, 255, 0]); // Sets strip using an array
 strip.show();
 ```
 
-##### shift( *amt*, *direction*, *wrap* );
+#### shift( *amt*, *direction*, *wrap* );
 
 All LEDs on the strip can be shifted along the strip forwards or backwards
 by the given amount. This is very useful for long strip animation when you're
 moving the whole strip by a pixel in one direction each frame and means you
 don't have to send an update of `framelength` messages
 
-###### Parameters
+Parameters
 
 * **amt** A `Number` representing the number of pixels you want everything to
 shift by.
@@ -304,7 +304,7 @@ direction of travel. Forward direction is in the flow index values (ie index 1->
 or a CSS rgb(r, g, b) value used to specify the colour of the strip. Alternatively
 an `Array` object as an rgb value eg `[r, g, b]`
 
-###### Example
+Example
 
 ```javascript
 strip.pixel(0).color("#000");
@@ -314,7 +314,7 @@ strip.pixel(1).color; // will now be nothing
 strip.pixel(2).color; // will now be red.
 ```
 
-##### pixel( *address* );
+#### pixel( *address* );
 
 Individual pixels can be addressed by the pixel method using their address in
 the sequence.
@@ -322,37 +322,37 @@ the sequence.
 Note that if you have two physical strips of 8 and 10 then `pixel(10)` will be
 the third pixel on the second physical strip.
 
-###### Parameter
+Parameters
 
 * **address** A `Number` indexing the pixel you want. Returns a `Pixel` object.
 
-###### Example
+Example
 
 ```javascript
 var p = strip.pixel(1); // get the second LED. p is now a Pixel object
 ```
 
-### Pixel
+## Pixel
 
 A pixel is an individual element in the strip. It is fairly basic and it's API
 is detailed below.
 
-#### Methods
+### Methods
 
-##### color( *color string* )
+#### color( *color string* )
 
 Colors work exactly the same way on individual pixels as per strips so see the
 `strip.color` reference above.
 
 `.colour()` is aliased to this method as well.
 
-###### Parameters
+Parameters
 
 * **color string** A `String` providing the hex colour, CSS colour name or CSS
 rgb() values to be used to set the individual pixel a certain colour. You can also
 pass in an `Array` object that is a set of RGB values as [r, g, b].
 
-###### Examples
+Examples
 
 ```javascript
 var p = strip.pixel(1);     // get second LED
@@ -368,17 +368,17 @@ p = strip.pixel(4);         // get fifth LED
 p.color([255, 0, 255]);     // set fifth LED magenta
 ```
 
-##### color()
+#### color()
 
 Returns an object representing the color of this pixel with the shape below.
 
 `.colour()` is aliased to this method as well.
 
-###### Parameters
+Parameters
 
 * none
 
-###### Shape
+Shape
 
 ```javascript
 {
@@ -391,7 +391,7 @@ Returns an object representing the color of this pixel with the shape below.
 }
 ```
 
-###### Example
+Example
 
 Get a pixel, set it's colour and then query it's current state.
 
@@ -401,6 +401,24 @@ var p = strip.pixel(1); // get second LED
 p.color("#0000FF"); // set second pixel blue.
 
 p.color(); // returns {r:0, g:0, b:255, hexcode:"#0000ff", color:"blue", rgb[0,0,255]}
+```
+
+#### off()
+
+Turns the pixel to it's off state.
+
+`.clear()` is also aliased to this method.
+
+Example
+
+Set a pixel value to off
+
+```javascript
+
+var p = strip.pixel(1); // get second LED
+p.off(); // turn it off
+p.color(); // returns {r: 0, g: 0, b: 0, hexcode:"#000000", color:"black", rgb: [0,0,0]}
+strip.show(); // pixel will be off
 ```
 
 ## Detailed examples with circuits
