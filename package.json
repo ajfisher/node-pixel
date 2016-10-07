@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "IS_TEST_MODE=true grunt test"
   },
   "repository": {
     "type": "git",
