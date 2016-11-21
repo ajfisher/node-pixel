@@ -1,5 +1,9 @@
 # node-pixel changelog
 
+### 0.8.2
+
+* Fixes to testing setup - thanks @reconbot
+
 ### 0.8.1
 
 * Put in error check to make sure the firmata firmware is capable of doing
