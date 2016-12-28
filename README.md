@@ -103,6 +103,7 @@ writing in sequence or parallel as appropriate.
 | board | IO Object | IO Board object to use with Johnny Five | undefined | yes(1) |
 | firmata | Firmata board | Firmata board object to use with Firmata directly | undefined | yes(1) |
 | controller | String | I2CBACKPACK, FIRMATA | FIRMATA | no |
+| gamma | Number | A number representing the gamma correction for a strip. Can be any decimal number. 2.8 generally works well. | 1.0 (7) | no |
 
 (1) A board or firmata object is required but only one of these needs to be set.
 
@@ -122,9 +123,13 @@ which would set pins 4, 10 & 11 to have strips of length 8 on each of them.
 (6) If supplied it will apply to all `strips` unless overridden selectively in
 the `strips` array eg `[ {color_order: pixel.COLOR_ORDER.RGB}, ..]`
 
+(7) Currently set to `1.0` to maintain current behaviour. Will move to `2.8` default
+in version 0.10.
+
 ### Properties
 
 * `length` - number of pixels in the `strip`
+* `gamma` - the currently set gamma for the `strip`
 
 ### Events
 
@@ -148,6 +153,7 @@ board.on("ready", function() {
         board: this,
         controller: "FIRMATA",
         strips: [ {pin: 6, length: 4}, ], // this is preferred form for definition
+        gamma: 2.8, // set to a gamma that works nicely for WS2812
     });
 
     strip.on("ready", function() {
@@ -169,6 +175,7 @@ var board = new firmata.Board('path to usb',function(){
         length: 4,
         firmata: board,
         controller: "FIRMATA",
+
     });
 
     strip.on("ready", function() {

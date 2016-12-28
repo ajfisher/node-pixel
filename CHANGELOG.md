@@ -1,5 +1,11 @@
 # node-pixel changelog
 
+### 0.9.0
+
+* Added capability for gamma correction for the strip. Currently set to no
+correction by default, it can now be added as an initialisation parameter `gamma`.
+* Package updates for all dependencies
+
 ### 0.8.2
 
 * Fixes to testing setup - thanks @reconbot
