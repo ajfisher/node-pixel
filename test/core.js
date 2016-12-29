@@ -88,14 +88,14 @@ exports["Strip"] = {
             controller: "FIRMATA",
             strips: [{pin: 2, length: 100}]
         });
-        test.equal(strip.stripLength(), 100, "Single strips length correct");
+        test.equal(strip.length, 100, "Single strips length correct");
 
         var strip2 = new pixel.Strip({
             board: this.board,
             controller: "FIRMATA",
             strips: [{pin: 2, length: 50}, {pin: 3, length: 50}]
         });
-        test.equal(strip2.stripLength(), 100, "Multiple strips length correct");
+        test.equal(strip2.length, 100, "Multiple strips length correct");
 
         var strip3 = new pixel.Strip({
             board: this.board,
@@ -103,7 +103,7 @@ exports["Strip"] = {
             pin: 3,
             length: 150,
         });
-        test.equal(strip3.stripLength(), 150, "Shorthand strips length correct");
+        test.equal(strip3.length, 150, "Shorthand strips length correct");
 
         test.done();
     },
@@ -170,7 +170,6 @@ exports["Strip"] = {
 
         this.strip.off();
         test.deepEqual(this.strip.pixel(0).color(), colourcheck, "Check strip is off");
-
         test.done();
     },
 };
