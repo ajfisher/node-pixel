@@ -10,7 +10,7 @@ to add addressable LED support to the way firmata works already. This is a good
 option if you want to play with NeoPixels and you aren't doing much more than
 controlling LEDs. The downside of this approach is that Firmata has a lot of
 support already in it for a range of devices so you will be limited in the number
-of pixels you can control. In addition, the pixel libary will block at times, so your
+of pixels you can control. In addition, the pixel library will block at times, so your
 framerate will always be limited.
 
 The `backpack` method provides I2C support to a strip of WS2812 pixels and will work
