@@ -32,7 +32,7 @@ var board = new firmata.Board(opts.port, function() {
 
         strip.color("#000"); // blanks it out
 
-        if (++pos >= strip.stripLength()) {
+        if (++pos >= strip.length) {
             pos = 0;
             if (++current_color>= colors.length) current_color = 0;
         }
