@@ -46,7 +46,7 @@ board.on("ready", function() {
                 cwi = 0;
             }
 
-            for(var i = 0; i < strip.stripLength(); i++) {
+            for(var i = 0; i < strip.length; i++) {
                 showColor = colorWheel( ( cwi+i ) & 255 );
                 strip.pixel( i ).color( showColor );
             }
