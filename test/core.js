@@ -88,14 +88,14 @@ exports["Strip"] = {
             controller: "FIRMATA",
             strips: [{pin: 2, length: 100}]
         });
-        test.equal(strip.stripLength(), 100, "Single strips length correct");
+        test.equal(strip.length, 100, "Single strips length correct");
 
         var strip2 = new pixel.Strip({
             board: this.board,
             controller: "FIRMATA",
             strips: [{pin: 2, length: 50}, {pin: 3, length: 50}]
         });
-        test.equal(strip2.stripLength(), 100, "Multiple strips length correct");
+        test.equal(strip2.length, 100, "Multiple strips length correct");
 
         var strip3 = new pixel.Strip({
             board: this.board,
@@ -103,7 +103,7 @@ exports["Strip"] = {
             pin: 3,
             length: 150,
         });
-        test.equal(strip3.stripLength(), 150, "Shorthand strips length correct");
+        test.equal(strip3.length, 150, "Shorthand strips length correct");
 
         test.done();
     },
@@ -170,9 +170,38 @@ exports["Strip"] = {
 
         this.strip.off();
         test.deepEqual(this.strip.pixel(0).color(), colourcheck, "Check strip is off");
-
         test.done();
     },
+
+    gamma: function(test) {
+        // tests if setting the gamma works as expected
+        test.expect(4);
+
+        // test gamma being set
+        var strip = new pixel.Strip({
+            board: this.board,
+            controller: "FIRMATA",
+            strips: [{pin: 2, length: 1}],
+            gamma: 2.3
+        });
+        test.equal(strip.gamma, 2.3, "Set and return gamma");
+
+        test.equal(strip.gtable.length, 256, "Gamma Table built");
+
+        test.equal(strip.gtable[18], 1, "Gamma table values built correctly");
+
+        // now check that a non gamma returns the right values
+        var strip2 = new pixel.Strip({
+            board: this.board,
+            controller: "FIRMATA",
+            strips: [{pin: 2, length: 1}],
+            gamma: 1.0,
+        });
+
+        test.equal(strip2.gtable[18], 18, "Non set gamma built correctly");
+
+        test.done();
+    }
 };
 
 exports["Pixel"] = {

@@ -81,7 +81,7 @@ exports["Strip - I2C"] = {
         strip.on("ready", function() {
             test.equal(this.i2cWrite.callCount, 1, "I2C Write called as part of config");
             test.ok(true, "Ready emitter working");
-            test.equal(strip.stripLength(), 8, "Strip length correct");
+            test.equal(strip.length, 8, "Strip length correct");
             test.done();
         }.bind(this));
     },
