@@ -1,5 +1,10 @@
 # node-pixel changelog
 
+### 0.8.3
+
+* Fixes to all examples to bring in line with new `length` API and removal
+of deprecration notices as a result of this change. Thanks @The-Alchemist
+
 ### 0.8.2
 
 * Fixes to testing setup - thanks @reconbot
