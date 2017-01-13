@@ -115,7 +115,7 @@ exports["Strip"] = {
 
     colour: function(test) {
         // tests if the colour sequences are working okay
-        test.expect(2);
+        test.expect(3);
 
         var colourcheck = {
             r: 255, g: 255, b: 255,
@@ -138,6 +138,14 @@ exports["Strip"] = {
         this.strip.color([0, 255, 0]);
         test.deepEqual(this.strip.pixel(3).color(), colourcheck,
                 "If setting colour by RGB array, the colour object should be updated");
+
+        test.doesNotThrow(
+            () => {
+                this.strip.colour("QWERTYUIOP");
+            },
+            undefined,
+            "An invalid color should be ignored not throw an error"
+        );
 
         test.done();
     },
@@ -217,7 +225,7 @@ exports["Pixel"] = {
 
     colour: function(test) {
         // tests if the colour sequences are working okay
-        test.expect(2);
+        test.expect(3);
 
         var colourcheck = {
             r: 255, g: 255, b: 255,
@@ -241,6 +249,33 @@ exports["Pixel"] = {
         test.deepEqual(this.strip.pixel(3).color(), colourcheck,
                 "If setting the pixel colour using RGB array, the pixel colour object should be updated");
 
+        test.doesNotThrow(
+            () => {
+                this.strip.pixel(1).colour("QWERTYUIOP");
+            },
+            undefined,
+            "An invalid color should be ignored not throw an error"
+        );
+
+        test.done();
+    },
+
+    off: function(test) {
+        // tests if setting strip off results in black pixel colour
+        test.expect(1);
+
+        this.strip.color("#FF0000");
+
+        var colourcheck = {
+            r: 0, g: 0, b: 0,
+            hexcode: "#000000",
+            color: "black",
+            rgb: [0, 0, 0],
+        };
+
+        this.strip.pixel(1).off();
+        test.deepEqual(this.strip.pixel(1).color(), colourcheck,
+                "If setting a colour then turning a pixel off, the colour should revert to off state.");
         test.done();
     },
 };
