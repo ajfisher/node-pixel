@@ -84,92 +84,69 @@ exports["Strip - Firmata"] = {
         });
     },
 
-    numberOfStripsMax: function(test) {
-        // tests that the number of strips available is bounded.
+    maxNumberOfStrips: function(test) {
         test.expect(1);
 
-        try {
-            // this should fail.
-            var strip = new pixel.Strip({
-                board: this.board,
-                controller: "FIRMATA",
-                strips: [8, 8, 8, 8, 8, 8, 8, 8, 8]
-            });
-        } catch (e) {
-            if (e instanceof(RangeError)) {
-                test.ok(true, "Max exceeded out of range");
-                errFound = true;
-            } else {
-                test.ok(false, "Max exceeded error of incorrect type");
-            }
-            test.done();
-            return;
-        }
-        test.ok(false, "Maximum was exceeded and it let it through");
+        test.throws(
+            () => {
+                var strip = new pixel.Strip({
+                    board: this.board,
+                    controller: "FIRMATA",
+                    strips: [8, 8, 8, 8, 8, 8, 8, 8, 8]
+                });
+            },
+            (err) => {
+                if (err instanceof RangeError) {
+                    return true;
+                }
+            },
+            "Excessive number of strips should throw a RangeError"
+        );
+
         test.done();
     },
 
-    numberOfPixelsMax: function(test) {
-        // test the number of pixels available is bounded properly.
-
+    maxNumberOfPixels: function(test) {
         test.expect(2);
-        var errFound = false;
 
-        // first try with a single strip pixels.
-        // move this to throws model.
-        try {
-            // this should fail.
-            var strip1 = new pixel.Strip({
-                board: this.board,
-                controller: "FIRMATA",
-                strips: [ {pin: 6, length: 300}, ]
-            });
-        } catch (e) {
-            if (e instanceof(RangeError)) {
-                test.ok(true, "Max pixels exceeded range for one strip");
-                errFound = true;
-            } else {
-                test.ok(false, "Max pixels exceeded error of incorrect type");
-                errFound = true;
-            }
-        }
+        test.throws(
+            () => {
+                var strip1 = new pixel.Strip({
+                    board: this.board,
+                    controller: "FIRMATA",
+                    strips: [ {pin: 6, length: 300}, ]
+                });
+            },
+            (err) => {
+                if (err instanceof RangeError) {
+                    return true;
+                }
+            },
+            "Excess pixels in a single strip should throw a RangeError"
+        );
 
-        if (! errFound) {
-            test.ok(false, "Maximum pixels was exceeded and it let it through");
-        }
-
-        errFound = false;
-
-        // now we try with multiples.
-        // move this to throws model.
-        try {
-            // this should fail.
-            var strip2 = new pixel.Strip({
-                board: this.board,
-                controller: "FIRMATA",
-                strips: [   {pin: 2, length: 64},
-                            {pin: 2, length: 64},
-                            {pin: 2, length: 64},
-                            {pin: 2, length: 64},
-                            {pin: 2, length: 64},
-                        ], // more than 256
-            });
-        } catch (e) {
-            if (e instanceof(RangeError)) {
-                test.ok(true, "Max pixels exceeded out of range multipin");
-                errFound = true;
-            } else {
-                test.ok(false, "Max pixels exceeded error of incorrect type");
-                errFound = true;
-            }
-            test.done();
-            return;
-        }
-        if (! errFound) {
-            test.ok(false, "Maximum pixels was exceeded on multipin and it let it through");
-        }
-
+        test.throws(
+            () => {
+                var strip2 = new pixel.Strip({
+                    board: this.board,
+                    controller: "FIRMATA",
+                    strips: [   {pin: 2, length: 64},
+                                {pin: 2, length: 64},
+                                {pin: 2, length: 64},
+                                {pin: 2, length: 64},
+                                {pin: 2, length: 64},
+                            ], // more than 256
+                });
+            },
+            (err) => {
+                if (err instanceof RangeError) {
+                    return true;
+                }
+            },
+            "Excess pixels in multiple strips should throw a RangeError"
+        );
         test.done();
+
     },
 
     show: function(test) {
