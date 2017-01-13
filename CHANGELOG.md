@@ -5,6 +5,13 @@
 * Added capability for gamma correction for the strip. Currently set to no
 correction by default, it can now be added as an initialisation parameter `gamma`.
 * Package updates for all dependencies
+* Major update to tests
+    * Roll out of istanbul for code coverage testing
+    * Updates of tests to all work again properly with latest API due to drift
+    * Addition of new test for gamma value creation
+    * New test for ensuring `stripLength` throws an error
+    * Removed redundant tests that were testing ColorString.
+    * Fixes to test messages to better indicate what they were testing.
 
 ### 0.8.3
 
