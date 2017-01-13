@@ -81,7 +81,7 @@ exports["Strip"] = {
 
     length: function(test) {
         // tests length of the strip properly.
-        test.expect(3);
+        test.expect(4);
 
         var strip = new pixel.Strip({
             board: this.board,
@@ -104,6 +104,10 @@ exports["Strip"] = {
             length: 150,
         });
         test.equal(strip3.length, 150, "Shorthand strips length correct");
+
+        test.throws(() => {
+            strip3.stripLength()
+        }, /NotImplemented/, "Deprecated stripLength() correctly throws error");
 
         test.done();
     },
