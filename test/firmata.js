@@ -75,10 +75,11 @@ exports["Strip - Firmata"] = {
             controller: "FIRMATA",
         });
 
-        test.equal(this.write.callCount, 1, "Write only called for config");
+        test.equal(this.write.callCount, 1,
+                "During initialisation serial write should occur only once");
 
         strip.on("ready", function() {
-            test.ok(true, "Ready emitter working");
+            test.ok(true, "If initialisation is complete a ready event should be emitted");
             test.done();
         });
     },
@@ -115,6 +116,7 @@ exports["Strip - Firmata"] = {
         var errFound = false;
 
         // first try with a single strip pixels.
+        // move this to throws model.
         try {
             // this should fail.
             var strip1 = new pixel.Strip({
@@ -139,6 +141,7 @@ exports["Strip - Firmata"] = {
         errFound = false;
 
         // now we try with multiples.
+        // move this to throws model.
         try {
             // this should fail.
             var strip2 = new pixel.Strip({
@@ -182,14 +185,14 @@ exports["Strip - Firmata"] = {
         });
 
         strip.on("ready", function() {
-            test.equal(this.write.callCount, 1, "Write called as part of setup");
+            test.equal(this.write.callCount, 1,
+                    "Firmata should call serial write only once during setup");
             strip.show();
-            test.equal(this.write.callCount, 2, "Show called once after setup");
+            test.equal(this.write.callCount, 2,
+                    "Show should call serial write once after setup is complete.");
             test.done();
         }.bind(this));
-
     }
-
 };
 
 exports["Pixel - Firmata"] = {
@@ -225,7 +228,8 @@ exports["Pixel - Firmata"] = {
         // tests to see whether the write to the pixel is going out properly
         test.expect(1);
         this.strip.pixel(0).color("#FFF");
-        test.equal(this.write.callCount, 2, "Write pixel value to serial");
+        test.equal(this.write.callCount, 2,
+                "Setting the pixel value should make a single serial call");
         test.done()
     },
 };

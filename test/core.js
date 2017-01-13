@@ -55,7 +55,7 @@ exports["Test Mode configured"] = {
     testMode: function(test) {
         // tests that the env variable is set properly
         test.expect(1);
-        test.equal(process.env.IS_TEST_MODE, 'true', "Is test mode configured properly");
+        test.equal(process.env.IS_TEST_MODE, 'true', "Test mode should be configured");
         test.done();
     },
 };
@@ -81,21 +81,21 @@ exports["Strip"] = {
 
     length: function(test) {
         // tests length of the strip properly.
-        test.expect(4);
+        test.expect(3)
 
         var strip = new pixel.Strip({
             board: this.board,
             controller: "FIRMATA",
             strips: [{pin: 2, length: 100}]
         });
-        test.equal(strip.length, 100, "Single strips length correct");
+        test.equal(strip.length, 100, "Single strip length should be equal to provided length");
 
         var strip2 = new pixel.Strip({
             board: this.board,
             controller: "FIRMATA",
             strips: [{pin: 2, length: 50}, {pin: 3, length: 50}]
         });
-        test.equal(strip2.length, 100, "Multiple strips length correct");
+        test.equal(strip2.length, 100, "Multiple strips length should be equal to sum of lengths");
 
         var strip3 = new pixel.Strip({
             board: this.board,
@@ -103,18 +103,19 @@ exports["Strip"] = {
             pin: 3,
             length: 150,
         });
-        test.equal(strip3.length, 150, "Shorthand strips length correct");
 
         test.throws(() => {
-            strip3.stripLength()
-        }, /NotImplemented/, "Deprecated stripLength() correctly throws error");
+                strip3.stripLength()
+            },
+            /NotImplemented/,
+            "Deprecated stripLength() should throw NotImplemented error");
 
         test.done();
     },
 
     colour: function(test) {
         // tests if the colour sequences are working okay
-        test.expect(4);
+        test.expect(2);
 
         var colourcheck = {
             r: 255, g: 255, b: 255,
@@ -124,27 +125,8 @@ exports["Strip"] = {
         };
 
         this.strip.color("#FFFFFF");
-        test.deepEqual(this.strip.pixel(0).color(), colourcheck, "Check colours set");
-
-        colourcheck = {
-            r: 255, g: 0, b: 0,
-            hexcode: "#FF0000",
-            color: "red",
-            rgb: [255, 0, 0],
-        };
-
-        this.strip.color("#F00");
-        test.deepEqual(this.strip.pixel(1).color(), colourcheck, "Check colours updated");
-
-        colourcheck = {
-            r: 0, g: 0, b: 255,
-            hexcode: "#0000FF",
-            color: "blue",
-            rgb: [0, 0, 255],
-        };
-
-        this.strip.color("blue");
-        test.deepEqual(this.strip.pixel(2).color(), colourcheck, "Colour set using name");
+        test.deepEqual(this.strip.pixel(0).color(), colourcheck,
+                "If colour is set with full hex colour, colour object should be updated");
 
         colourcheck = {
             r: 0, g: 255, b: 0,
@@ -154,7 +136,8 @@ exports["Strip"] = {
         };
 
         this.strip.color([0, 255, 0]);
-        test.deepEqual(this.strip.pixel(3).color(), colourcheck, "Colour set using RGB array");
+        test.deepEqual(this.strip.pixel(3).color(), colourcheck,
+                "If setting colour by RGB array, the colour object should be updated");
 
         test.done();
     },
@@ -173,7 +156,8 @@ exports["Strip"] = {
         };
 
         this.strip.off();
-        test.deepEqual(this.strip.pixel(0).color(), colourcheck, "Check strip is off");
+        test.deepEqual(this.strip.pixel(0).color(), colourcheck,
+                "If setting a colour then turning the strip off, the colour should revert to off state.");
         test.done();
     },
 
@@ -188,21 +172,24 @@ exports["Strip"] = {
             strips: [{pin: 2, length: 1}],
             gamma: 2.3
         });
-        test.equal(strip.gamma, 2.3, "Set and return gamma");
+        test.equal(strip.gamma, 2.3,
+                "If setting gamma in constructor, the gamma value should be retained");
 
-        test.equal(strip.gtable.length, 256, "Gamma Table built");
+        test.equal(strip.gtable.length, 256,
+                "If setting gamma in constructor, the Gamma Table should be built");
 
-        test.equal(strip.gtable[18], 1, "Gamma table values built correctly");
+        test.equal(strip.gtable[18], 1,
+                "If setting gamma, the gamma table values should be built correctly");
 
         // now check that a non gamma returns the right values
         var strip2 = new pixel.Strip({
             board: this.board,
             controller: "FIRMATA",
             strips: [{pin: 2, length: 1}],
-            gamma: 1.0,
         });
 
-        test.equal(strip2.gtable[18], 18, "Non set gamma built correctly");
+        test.equal(strip2.gtable[18], 18,
+                "If gamma is not set, the gamma values should be built using default");
 
         test.done();
     }
@@ -230,7 +217,7 @@ exports["Pixel"] = {
 
     colour: function(test) {
         // tests if the colour sequences are working okay
-        test.expect(4);
+        test.expect(2);
 
         var colourcheck = {
             r: 255, g: 255, b: 255,
@@ -240,27 +227,8 @@ exports["Pixel"] = {
         };
 
         this.strip.pixel(0).color("#FFFFFF");
-        test.deepEqual(this.strip.pixel(0).color(), colourcheck, "Check colours set");
-
-        colourcheck = {
-            r: 255, g: 0, b: 0,
-            hexcode: "#FF0000",
-            color: "red",
-            rgb: [255, 0, 0],
-        };
-
-        this.strip.pixel(1).color("#F00");
-        test.deepEqual(this.strip.pixel(1).color(), colourcheck, "Check colours updated");
-
-        colourcheck = {
-            r: 0, g: 0, b: 255,
-            hexcode: "#0000FF",
-            color: "blue",
-            rgb: [0, 0, 255],
-        };
-
-        this.strip.pixel(2).color("blue");
-        test.deepEqual(this.strip.pixel(2).color(), colourcheck, "Colour set using name");
+        test.deepEqual(this.strip.pixel(0).color(), colourcheck,
+                "If pixel colour is set, the pixel colour object should be updated");
 
         colourcheck = {
             r: 0, g: 255, b: 0,
@@ -270,7 +238,8 @@ exports["Pixel"] = {
         };
 
         this.strip.pixel(3).color([0, 255, 0]);
-        test.deepEqual(this.strip.pixel(3).color(), colourcheck, "Colour set using RGB array");
+        test.deepEqual(this.strip.pixel(3).color(), colourcheck,
+                "If setting the pixel colour using RGB array, the pixel colour object should be updated");
 
         test.done();
     },

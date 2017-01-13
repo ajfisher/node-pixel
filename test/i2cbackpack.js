@@ -66,7 +66,7 @@ exports["Strip - I2C"] = {
     stripReady: function(test) {
         // tests if the strip emits the ready event properly.
 
-        test.expect(4);
+        test.expect(3);
         var strip = new pixel.Strip({
             data: 6,
             length: 8,
@@ -76,12 +76,14 @@ exports["Strip - I2C"] = {
 
         // emit the ready event ahead of time.
 
-        test.equal(this.i2cConfig.callCount, 1, "I2C Config called once in config.");
+        test.equal(this.i2cConfig.callCount, 1,
+                "I2C Config should be called only once during config.");
 
         strip.on("ready", function() {
-            test.equal(this.i2cWrite.callCount, 1, "I2C Write called as part of config");
-            test.ok(true, "Ready emitter working");
-            test.equal(strip.length, 8, "Strip length correct");
+            test.equal(this.i2cWrite.callCount, 1,
+                    "I2C Write should be called once as part of config");
+            test.ok(true,
+                    "If configuration is complete a ready even should be emitted");
             test.done();
         }.bind(this));
     },
@@ -174,7 +176,7 @@ exports["Strip - I2C"] = {
     show: function(test) {
         // tests if the strip calls the show out to I2C properly.
         //
-        test.expect(2);
+        test.expect(1);
 
         var strip = new pixel.Strip({
             data: 6,
@@ -184,9 +186,10 @@ exports["Strip - I2C"] = {
         });
 
         strip.on("ready", function() {
-            test.equal(this.i2cWrite.callCount, 1, "Write called as part of setup");
             strip.show();
-            test.equal(this.i2cWrite.callCount, 2, "Show called once after setup");
+            // first call count will be for the setup call
+            test.equal(this.i2cWrite.callCount, 2,
+                    "i2cWrite should be called only once during show");
             test.done();
         }.bind(this));
 
@@ -224,7 +227,8 @@ exports["Pixel - I2C"] = {
         // tests to see whether the write to the pixel is going out properly
         test.expect(1);
         this.strip.pixel(0).color("#FFF");
-        test.equal(this.i2cWrite.callCount, 1, "Write pixel value to I2C");
+        test.equal(this.i2cWrite.callCount, 1,
+                "i2cWrite should only call once to write a pixel value");
         test.done()
     },
 }
