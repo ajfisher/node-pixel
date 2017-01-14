@@ -13,6 +13,7 @@ var Board = five.Board;
 function newBoard() {
     var sp = new MockSerialPort("/dev/test");
     var io = new MockFirmata(sp);
+    io["firmware"] = { name: "node_pixel_firmata.ino", };
 
     io.emit("connect");
     io.emit("ready");

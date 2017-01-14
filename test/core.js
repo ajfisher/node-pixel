@@ -13,6 +13,7 @@ var Board = five.Board;
 function newBoard() {
     var sp = new MockSerialPort("/dev/test");
     var io = new MockFirmata(sp);
+    io["firmware"] = { name: "node_pixel_firmata.ino", };
 
     io.emit("connect");
     io.emit("ready");
@@ -200,7 +201,71 @@ exports["Strip"] = {
                 "If gamma is not set, the gamma values should be built using default");
 
         test.done();
-    }
+    },
+
+    shift: function(test) {
+        // tests that wrapping behaviour is consistent
+
+        test.expect(10);
+
+        var strip = new pixel.Strip({
+            board: this.board,
+            controller: "FIRMATA",
+            strips: [{ pin: 2, length: 8}],
+        });
+
+        // set up a pixel on either end of the strip
+        // in preparation for movement.
+        strip.pixel(1).color("red");
+        strip.pixel(6).color("blue");
+
+        // advance the pixels one step along the strip.
+        strip.shift(1, pixel.FORWARD, false);
+
+        test.equal(strip.pixel(7).color().color, "blue",
+            "If pixels are advanced one position, pixel 6 value should be on pixel 7");
+
+        test.equal(strip.pixel(6).color().color, "black",
+            "If pixels are advanced one position, pixel 5 value should overwrite pixel 6");
+
+        test.equal(strip.pixel(0).color().color, "black",
+            "If pixels advance with no wrapping, pixel 0 value should be off");
+
+        strip.shift(1, pixel.BACKWARD, false);
+
+        test.equal(strip.pixel(6).color().color, "blue",
+            "If pixels are reversed one position, pixel 7 value should be on pixel 6");
+
+        test.equal(strip.pixel(5).color().color, "black",
+            "If pixels are reversed one position, pixel 6 value should overwrite pixel 5");
+
+        test.equal(strip.pixel(7).color().color, "black",
+            "If pixels reverse with no wrapping, pixel 7 value should be off");
+
+        // now we are back to starting spot let's do a multistep advancement
+        // with a wrap around.
+
+        strip.shift(2, pixel.FORWARD, true);
+
+        test.equal(strip.pixel(3).color().color, "red",
+            "If pixels are advanced 2 positions & wrapped, pixel 1 value should be on pixel 3");
+
+        test.equal(strip.pixel(0).color().color, "blue",
+            "If pixels are advanced 2 positions & wrapped, pixel 6 value should be on pixel 0");
+
+        // now let's test a jump over the length of the strip.
+        strip.shift(9, pixel.BACKWARD, true);
+
+        test.equal(strip.pixel(7).color().color, "blue",
+            "If pixels are reversed more than strip length (9), pixel 0 should be on pixel 7");
+
+        // make sure there's nothing dangling behind.
+        test.equal(strip.pixel(6).color().color, "black",
+            "If pixels are shifted and wrapped, original pixel should have moved");
+
+        test.done();
+
+    },
 };
 
 exports["Pixel"] = {
