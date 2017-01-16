@@ -96,7 +96,7 @@ exports["Strip - Firmata"] = {
                     strips: [8, 8, 8, 8, 8, 8, 8, 8, 8]
                 });
             },
-            (err) => {
+            function (err) {
                 if (err instanceof RangeError) {
                     return true;
                 }
@@ -118,7 +118,7 @@ exports["Strip - Firmata"] = {
                     strips: [ {pin: 6, length: 300}, ]
                 });
             },
-            (err) => {
+            function (err) {
                 if (err instanceof RangeError) {
                     return true;
                 }
@@ -139,7 +139,7 @@ exports["Strip - Firmata"] = {
                             ], // more than 256
                 });
             },
-            (err) => {
+            function (err) {
                 if (err instanceof RangeError) {
                     return true;
                 }
