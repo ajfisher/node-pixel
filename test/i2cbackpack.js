@@ -99,7 +99,7 @@ exports["Strip - I2C"] = {
                     strips: [8, 8, 8, 8, 8, 8, 8, 8, 8]
                 });
             },
-            (err) => {
+            function (err)  {
                 if (err instanceof RangeError) {
                     return true;
                 }
@@ -121,7 +121,7 @@ exports["Strip - I2C"] = {
                     strips: [ 600 ]
                 });
             },
-            (err) => {
+            function (err) {
                 if (err instanceof RangeError) {
                     return true;
                 }
@@ -137,7 +137,7 @@ exports["Strip - I2C"] = {
                     strips: [ 100, 100, 100, 100, 100, 100, 100, ]
                 });
             },
-            (err) => {
+            function (err) {
                 if (err instanceof RangeError) {
                     return true;
                 }
