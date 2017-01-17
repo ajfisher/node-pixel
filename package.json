@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "IS_TEST_MODE=true grunt test",
-    "test-cover": "istanbul cover ./node_modules/.bin/nodeunit test/*",
+    "test-cover": "IS_TEST_MODE=true istanbul cover ./node_modules/.bin/nodeunit test/*",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
