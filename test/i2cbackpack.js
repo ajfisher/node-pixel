@@ -199,7 +199,35 @@ exports["Strip - I2C"] = {
             test.done();
         }.bind(this));
 
-    }
+    },
+
+    color: function(test) {
+        // aims for coverage tests to ensure that colours are set properly.
+        //
+        test.expect(2);
+
+        var strip = new pixel.Strip({
+            data: 6,
+            length: 8,
+            board: this.board,
+            controller: "I2CBACKPACK",
+        });
+
+        strip.on("ready", function() {
+
+            strip.color("red");
+            // first call count will be for the setup call
+            test.equal(this.i2cWrite.callCount, 2,
+                    "i2cWrite should be called only once during colour setting");
+
+            strip.shift(1, pixel.FORWARDS, true);
+            test.equal(this.i2cWrite.callCount, 3,
+                    "i2cWrite should be called only once during shift call");
+
+            test.done();
+        }.bind(this));
+
+    },
 };
 
 exports["Pixel - I2C"] = {
