@@ -23,6 +23,8 @@ correction by default, it can now be added as an initialisation parameter `gamma
     * Removed redundant checks in codebase where preconditions had to be met
     so checks were irrelevant
     * Added tests for handling issues where strips are incorrectly initialised
+    * Achieved significant coverage improvement using Istanbul
+* Added travis integration
 
 ### 0.8.3
 
