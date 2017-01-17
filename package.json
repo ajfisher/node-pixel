@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "color-string": "^1.2.0",
-    "firmata": "^0.14.1",
+    "firmata": "^0.15.0",
     "johnny-five": "^0.10.0"
   },
   "devDependencies": {
