@@ -5,6 +5,7 @@
 ![](https://img.shields.io/badge/status-Ready-green.svg)
 ![](https://img.shields.io/david/ajfisher/node-pixel.svg)
 ![](https://img.shields.io/github/issues/ajfisher/node-pixel.svg)
+[![Coverage Status](https://coveralls.io/repos/github/ajfisher/node-pixel/badge.svg?branch=master)](https://coveralls.io/github/ajfisher/node-pixel?branch=master)
 
 The purpose of this library is to provide a node js interface for addressable
 RGB LEDs. Most commonly these are known as Neo Pixels (if you shop at Adafruit)
