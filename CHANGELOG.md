@@ -24,7 +24,9 @@ correction by default, it can now be added as an initialisation parameter `gamma
     so checks were irrelevant
     * Added tests for handling issues where strips are incorrectly initialised
     * Achieved significant coverage improvement using Istanbul
-* Added travis integration and integrated with gitter.
+* Added travis integration and integrated with gitter and coveralls.
+* Added green keeper integration
+
 
 ### 0.8.3
 
