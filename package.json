@@ -7,7 +7,9 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "IS_TEST_MODE=true grunt test"
+    "test": "IS_TEST_MODE=true grunt test",
+    "test-cover": "istanbul cover ./node_modules/.bin/nodeunit test/*",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "board-io": "^3.0.4",
+    "coveralls": "^2.11.15",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
