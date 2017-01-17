@@ -44,6 +44,123 @@ function restore(target) {
     }
 }
 
+exports["Firmata - Initialisation"] = {
+
+    setUp: function(done){
+
+        this.board = newBoard();
+        done();
+    },
+
+    tearDown: function(done) {
+        Board.purge();
+        restore(this);
+        done();
+    },
+
+    firmataInitialisation: function(test) {
+
+        test.expect(4);
+        let mock_firmata = {
+            firmware: {
+                name: "node_pixel_firmata.ino",
+            },
+        };
+
+        test.doesNotThrow(
+            () => {
+                var strip = new pixel.Strip({
+                    data: 6,
+                    length: 8,
+                    board: this.board,
+                });
+            },
+            "If no controller is provided strip should default to firmata without error"
+        );
+
+        // check error states.
+        test.throws(
+            () => {
+                var strip = new pixel.Strip({
+                    data: 6,
+                    length: 8,
+                    controller: "FIRMATA",
+                });
+            },
+            function(err) {
+                if (err) {
+                    if (err.name == "NoFirmataError") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            },
+            "If board is not present an error should be thrown"
+        );
+
+        test.throws(
+            () => {
+                // build with an empty firmata to test non-writable port.
+                //
+
+                var strip = new pixel.Strip({
+                    data: 6,
+                    length: 8,
+                    firmata: mock_firmata,
+                    controller: "FIRMATA",
+                });
+
+            },
+            function(err) {
+                if (err) {
+                    if (err.name == "NoWritablePortError") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            },
+            "If there is no writable port, controller should throw an error"
+        );
+
+        test.throws(
+            () => {
+                // build with an empty firmata to test bad naming.
+                mock_firmata.firmware.name = "StandardFirmata.ino";
+
+                var strip = new pixel.Strip({
+                    data: 6,
+                    length: 8,
+                    firmata: mock_firmata,
+                    controller: "FIRMATA",
+                });
+
+            },
+            function(err) {
+                if (err) {
+                    if (err.name == "IncorrectFirmataVersionError") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            },
+            "If firmware name is incorrect, controller should throw an error"
+        );
+
+        test.done();
+    },
+
+
+};
+
 exports["Strip - Firmata"] = {
     setUp: function(done){
 

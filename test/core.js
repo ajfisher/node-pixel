@@ -82,7 +82,7 @@ exports["Strip"] = {
 
     length: function(test) {
         // tests length of the strip properly.
-        test.expect(3)
+        test.expect(3);
 
         var strip = new pixel.Strip({
             board: this.board,
@@ -116,7 +116,7 @@ exports["Strip"] = {
 
     colour: function(test) {
         // tests if the colour sequences are working okay
-        test.expect(3);
+        test.expect(4);
 
         var colourcheck = {
             r: 255, g: 255, b: 255,
@@ -146,6 +146,14 @@ exports["Strip"] = {
             },
             undefined,
             "An invalid color should be ignored not throw an error"
+        );
+
+        test.doesNotThrow(
+            () => {
+                this.strip.color();
+            },
+            undefined,
+            "When no colour is provided it should be ignored and not throw an error"
         );
 
         test.done();
@@ -206,7 +214,7 @@ exports["Strip"] = {
     shift: function(test) {
         // tests that wrapping behaviour is consistent
 
-        test.expect(10);
+        test.expect(12);
 
         var strip = new pixel.Strip({
             board: this.board,
@@ -219,11 +227,19 @@ exports["Strip"] = {
         strip.pixel(1).color("red");
         strip.pixel(6).color("blue");
 
+        // call a shift but it shouldn't do anything
+        strip.shift(0, pixel.FORWARD, false);
+        test.equal(strip.pixel(1).color().color, "red",
+            "If pixels are advanced by 0 elements, pixel 1 should stay the same");
+
         // advance the pixels one step along the strip.
         strip.shift(1, pixel.FORWARD, false);
 
         test.equal(strip.pixel(7).color().color, "blue",
             "If pixels are advanced one position, pixel 6 value should be on pixel 7");
+
+        test.equal(strip.pixel(7).address, 7,
+            "After pixels are shifted, pixel address should be updated again");
 
         test.equal(strip.pixel(6).color().color, "black",
             "If pixels are advanced one position, pixel 5 value should overwrite pixel 6");

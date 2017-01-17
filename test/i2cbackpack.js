@@ -63,6 +63,38 @@ exports["Strip - I2C"] = {
         done();
     },
 
+    i2cControllerConfig: function(test) {
+        // ensures that the configuration of the controller works correctly
+
+        test.expect(1);
+
+        test.throws(
+            () => {
+                var strip = new pixel.Strip({
+                    data: 6,
+                    length: 8,
+                    board: {},
+                    controller: "I2CBACKPACK",
+                });
+            },
+            function(err) {
+                if (err) {
+                    if (err.name == "NoIOError") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            },
+            "If IO is not present an error should be thrown"
+        );
+
+        test.done();
+
+    },
+
     stripReady: function(test) {
         // tests if the strip emits the ready event properly.
 

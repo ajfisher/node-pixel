@@ -19,6 +19,10 @@ correction by default, it can now be added as an initialisation parameter `gamma
     * Large refactor to tests for exception handling
     * Added test for pixel.off correctness.
     * Tests for handling garbage colour values
+    * Added tests for handling wrapping / shifting conditions.
+    * Removed redundant checks in codebase where preconditions had to be met
+    so checks were irrelevant
+    * Added tests for handling issues where strips are incorrectly initialised
 
 ### 0.8.3
 
