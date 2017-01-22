@@ -1,5 +1,11 @@
 # node-pixel changelog
 
+### 0.9.1
+
+* Example documentation updates to bring in line with the new `.length` API -
+thanks @rupl
+* Upgraded mockfirmata for testing
+
 ### 0.9.0
 
 * Added capability for gamma correction for the strip. Currently set to no
