@@ -45,8 +45,8 @@ board.on("ready", function() {
         console.log('staticRainbow');
 
         var showColor;
-        for(var i = 0; i < strip.stripLength(); i++) {
-            showColor = colorWheel( ( i*256 / strip.stripLength() ) & 255 );
+        for(var i = 0; i < strip.length; i++) {
+            showColor = colorWheel( ( i*256 / strip.length ) & 255 );
             strip.pixel( i ).color( showColor );
         }
         strip.show();

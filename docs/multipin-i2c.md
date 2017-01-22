@@ -59,7 +59,7 @@ board.on("ready", function() {
 
             strip.color("#000"); // blanks it out
             for (var i=0; i< current_pos.length; i++) {
-                if (++current_pos[i] >= strip.stripLength()) {
+                if (++current_pos[i] >= strip.length) {
                     current_pos[i] = 0;
                     if (++current_colors[i] >= colors.length) current_colors[i] = 0;
                 }
