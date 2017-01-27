@@ -308,10 +308,6 @@ direction of travel. Forward direction is in the flow index values (ie index 1->
 * **wrap** a `Boolean` representing whether to wrap the values that go off the
 "end" of the strip back around to the start - useful for circular displays.
 
-* **colourstring** A `String` as a standard HTML hex colour or a CSS colour name,
-or a CSS rgb(r, g, b) value used to specify the colour of the strip. Alternatively
-an `Array` object as an rgb value eg `[r, g, b]`
-
 Example
 
 ```javascript
