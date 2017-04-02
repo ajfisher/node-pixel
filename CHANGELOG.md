@@ -1,5 +1,10 @@
 # node-pixel changelog
 
+### 0.9.2
+
+* Range of general changes related to upstream package dependencies and bringing
+back into line.
+
 ### 0.9.1
 
 * Example documentation updates to bring in line with the new `.length` API -
