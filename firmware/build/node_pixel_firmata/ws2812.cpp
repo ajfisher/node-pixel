@@ -12,11 +12,12 @@ bool strip_changed[MAX_STRIPS]; // used to optimise strip writes.
 uint8_t *px;
 uint16_t px_count;
 uint8_t strip_count = 0; // number of strips being used.
-uint8_t color_depth = 3; // Bytes used to hold one pixel
+uint8_t color_depth = 4; // Bytes used to hold one pixel
 
 uint8_t offsetRed;
 uint8_t offsetGreen;
 uint8_t offsetBlue;
+uint8_t offsetWhite;
 
 void ws2812_initialise() {
     // initialises the strip defaults.
@@ -77,9 +78,10 @@ uint8_t set_rgb_at(uint16_t index, uint32_t px_value) {
         uint16_t tmp_pixel;
         tmp_pixel = index * color_depth;
 
-        px[OFFSET_R(tmp_pixel)] = (uint8_t)(px_value >> 16);
-        px[OFFSET_G(tmp_pixel)] = (uint8_t)(px_value >> 8);
-        px[OFFSET_B(tmp_pixel)] = (uint8_t)px_value;
+        px[OFFSET_R(tmp_pixel)] = (uint8_t)(px_value >> 24);
+        px[OFFSET_G(tmp_pixel)] = (uint8_t)(px_value >> 16);
+        px[OFFSET_B(tmp_pixel)] = (uint8_t)(px_value >> 8);
+        px[OFFSET_W(tmp_pixel)] = (uint8_t)px_value;
 
         return 0;
     }
@@ -261,6 +263,9 @@ void process_command(byte argc, byte *argv){
                         case PIXEL_COLOUR_BRG:
                             setColorOrderBRG();
                             break;
+                        case PIXEL_COLOUR_RGBW:
+                            setColorOrderRGBW();
+                            break;
                     }
 
                     // now get the strand length and set it
@@ -316,6 +321,13 @@ void setColorOrderBRG() {
 	offsetBlue = 0;
 	offsetRed = 1;
 	offsetGreen = 2;
+}
+
+void setColorOrderRGBW() {
+	offsetRed = 0;
+	offsetGreen = 1;
+	offsetBlue = 2;
+  offsetWhite = 3;
 }
 
 #if DEBUG

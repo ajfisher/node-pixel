@@ -35,6 +35,7 @@
 #define PIXEL_COLOUR_GRB        0x0
 #define PIXEL_COLOUR_RGB        0x1
 #define PIXEL_COLOUR_BRG        0x2
+#define PIXEL_COLOUR_RGBW       0x3
 
 #define STRIP_START_PIN 0
 
@@ -47,6 +48,7 @@
 #define OFFSET_R(r) r+offsetRed
 #define OFFSET_G(g) g+offsetGreen
 #define OFFSET_B(b) b+offsetBlue
+#define OFFSET_W(w) w+offsetWhite
 
 void ws2812_initialise();
 void ws2812_initialise(bool backpack);
@@ -57,6 +59,7 @@ uint8_t set_rgb_at(uint16_t index, uint32_t px_value);
 void setColorOrderRGB();
 void setColorOrderGRB();
 void setColorOrderBRG();
+void setColorOrderRGBW();
 
 #if DEBUG
 void print_pixels();
