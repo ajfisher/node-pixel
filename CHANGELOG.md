@@ -1,5 +1,11 @@
 # node-pixel changelog
 
+### 0.9.3
+
+* Breaking change with Sinon as a result of 3.0, needed to reactor tests as a
+result
+* Range of other package updates bringing back into line.
+
 ### 0.9.2
 
 * Range of general changes related to upstream package dependencies and bringing

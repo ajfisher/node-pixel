@@ -49,7 +49,7 @@ exports["Strip - I2C"] = {
         this.board = newBoard();
         this.clock = sinon.useFakeTimers();
         this.i2cConfig = sinon.spy(MockFirmata.prototype, "i2cConfig");
-        this.i2cWrite = sinon.stub(MockFirmata.prototype, "i2cWrite", function(i2caddr, data) {
+        this.i2cWrite = sinon.stub(MockFirmata.prototype, "i2cWrite").callsFake(function(i2caddr, data) {
             return;
         });
 
@@ -236,7 +236,7 @@ exports["Pixel - I2C"] = {
         this.board = newBoard();
         this.clock = sinon.useFakeTimers();
         this.i2cConfig = sinon.spy(MockFirmata.prototype, "i2cConfig");
-        this.i2cWrite = sinon.stub(MockFirmata.prototype, "i2cWrite", function(i2caddr, data) {
+        this.i2cWrite = sinon.stub(MockFirmata.prototype, "i2cWrite").callsFake(function(i2caddr, data) {
             return;
         });
 

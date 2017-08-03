@@ -164,7 +164,7 @@ exports["Firmata - Initialisation"] = {
 exports["Strip - Firmata"] = {
     setUp: function(done){
 
-        this.write = sinon.stub(MockSerialPort.prototype, "write", function(buffer, callback) {
+        this.write = sinon.stub(MockSerialPort.prototype, "write").callsFake( function(buffer, callback) {
             if (typeof callback === "function") {
                 process.nextTick(callback);
             } else {
@@ -293,7 +293,7 @@ exports["Strip - Firmata"] = {
 exports["Pixel - Firmata"] = {
     setUp: function(done){
 
-        this.write = sinon.stub(MockSerialPort.prototype, "write", function(buffer, callback) {
+        this.write = sinon.stub(MockSerialPort.prototype, "write").callsFake(function(buffer, callback) {
             if (typeof callback === "function") {
                 process.nextTick(callback);
             } else {
