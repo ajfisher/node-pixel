@@ -39,8 +39,8 @@
   },
   "dependencies": {
     "color-string": "^1.4.0",
-    "firmata": "^0.16.0",
-    "johnny-five": "^0.11.2"
+    "johnny-five": "^0.11.2",
+    "firmata": "^0.17.0"
   },
   "devDependencies": {
     "board-io": "^3.0.4",
@@ -54,7 +54,7 @@
     "grunt-exec": "^2.0.0",
     "grunt-todo": "^0.5.0",
     "istanbul": "^0.4.5",
-    "mock-firmata": "0.1.0",
+    "mock-firmata": "0.2.0",
     "nodeunit": "^0.11.0",
     "sinon": "^2.0.0"
   }
