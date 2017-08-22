@@ -9,7 +9,7 @@ To install the I2C backpack, see the [Installation Guide](installation.md).
 
 Wire the neopixel strip up as shown below. This can be done on any I2C compatible
 board that Johnny Five supports. This example uses a Raspberry Pi with 2 strips
-attached to the backpack.
+attached to the backpack. For the Raspberry Pi to work with the backpack, include the [raspi-io](https://www.npmjs.com/package/raspi-io) plugin to Johnny Five when initializing the Board.
 
 ![Wiring diagram](breadboard/i2c_backpack_multipin_bb.png)
 
@@ -76,6 +76,20 @@ board.on("ready", function() {
     });
 });
 ```
+
+When using a Raspberry Pi:
+
+```js
+var Raspi = require("raspi-io");
+var five = require("johnny-five");
+
+const board = new five.Board({
+    io: new Raspi()
+});
+
+// .. Rest of your code
+```
+
 
 ## Running
 
