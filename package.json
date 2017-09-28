@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "board-io": "^3.0.4",
-    "coveralls": "^2.11.15",
+    "coveralls": "^3.0.0",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
