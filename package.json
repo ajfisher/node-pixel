@@ -40,7 +40,7 @@
   "dependencies": {
     "color-string": "^1.4.0",
     "johnny-five": "^0.11.2",
-    "firmata": "^0.17.0"
+    "firmata": "^0.19.1"
   },
   "devDependencies": {
     "board-io": "^3.0.4",
