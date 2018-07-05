@@ -111,7 +111,7 @@ and `Backpack` will mean the custom arduino used to provide I2C support.
 
 With the hardware off, attach your pixels to the Backpack. Usually this involves
 getting a 5V source, a ground and then attaching the data line to an arduino
-digital pin. The default configuration assumes PIN 6 (NOTE this is NOT configurable).
+digital pin. The default configuration assumes PIN 0 (NOTE this is NOT configurable).
 
 Connect the grounds of the Board and Backpack as well as the SDA and SCK pins. (You
 will need to look at your board and backpack pin out diagrams to see what these are).
