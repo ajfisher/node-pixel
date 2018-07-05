@@ -104,6 +104,7 @@ writing in sequence or parallel as appropriate.
 | board | IO Object | IO Board object to use with Johnny Five | undefined | yes(1) |
 | firmata | Firmata board | Firmata board object to use with Firmata directly | undefined | yes(1) |
 | controller | String | I2CBACKPACK, FIRMATA | FIRMATA | no |
+| skip_firmware_check | Boolean | If the controller is FIRMATA, optionally skip the check for the matching node-pixel sketch | false | no |
 | gamma | Number | A number representing the gamma correction for a strip. Can be any decimal number. 2.8 generally works well. | 1.0 (7) | no |
 
 (1) A board or firmata object is required but only one of these needs to be set.
