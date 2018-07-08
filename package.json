@@ -38,11 +38,11 @@
     "url": "https://github.com/ajfisher/node-pixel/issues"
   },
   "dependencies": {
-    "color-string": "^1.4.0"
+    "color-string": "^1.4.0",
+    "johnny-five": "^0.15.0"
   },
   "peerDependencies": {
-    "firmata": "^0.19.1",
-    "johnny-five": "^0.15.0"
+    "firmata": "^0.19.1"
   },
   "devDependencies": {
     "board-io": "^3.0.4",
@@ -57,7 +57,7 @@
     "grunt-todo": "^0.5.0",
     "istanbul": "^0.4.5",
     "mock-firmata": "0.2.0",
-    "nodeunit": "^0.11.0",
+    "nodeunit": "^0.11.2",
     "sinon": "^6.0.1"
   }
 }
