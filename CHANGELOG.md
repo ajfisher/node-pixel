@@ -4,7 +4,7 @@
 
 * Updates for all major packages in the repo in order to bring back in line
 * Build now passing for nodejs v10 and this has been added to build testing script
-* Updates for johnny five and firmata
+* Updates for johnny five and firmata and move to peer dependency
 
 ### 0.9.3
 

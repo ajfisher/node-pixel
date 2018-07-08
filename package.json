@@ -40,7 +40,7 @@
   "dependencies": {
     "color-string": "^1.4.0"
   },
-  "optionalDependencies": {
+  "peerDependencies": {
     "firmata": "^0.19.1",
     "johnny-five": "^0.15.0"
   },
