@@ -38,19 +38,21 @@
     "url": "https://github.com/ajfisher/node-pixel/issues"
   },
   "dependencies": {
-    "color-string": "^1.4.0",
+    "color-string": "^1.4.0"
+  },
+  "optionalDependencies": {
     "firmata": "^0.19.1",
     "johnny-five": "^0.15.0"
   },
   "devDependencies": {
     "board-io": "^3.0.4",
     "coveralls": "^3.0.1",
-    "grunt": "^1.0.1",
+    "grunt": "^1.0.3",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-nodeunit": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "^3.0.0",
     "grunt-todo": "^0.5.0",
     "istanbul": "^0.4.5",
