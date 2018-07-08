@@ -1,5 +1,11 @@
 # node-pixel changelog
 
+## 0.10.0
+
+* Updates for all major packages in the repo in order to bring back in line
+* Build now passing for nodejs v10 and this has been added to build testing script
+* Updates for johnny five and firmata
+
 ### 0.9.3
 
 * Breaking change with Sinon as a result of 3.0, needed to reactor tests as a
