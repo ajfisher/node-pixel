@@ -22,8 +22,10 @@ run the pixels. These boards can be had for about $2 with a bit of searching.
 
 ## Prerequisites
 
-It is assumed you have an [Arduino](http://arduino.cc/en/Guide/HomePage) or
-similar board.
+- Arduino or similar board
+- Adafruit NeoPixels or standard WS2812b LEDs
+- NodeJS
+- Johnny-Five
 
 For the purposes of this guide I will assume you're using Adafruit NeoPixels and I'm going
 to assume you've read the [NeoPixel Uber Guide](http://learn.adafruit.com/adafruit-neopixel-uberguide/overview)
@@ -33,7 +35,9 @@ Standard WS2812b LEDs from any other supplier will work just as well.
 I'm going to assume you have NodeJS all ready to go too and you've gone through
 the [Johnny-Five getting started guide](http://johnny-five.io).
 
-### Get the node-pixel code
+## Software Installation
+
+### 1. Install the node-pixel code
 
 As per most NodeJS projects you can either clone the repo;
 
@@ -49,7 +53,7 @@ or just install from npm
 npm install node-pixel
 ```
 
-### Install firmware to your board
+### 2. Install firmware to your board
 
 The first thing you'll need is Interchange to manage the firmware for your
 target board. [Find out more about what Interchange does here.](http://github.com/j5js/nodebots-interchange).
@@ -59,7 +63,7 @@ To install, run `npm install -g nodebots-interchange` from your project folder.
 Now plug in your board and you can install the firmware to it. For the purposes
 of this doc it's assumed you have an Arduino Nano.
 
-#### I2C Backpack
+#### A. I2C Backpack
 
 This is the preferred set up as it can run more pixels faster than a normal
 arduino having to manage pixels AND firmata at the same time. To install:
@@ -68,7 +72,7 @@ arduino having to manage pixels AND firmata at the same time. To install:
 interchange install git+https://github.com/ajfisher/node-pixel -a nano
 ```
 
-#### Node Pixel Firmata
+#### B. Node Pixel Firmata
 
 If you don't have a spare board to dedicate to your LEDs, you can run the
 node-pixel firmware inside Firmata. This does limit how many pixels you can
@@ -80,7 +84,9 @@ interchange install git+https://github.com/ajfisher/node-pixel -a uno --firmata
 
 If everything proceeds without error then you should be good to go.
 
-### Hardware installation
+## Hardware Installation
+
+### Standard Installation
 
 With the hardware off, attach your pixels to the arduino. Usually this involves
 getting a 5V source, a ground and then attaching the data line to an arduino
@@ -90,7 +96,7 @@ _Wiring diagram_
 
 ![Custom Firmata Diagram](breadboard/custom_firmata_bb.png)
 
-## I2C Backpack Installation
+### I2C Backpack 
 
 This installation method installs a custom "Backpack" firmware onto an arduino
 Nano or Pro Mini which is then connected to the board using I2C connections.
@@ -104,7 +110,7 @@ if you are used to using only Uno boards.
 Compile, check for errors and then upload to your arduino. Assuming no errors
 you should be ready to go.
 
-### Hardware installation
+#### Hardware installation
 
 For the purposes of this `Board` will mean the board that is talking to NodeJS
 and `Backpack` will mean the custom arduino used to provide I2C support.
