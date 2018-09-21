@@ -1,5 +1,9 @@
 # node-pixel changelog
 
+## 0.10.1
+
+* Security updates to fix dependency security issues
+
 ## 0.10.0
 
 * Updates for all major packages in the repo in order to bring back in line
