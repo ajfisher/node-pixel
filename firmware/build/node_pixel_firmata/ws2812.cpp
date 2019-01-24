@@ -183,7 +183,8 @@ void process_command(byte argc, byte *argv){
             uint32_t strip_colour = (uint32_t)argv[1] +
                 ((uint32_t)argv[2]<<7) +
                 ((uint32_t)argv[3]<<14) +
-                ((uint32_t)argv[4] << 21);
+                ((uint32_t)argv[4]<< 21) +
+                ((uint32_t)argv[5] << 28);
 
             if (! isShifting) {
                 if (strip_colour == 0) {
@@ -203,7 +204,7 @@ void process_command(byte argc, byte *argv){
             // sets the pixel given by the index to the given colour
             uint16_t index = (uint16_t)argv[1] + ((uint16_t)argv[2]<<7);
             uint32_t colour = (uint32_t)argv[3] + ((uint32_t)argv[4]<<7) +
-                ((uint32_t)argv[5]<<14) + ((uint32_t)argv[6] << 21);
+                ((uint32_t)argv[5]<<14) + ((uint32_t)argv[6] << 21) + ((uint32_t)argv[6] << 28);
 
             if (isShifting) {
                 break;

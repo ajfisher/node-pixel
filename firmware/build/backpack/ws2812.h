@@ -57,9 +57,10 @@ void initialise_pixels(uint16_t num_pixels);
 uint8_t set_rgb_at(uint16_t index, uint32_t px_value);
 
 void setColorOrderRGB();
-void setColorOrderRGBW();
 void setColorOrderGRB();
 void setColorOrderBRG();
+void setColorOrderRGBW();
+
 
 #if DEBUG
 void print_pixels();
