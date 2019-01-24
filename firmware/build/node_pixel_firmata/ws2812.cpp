@@ -264,7 +264,7 @@ void process_command(byte argc, byte *argv){
                             setColorOrderBRG();
                             break;
                         case PIXEL_COLOUR_RGBW:
-                            setColorOrderRGB();
+                            setColorOrderRGBW();
                             break;
                     }
 
@@ -357,6 +357,10 @@ int freeRam () {
   return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
 }
 #endif
+
+
+
+
 
 
 
