@@ -1,4 +1,15 @@
-# node-pixel changelog
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.10.2](https://github.com/ajfisher/node-pixel/compare/v0.10.0...v0.10.2) (2019-06-05)
+
+
+### Bug Fixes
+
+* **package:** update johnny-five to version 1.0.0 ([a43c8dc](https://github.com/ajfisher/node-pixel/commit/a43c8dc))
+
+
 
 ## 0.10.1
 
@@ -226,4 +237,3 @@ support no-dependency firmware compilation.
 * Specific implementation in firmata to provide functions
 * Naive implementation against Adafruit NP library.
 * Initial build of library
-

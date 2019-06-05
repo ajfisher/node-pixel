@@ -1,6 +1,6 @@
 {
   "name": "node-pixel",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Library for controlling addressable LEDs (such as NeoPixels) from firmata or Johnny Five.",
   "main": "lib/pixel.js",
   "directories": {
@@ -9,7 +9,8 @@
   "scripts": {
     "test": "IS_TEST_MODE=true grunt test",
     "test-cover": "IS_TEST_MODE=true istanbul cover ./node_modules/.bin/nodeunit test/*",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",

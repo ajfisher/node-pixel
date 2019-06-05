@@ -6,5 +6,6 @@
     "firmata": {
         "bins": "/firmware/bin/firmata/",
         "hexPath": "/node_pixel_firmata.ino.hex"
-    }
+    },
+    "version": "0.10.2"
 }
