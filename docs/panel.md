@@ -39,7 +39,7 @@ board.on("ready", function() {
 
         console.log("Strip ready, let's go");
 
-        var colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "white"];
+        var colors = ["red", "green", "blue", "yellow", "violet", "indigo", "orange"];
         var current_colors = 0;
         var blinker = setInterval(function() {
 
