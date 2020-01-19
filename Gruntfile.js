@@ -2,7 +2,6 @@ var arduino = process.env.ARDUINO_PATH;
 
 var boards = require("./firmware/boards.js");
 var boardlist = Object.keys(boards).toString();
-
 module.exports = function(grunt) {
 
     // configure the tasks
@@ -128,6 +127,7 @@ module.exports = function(grunt) {
 
     // dynamically create the compile targets for the various boards
     Object.keys(boards).forEach(function(key) {
+
         grunt.config(["exec", "firmata_" + key], {
             command:function() {
                 return arduino + " --verify --verbose-build --board "  + boards[key].package +
