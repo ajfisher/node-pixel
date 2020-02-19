@@ -60,6 +60,6 @@
     "istanbul": "^0.4.5",
     "mock-firmata": "0.2.0",
     "nodeunit": "^0.11.3",
-    "sinon": "^8.0.0"
+    "sinon": "^9.0.0"
   }
 }
