@@ -8,6 +8,8 @@ var sinon = require("sinon");
 var five = require("johnny-five");
 var pixel = require("../lib/pixel.js");
 
+var mx = require("../lib/mx");
+
 var Board = five.Board;
 
 function newBoard() {
@@ -359,4 +361,40 @@ exports["Pixel"] = {
                 "If setting a colour then turning a pixel off, the colour should revert to off state.");
         test.done();
     },
+};
+ exports["mx"] = {
+   rowNum : function(test) {
+     test.equals(3,mx.rowNum(13,5),"In a grid with 5 rows, pixel 13 is in row 3");
+     test.done();
+   },
+   colNum : function(test) {
+     test.equals(2,mx.columnNum(13,5), "in a grid with 5 rows, pixel 13 is in column 2");
+     test.done();
+   },
+    rowZeroVal : function(test) {
+      // pixel 5 will be in column 1
+      test.equals(9, mx.rowZeroVal(5,5), "in a grid with 5 rows pixel 9 is at the top of column 1");
+     test.done();
+   },
+   columnIsOdd : function(test) {
+     test.equals(true,mx.columnIsOdd(5,5),"in a grid with 5 rows, pixel five is in an odd-numbered column");
+     test.equals(false,mx.columnIsOdd(11,5), "in a grid with 5 rows, pixel 11 is not in an odd-numbered column");
+     test.done();
+   },
+   address: function(test) {
+     test.equals(9,mx.address(5,5),"in a grid with 5 rows pixel 5 should map to pixel 9");
+     test.equals(4,mx.address(4,5),"in a grid with 5 rows pixel 4 should not be altered")
+     test.done();
+   },
+   inRange: function(test) {
+     test.equals(true,mx.inRange(8,2,13,5),"in a grid of 5 rows pixel 8 is in the range of 2,13");
+     test.equals(false,mx.inRange(6,2,13,5),"in a grid of 5 rows pixel 6 is not in range 2,13");
+     test.done();
+   },
+   rectRange : function(test){
+     const grid = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+     const rec = [2,3,7,8,12,13];
+     test.deepEqual(rec,mx.rectRange(2,13,5,grid),"in a grid of 5 rows return all pixel values which lie inside a rectangle bounded by 2 and 13")
+     test.done();
+   }
 };
