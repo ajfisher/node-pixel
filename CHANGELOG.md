@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.4](https://github.com/ajfisher/node-pixel/compare/v0.10.3...v0.10.4) (2020-10-04)
+
+
+### Bug Fixes
+
+* **security:** Bump websocket-extensions from 0.1.3 to 0.1.4 ([#166](https://github.com/ajfisher/node-pixel/issues/166)) ([be57708](https://github.com/ajfisher/node-pixel/commit/be57708af67223001cbcc2cb997b1049a186b2f2))
+
 ### [0.10.3](https://github.com/ajfisher/node-pixel/compare/v0.10.2...v0.10.3) (2020-10-04)
 
 ### [0.10.2](https://github.com/ajfisher/node-pixel/compare/v0.10.0...v0.10.2) (2019-06-05)
