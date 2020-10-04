@@ -42,14 +42,14 @@
     "color-string": "^1.5.3"
   },
   "peerDependencies": {
-    "firmata": "^0.19.1",
-    "johnny-five": "^2.0.0"
+    "firmata": "^0.19.1"
   },
   "devDependencies": {
     "standard-version": "^9.0.0",
     "board-io": "^3.0.4",
     "coveralls": "^3.1.0",
     "istanbul": "^0.4.5",
+    "johnny-five": "^2.0.0",
     "mock-firmata": "0.2.0",
     "nodeunit": "^0.11.3",
     "sinon": "^9.1.0"
