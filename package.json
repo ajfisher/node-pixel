@@ -39,8 +39,8 @@
     "url": "https://github.com/ajfisher/node-pixel/issues"
   },
   "dependencies": {
-    "color-string": "^1.4.0",
-    "johnny-five": "^1.0.0",
+    "color-string": "^1.5.3",
+    "johnny-five": "^2.0.0",
     "standard-version": "^9.0.0"
   },
   "peerDependencies": {
