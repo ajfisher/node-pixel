@@ -41,25 +41,25 @@
   "dependencies": {
     "color-string": "^1.4.0",
     "johnny-five": "^1.0.0",
-    "standard-version": "^7.0.0"
+    "standard-version": "^9.0.0"
   },
   "peerDependencies": {
     "firmata": "^0.19.1"
   },
   "devDependencies": {
     "board-io": "^3.0.4",
-    "coveralls": "^3.0.1",
-    "grunt": "^1.0.4",
-    "grunt-cli": "^1.2.0",
+    "coveralls": "^3.1.0",
+    "grunt": "^1.3.0",
+    "grunt-cli": "^1.3.2",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-nodeunit": "^2.0.0",
+    "grunt-contrib-nodeunit": "^2.1.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "^3.0.0",
     "grunt-todo": "^0.5.0",
     "istanbul": "^0.4.5",
     "mock-firmata": "0.2.0",
     "nodeunit": "^0.11.3",
-    "sinon": "^8.0.0"
+    "sinon": "^9.1.0"
   }
 }
