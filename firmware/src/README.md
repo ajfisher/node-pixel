@@ -25,10 +25,8 @@ relevant locations during the build process.
 ## Dev environment set up
 
 Due to the way this is all managed, the best way to work with this set up is
-to use something like arduino CLI tools so you can edit, have the 
-grunt watch task run to put the files in the appropriate place and then build.
-INO is no longer supported as of v0.4.0 as the project has stagnated and the
-arduino CLI is preferred.
+to use something like arduino CLI tools so you can edit and then use make to
+build and compile the files.
 
 If you don't have that sort of setup then the next easiest way is to switch your
 arduino IDE in preferences to "use an external editor". Then open up the target
@@ -36,22 +34,31 @@ you want to build and edit the source file in a separate editor (eg Sublime Text
 Vim or whatever). Then when you compile, the file and any supporting files will
 be loaded.
 
-## Grunt
+Export the path to your ARDUINO application:
 
-A `Gruntfile` is included that comprises a watcher on the `src` directory. When
-files here change then the targets are rebuilt appropriately with copy commands 
-to put the files in the appropriate locations.
+`export ARDUINO_PATH=~/Downloads/Arduino.app/Contents/MacOS/Arduino`
 
-To ease your development process use:
+To make sure it's available to make.
 
-```
-grunt watch
-```
+## Make
+
+A `Makefile` is included that has pretty much everything you need in it.
+
+`make build` will get all the files to the right location and then you can use
+the arduino cli tools or the arduino IDE to compile and flash to the board.
+
+`make compile` is used to build and compile all targets and will use the arduino
+command like invocation.
+
+A useful trick is if you just want to build one target use `make uno` or `make nano`
+and this will build just the backpack and firmata for that target.
+
 
 ## Building for deployment
 
-If there are any mods to the src files then run `grunt build` to make sure
+If there are any mods to the src files then run `make build` to make sure
 everything is updated properly.
+
 
 ## TODO
 
