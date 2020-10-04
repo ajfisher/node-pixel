@@ -42,7 +42,8 @@
     "color-string": "^1.5.3"
   },
   "peerDependencies": {
-    "firmata": "^0.19.1"
+    "firmata": "^0.19.1",
+    "johnny-five": "^2.0.0"
   },
   "devDependencies": {
     "standard-version": "^9.0.0",
