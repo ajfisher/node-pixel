@@ -1,12 +1,15 @@
-name: Test Firmware Build
+name: Test Firmware Builds
 
 on: push
+env:
+  FIRMATA_PATH: ./firmware/build/node_pixel_firmata/node_pixel_firmata.ino
+  BACKPACK_PATH: ./firmware/build/backpack/backpack.ino
 
 jobs:
   build-matrix:
     strategy:
       matrix:
-        board: ["uno", "nano"]
+        board: ["uno", "nano", "pro-mini", "mega", "diecimila", "leonardo", "micro"]
         include:
           - board: "uno"
             arduino-platform: "arduino:avr"
@@ -14,6 +17,21 @@ jobs:
           - board: "nano"
             arduino-platform: "arduino:avr"
             fqbn: "arduino:avr:nano:cpu=atmega328"
+          - board: "pro-mini"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:pro:cpu=16MHzatmega328"
+          - board: "mega"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:mega:cpu=atmega2560"
+          - board: "diecimila"
+            arduino-platform: "arduino-avr"
+            fqbn: "arduino:avr:diecimila:cpu=atmega328"
+          - board: "leonardo"
+            arduino-platform: "arduino-avr"
+            fqbn: "arduino:avr:leonardo"
+          - board: "micro"
+            arduino-platform: "arduino-avr"
+            fqbn: "arduino:avr:micro"
 
     runs-on: ubuntu-latest
     steps:
@@ -33,8 +51,8 @@ jobs:
 
       # now build the firmata file for target
       - name: Compile firmata
-        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./firmware/build/node_pixel_firmata/node_pixel_firmata.ino
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} $FIRMATA_PATH
 
       # And now build the backpack for the target
       - name: Compile backpack
-        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./firmware/build/backpack/backpack.ino
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} $BACKPACK_PATH
