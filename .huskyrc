@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "make lint",
+    "pre-push": "make test"
+  }
+}

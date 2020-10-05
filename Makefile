@@ -3,6 +3,9 @@
 # use this so we can call make again robustly if needed
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 
+# use this so we can run NVM for tests
+NVM = [[ -s $$HOME/.nvm/nvm.sh ]] && . $$HOME/.nvm/nvm.sh
+
 FIRMWARE_DIR = ./firmware
 BUILD_DIR = $(FIRMWARE_DIR)/build
 BIN_DIR = $(FIRMWARE_DIR)/bin
@@ -68,9 +71,17 @@ install: clean
 lint:
 	npm run lint
 
-test:
-	npm run test
+# What node versions do we want to have support for
+NODE_TARGETS = 12 14
 
+$(NODE_TARGETS):
+	@echo "Testing Node $@"
+	@$(NVM) && nvm use $@ && npm run test
+
+test: $(NODE_TARGETS)
+
+test-ci:
+	npm run test
 
 # make the Firmata build process to copy the files to the right place
 FIRMATA_DEST_DIR = $(BUILD_DIR)/node_pixel_firmata
