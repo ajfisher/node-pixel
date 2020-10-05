@@ -1,362 +1,360 @@
 global.IS_TEST_MODE = true;
-var mocks = require("mock-firmata");
-var MockFirmata = mocks.Firmata;
-var MockSerialPort = mocks.SerialPort;
+const mocks = require('mock-firmata');
+const MockFirmata = mocks.Firmata;
+const MockSerialPort = mocks.SerialPort;
 
-var sinon = require("sinon");
+const sinon = require('sinon');
 
-var five = require("johnny-five");
-var pixel = require("../lib/pixel.js");
+const five = require('johnny-five');
+const pixel = require('../lib/pixel.js');
 
-var Board = five.Board;
+const Board = five.Board;
 
 function newBoard() {
-    var sp = new MockSerialPort("/dev/test");
-    var io = new MockFirmata(sp);
-    io["firmware"] = { name: "node_pixel_firmata.ino", };
+  const sp = new MockSerialPort('/dev/test');
+  const io = new MockFirmata(sp);
+  io['firmware'] = { name: 'node_pixel_firmata.ino' };
 
-    io.emit("connect");
-    io.emit("ready");
+  io.emit('connect');
+  io.emit('ready');
 
-    var board = new Board({
-        io: io,
-        debug: false,
-        repl: false,
-    });
+  const board = new Board({
+    io,
+    debug: false,
+    repl: false
+  });
 
-    return board;
+  return board;
 }
 
 function restore(target) {
-    for (var prop in target) {
-
-        if (Array.isArray(target[prop])) {
-            continue;
-        }
-
-        if (target[prop] != null && typeof target[prop].restore === "function") {
-            target[prop].restore();
-        }
-
-        if (typeof target[prop] === "object") {
-            restore(target[prop]);
-        }
+  for (const prop in target) {
+    if (Array.isArray(target[prop])) {
+      continue;
     }
+
+    if (target[prop] != null && typeof target[prop].restore === 'function') {
+      target[prop].restore();
+    }
+
+    if (typeof target[prop] === 'object') {
+      restore(target[prop]);
+    }
+  }
 }
 
-exports["Test Mode configured"] = {
-    setUp: function(done) {
-        done();
-    },
+exports['Test Mode configured'] = {
+  setUp(done) {
+    done();
+  },
 
-    tearDown: function(done) {
-        done();
-    },
+  tearDown(done) {
+    done();
+  },
 
-    testMode: function(test) {
-        // tests that the env variable is set properly
-        test.expect(1);
-        test.equal(process.env.IS_TEST_MODE, 'true', "Test mode should be configured");
-        test.done();
-    },
+  testMode(test) {
+    // tests that the env variable is set properly
+    test.expect(1);
+    test.equal(process.env.IS_TEST_MODE, 'true', 'Test mode should be configured');
+    test.done();
+  }
 };
 
-exports["Strip"] = {
-    // used for the main strip tests.
-    setUp: function(done) {
-        this.board = newBoard();
-        this.strip = new pixel.Strip({
-            data: 6,
-            length: 8,
-            board: this.board,
-            controller: "FIRMATA",
-        });
-        done();
+exports['Strip'] = {
+  // used for the main strip tests.
+  setUp(done) {
+    this.board = newBoard();
+    this.strip = new pixel.Strip({
+      data: 6,
+      length: 8,
+      board: this.board,
+      controller: 'FIRMATA'
+    });
+    done();
+  },
+
+  tearDown(done) {
+    Board.purge();
+    restore(this);
+    done();
+  },
+
+  length(test) {
+    // tests length of the strip properly.
+    test.expect(3);
+
+    const strip = new pixel.Strip({
+      board: this.board,
+      controller: 'FIRMATA',
+      strips: [{pin: 2, length: 100}]
+    });
+    test.equal(strip.length, 100, 'Single strip length should be equal to provided length');
+
+    const strip2 = new pixel.Strip({
+      board: this.board,
+      controller: 'FIRMATA',
+      strips: [{pin: 2, length: 50}, {pin: 3, length: 50}]
+    });
+    test.equal(strip2.length, 100, 'Multiple strips length should be equal to sum of lengths');
+
+    const strip3 = new pixel.Strip({
+      board: this.board,
+      controller: 'FIRMATA',
+      pin: 3,
+      length: 150
+    });
+
+    test.throws(() => {
+      strip3.stripLength()
     },
+    /NotImplemented/,
+    'Deprecated stripLength() should throw NotImplemented error');
 
-    tearDown: function(done) {
-        Board.purge();
-        restore(this);
-        done();
-    },
+    test.done();
+  },
 
-    length: function(test) {
-        // tests length of the strip properly.
-        test.expect(3);
+  colour(test) {
+    // tests if the colour sequences are working okay
+    test.expect(4);
 
-        var strip = new pixel.Strip({
-            board: this.board,
-            controller: "FIRMATA",
-            strips: [{pin: 2, length: 100}]
-        });
-        test.equal(strip.length, 100, "Single strip length should be equal to provided length");
+    let colourcheck = {
+      r: 255, g: 255, b: 255,
+      hexcode: '#FFFFFF',
+      color: 'white',
+      rgb: [255, 255, 255]
+    };
 
-        var strip2 = new pixel.Strip({
-            board: this.board,
-            controller: "FIRMATA",
-            strips: [{pin: 2, length: 50}, {pin: 3, length: 50}]
-        });
-        test.equal(strip2.length, 100, "Multiple strips length should be equal to sum of lengths");
+    this.strip.color('#FFFFFF');
+    test.deepEqual(this.strip.pixel(0).color(), colourcheck,
+      'If colour is set with full hex colour, colour object should be updated');
 
-        var strip3 = new pixel.Strip({
-            board: this.board,
-            controller: "FIRMATA",
-            pin: 3,
-            length: 150,
-        });
+    colourcheck = {
+      r: 0, g: 255, b: 0,
+      hexcode: '#00FF00',
+      color: 'lime',
+      rgb: [0, 255, 0]
+    };
 
-        test.throws(() => {
-                strip3.stripLength()
-            },
-            /NotImplemented/,
-            "Deprecated stripLength() should throw NotImplemented error");
+    this.strip.color([0, 255, 0]);
+    test.deepEqual(this.strip.pixel(3).color(), colourcheck,
+      'If setting colour by RGB array, the colour object should be updated');
 
-        test.done();
-    },
+    test.doesNotThrow(
+      () => {
+        this.strip.colour('QWERTYUIOP');
+      },
+      undefined,
+      'An invalid color should be ignored not throw an error'
+    );
 
-    colour: function(test) {
-        // tests if the colour sequences are working okay
-        test.expect(4);
+    test.doesNotThrow(
+      () => {
+        this.strip.color();
+      },
+      undefined,
+      'When no colour is provided it should be ignored and not throw an error'
+    );
 
-        var colourcheck = {
-            r: 255, g: 255, b: 255,
-            hexcode: "#FFFFFF",
-            color: "white",
-            rgb: [255, 255, 255],
-        };
+    test.done();
+  },
 
-        this.strip.color("#FFFFFF");
-        test.deepEqual(this.strip.pixel(0).color(), colourcheck,
-                "If colour is set with full hex colour, colour object should be updated");
+  off(test) {
+    // tests if setting strip off results in black pixel colour
+    test.expect(1);
 
-        colourcheck = {
-            r: 0, g: 255, b: 0,
-            hexcode: "#00FF00",
-            color: "lime",
-            rgb: [0, 255, 0],
-        };
+    this.strip.color('#FF0000');
 
-        this.strip.color([0, 255, 0]);
-        test.deepEqual(this.strip.pixel(3).color(), colourcheck,
-                "If setting colour by RGB array, the colour object should be updated");
+    const colourcheck = {
+      r: 0, g: 0, b: 0,
+      hexcode: '#000000',
+      color: 'black',
+      rgb: [0, 0, 0]
+    };
 
-        test.doesNotThrow(
-            () => {
-                this.strip.colour("QWERTYUIOP");
-            },
-            undefined,
-            "An invalid color should be ignored not throw an error"
-        );
+    this.strip.off();
+    test.deepEqual(this.strip.pixel(0).color(), colourcheck,
+      'If setting a colour then turning the strip off, the colour should revert to off state.');
+    test.done();
+  },
 
-        test.doesNotThrow(
-            () => {
-                this.strip.color();
-            },
-            undefined,
-            "When no colour is provided it should be ignored and not throw an error"
-        );
+  gamma(test) {
+    // tests if setting the gamma works as expected
+    test.expect(4);
 
-        test.done();
-    },
+    // test gamma being set
+    const strip = new pixel.Strip({
+      board: this.board,
+      controller: 'FIRMATA',
+      strips: [{pin: 2, length: 1}],
+      gamma: 2.3
+    });
+    test.equal(strip.gamma, 2.3,
+      'If setting gamma in constructor, the gamma value should be retained');
 
-    off: function(test) {
-        // tests if setting strip off results in black pixel colour
-        test.expect(1);
+    test.equal(strip.gtable.length, 256,
+      'If setting gamma in constructor, the Gamma Table should be built');
 
-        this.strip.color("#FF0000");
+    test.equal(strip.gtable[18], 1,
+      'If setting gamma, the gamma table values should be built correctly');
 
-        var colourcheck = {
-            r: 0, g: 0, b: 0,
-            hexcode: "#000000",
-            color: "black",
-            rgb: [0, 0, 0],
-        };
+    // now check that a non gamma returns the right values
+    const strip2 = new pixel.Strip({
+      board: this.board,
+      controller: 'FIRMATA',
+      strips: [{pin: 2, length: 1}]
+    });
 
-        this.strip.off();
-        test.deepEqual(this.strip.pixel(0).color(), colourcheck,
-                "If setting a colour then turning the strip off, the colour should revert to off state.");
-        test.done();
-    },
+    test.equal(strip2.gtable[18], 18,
+      'If gamma is not set, the gamma values should be built using default');
 
-    gamma: function(test) {
-        // tests if setting the gamma works as expected
-        test.expect(4);
+    test.done();
+  },
 
-        // test gamma being set
-        var strip = new pixel.Strip({
-            board: this.board,
-            controller: "FIRMATA",
-            strips: [{pin: 2, length: 1}],
-            gamma: 2.3
-        });
-        test.equal(strip.gamma, 2.3,
-                "If setting gamma in constructor, the gamma value should be retained");
+  shift(test) {
+    // tests that wrapping behaviour is consistent
 
-        test.equal(strip.gtable.length, 256,
-                "If setting gamma in constructor, the Gamma Table should be built");
+    test.expect(12);
 
-        test.equal(strip.gtable[18], 1,
-                "If setting gamma, the gamma table values should be built correctly");
+    const strip = new pixel.Strip({
+      board: this.board,
+      controller: 'FIRMATA',
+      strips: [{ pin: 2, length: 8}]
+    });
 
-        // now check that a non gamma returns the right values
-        var strip2 = new pixel.Strip({
-            board: this.board,
-            controller: "FIRMATA",
-            strips: [{pin: 2, length: 1}],
-        });
+    // set up a pixel on either end of the strip
+    // in preparation for movement.
+    strip.pixel(1).color('red');
+    strip.pixel(6).color('blue');
 
-        test.equal(strip2.gtable[18], 18,
-                "If gamma is not set, the gamma values should be built using default");
+    // call a shift but it shouldn't do anything
+    strip.shift(0, pixel.FORWARD, false);
+    test.equal(strip.pixel(1).color().color, 'red',
+      'If pixels are advanced by 0 elements, pixel 1 should stay the same');
 
-        test.done();
-    },
+    // advance the pixels one step along the strip.
+    strip.shift(1, pixel.FORWARD, false);
 
-    shift: function(test) {
-        // tests that wrapping behaviour is consistent
+    test.equal(strip.pixel(7).color().color, 'blue',
+      'If pixels are advanced one position, pixel 6 value should be on pixel 7');
 
-        test.expect(12);
+    test.equal(strip.pixel(7).address, 7,
+      'After pixels are shifted, pixel address should be updated again');
 
-        var strip = new pixel.Strip({
-            board: this.board,
-            controller: "FIRMATA",
-            strips: [{ pin: 2, length: 8}],
-        });
+    test.equal(strip.pixel(6).color().color, 'black',
+      'If pixels are advanced one position, pixel 5 value should overwrite pixel 6');
 
-        // set up a pixel on either end of the strip
-        // in preparation for movement.
-        strip.pixel(1).color("red");
-        strip.pixel(6).color("blue");
+    test.equal(strip.pixel(0).color().color, 'black',
+      'If pixels advance with no wrapping, pixel 0 value should be off');
 
-        // call a shift but it shouldn't do anything
-        strip.shift(0, pixel.FORWARD, false);
-        test.equal(strip.pixel(1).color().color, "red",
-            "If pixels are advanced by 0 elements, pixel 1 should stay the same");
+    strip.shift(1, pixel.BACKWARD, false);
 
-        // advance the pixels one step along the strip.
-        strip.shift(1, pixel.FORWARD, false);
+    test.equal(strip.pixel(6).color().color, 'blue',
+      'If pixels are reversed one position, pixel 7 value should be on pixel 6');
 
-        test.equal(strip.pixel(7).color().color, "blue",
-            "If pixels are advanced one position, pixel 6 value should be on pixel 7");
+    test.equal(strip.pixel(5).color().color, 'black',
+      'If pixels are reversed one position, pixel 6 value should overwrite pixel 5');
 
-        test.equal(strip.pixel(7).address, 7,
-            "After pixels are shifted, pixel address should be updated again");
+    test.equal(strip.pixel(7).color().color, 'black',
+      'If pixels reverse with no wrapping, pixel 7 value should be off');
 
-        test.equal(strip.pixel(6).color().color, "black",
-            "If pixels are advanced one position, pixel 5 value should overwrite pixel 6");
+    // now we are back to starting spot let's do a multistep advancement
+    // with a wrap around.
 
-        test.equal(strip.pixel(0).color().color, "black",
-            "If pixels advance with no wrapping, pixel 0 value should be off");
+    strip.shift(2, pixel.FORWARD, true);
 
-        strip.shift(1, pixel.BACKWARD, false);
+    test.equal(strip.pixel(3).color().color, 'red',
+      'If pixels are advanced 2 positions & wrapped, pixel 1 value should be on pixel 3');
 
-        test.equal(strip.pixel(6).color().color, "blue",
-            "If pixels are reversed one position, pixel 7 value should be on pixel 6");
+    test.equal(strip.pixel(0).color().color, 'blue',
+      'If pixels are advanced 2 positions & wrapped, pixel 6 value should be on pixel 0');
 
-        test.equal(strip.pixel(5).color().color, "black",
-            "If pixels are reversed one position, pixel 6 value should overwrite pixel 5");
+    // now let's test a jump over the length of the strip.
+    strip.shift(9, pixel.BACKWARD, true);
 
-        test.equal(strip.pixel(7).color().color, "black",
-            "If pixels reverse with no wrapping, pixel 7 value should be off");
+    test.equal(strip.pixel(7).color().color, 'blue',
+      'If pixels are reversed more than strip length (9), pixel 0 should be on pixel 7');
 
-        // now we are back to starting spot let's do a multistep advancement
-        // with a wrap around.
+    // make sure there's nothing dangling behind.
+    test.equal(strip.pixel(6).color().color, 'black',
+      'If pixels are shifted and wrapped, original pixel should have moved');
 
-        strip.shift(2, pixel.FORWARD, true);
-
-        test.equal(strip.pixel(3).color().color, "red",
-            "If pixels are advanced 2 positions & wrapped, pixel 1 value should be on pixel 3");
-
-        test.equal(strip.pixel(0).color().color, "blue",
-            "If pixels are advanced 2 positions & wrapped, pixel 6 value should be on pixel 0");
-
-        // now let's test a jump over the length of the strip.
-        strip.shift(9, pixel.BACKWARD, true);
-
-        test.equal(strip.pixel(7).color().color, "blue",
-            "If pixels are reversed more than strip length (9), pixel 0 should be on pixel 7");
-
-        // make sure there's nothing dangling behind.
-        test.equal(strip.pixel(6).color().color, "black",
-            "If pixels are shifted and wrapped, original pixel should have moved");
-
-        test.done();
-
-    },
+    test.done();
+  }
 };
 
-exports["Pixel"] = {
-    setUp: function(done) {
-        this.board = newBoard();
+exports['Pixel'] = {
+  setUp(done) {
+    this.board = newBoard();
 
-        this.strip = new pixel.Strip({
-            data: 6,
-            length: 4,
-            board: this.board,
-            controller: "FIRMATA",
-        });
+    this.strip = new pixel.Strip({
+      data: 6,
+      length: 4,
+      board: this.board,
+      controller: 'FIRMATA'
+    });
 
-        done();
-    },
+    done();
+  },
 
-    tearDown: function(done) {
-        Board.purge();
-        restore(this);
-        done();
-    },
+  tearDown(done) {
+    Board.purge();
+    restore(this);
+    done();
+  },
 
-    colour: function(test) {
-        // tests if the colour sequences are working okay
-        test.expect(3);
+  colour(test) {
+    // tests if the colour sequences are working okay
+    test.expect(3);
 
-        var colourcheck = {
-            r: 255, g: 255, b: 255,
-            hexcode: "#FFFFFF",
-            color: "white",
-            rgb: [255, 255, 255],
-        };
+    let colourcheck = {
+      r: 255, g: 255, b: 255,
+      hexcode: '#FFFFFF',
+      color: 'white',
+      rgb: [255, 255, 255]
+    };
 
-        this.strip.pixel(0).color("#FFFFFF");
-        test.deepEqual(this.strip.pixel(0).color(), colourcheck,
-                "If pixel colour is set, the pixel colour object should be updated");
+    this.strip.pixel(0).color('#FFFFFF');
+    test.deepEqual(this.strip.pixel(0).color(), colourcheck,
+      'If pixel colour is set, the pixel colour object should be updated');
 
-        colourcheck = {
-            r: 0, g: 255, b: 0,
-            hexcode: "#00FF00",
-            color: "lime",
-            rgb: [0, 255, 0],
-        };
+    colourcheck = {
+      r: 0, g: 255, b: 0,
+      hexcode: '#00FF00',
+      color: 'lime',
+      rgb: [0, 255, 0]
+    };
 
-        this.strip.pixel(3).color([0, 255, 0]);
-        test.deepEqual(this.strip.pixel(3).color(), colourcheck,
-                "If setting the pixel colour using RGB array, the pixel colour object should be updated");
+    this.strip.pixel(3).color([0, 255, 0]);
+    test.deepEqual(this.strip.pixel(3).color(), colourcheck,
+      'If setting the pixel colour using RGB array, the pixel colour object should be updated');
 
-        test.doesNotThrow(
-            () => {
-                this.strip.pixel(1).colour("QWERTYUIOP");
-            },
-            undefined,
-            "An invalid color should be ignored not throw an error"
-        );
+    test.doesNotThrow(
+      () => {
+        this.strip.pixel(1).colour('QWERTYUIOP');
+      },
+      undefined,
+      'An invalid color should be ignored not throw an error'
+    );
 
-        test.done();
-    },
+    test.done();
+  },
 
-    off: function(test) {
-        // tests if setting strip off results in black pixel colour
-        test.expect(1);
+  off(test) {
+    // tests if setting strip off results in black pixel colour
+    test.expect(1);
 
-        this.strip.color("#FF0000");
+    this.strip.color('#FF0000');
 
-        var colourcheck = {
-            r: 0, g: 0, b: 0,
-            hexcode: "#000000",
-            color: "black",
-            rgb: [0, 0, 0],
-        };
+    const colourcheck = {
+      r: 0, g: 0, b: 0,
+      hexcode: '#000000',
+      color: 'black',
+      rgb: [0, 0, 0]
+    };
 
-        this.strip.pixel(1).off();
-        test.deepEqual(this.strip.pixel(1).color(), colourcheck,
-                "If setting a colour then turning a pixel off, the colour should revert to off state.");
-        test.done();
-    },
+    this.strip.pixel(1).off();
+    test.deepEqual(this.strip.pixel(1).color(), colourcheck,
+      'If setting a colour then turning a pixel off, the colour should revert to off state.');
+    test.done();
+  }
 };

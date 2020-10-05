@@ -4,27 +4,27 @@
 // flashed.
 
 module.exports = {
-    "uno" :{
-        package: "arduino:avr:uno",
-    },
-    "nano": {
-        cpu: "atmega328",
-        package: "arduino:avr:nano:cpu=atmega328",
-    },
-    "pro-mini": {
-        cpu: "16MHzatmega328",
-        package: "arduino:avr:pro:cpu=16MHzatmega328",
-    },
-    "mega": {
-        package: "arduino:avr:mega:cpu=atmega2560",
-    },
-    "diecimila": {
-        package: "arduino:avr:diecimila:cpu=atmega328",
-    },
-    "leonardo": {
-        package: "arduino:avr:leonardo",
-    },
-    "micro": {
-        package: "arduino:avr:micro",
-    },
+  'uno' :{
+    package: 'arduino:avr:uno'
+  },
+  'nano': {
+    cpu: 'atmega328',
+    package: 'arduino:avr:nano:cpu=atmega328'
+  },
+  'pro-mini': {
+    cpu: '16MHzatmega328',
+    package: 'arduino:avr:pro:cpu=16MHzatmega328'
+  },
+  'mega': {
+    package: 'arduino:avr:mega:cpu=atmega2560'
+  },
+  'diecimila': {
+    package: 'arduino:avr:diecimila:cpu=atmega328'
+  },
+  'leonardo': {
+    package: 'arduino:avr:leonardo'
+  },
+  'micro': {
+    package: 'arduino:avr:micro'
+  }
 };

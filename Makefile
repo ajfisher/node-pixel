@@ -66,7 +66,7 @@ install: clean
 	npm install
 
 lint:
-	@echo "Not implemented"
+	npm run lint
 
 test:
 	npm run test

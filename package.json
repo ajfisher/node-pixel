@@ -10,7 +10,8 @@
     "test": "IS_TEST_MODE=true ./node_modules/.bin/nodeunit test/*",
     "test-cover": "IS_TEST_MODE=true istanbul cover ./node_modules/.bin/nodeunit test/*",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "release": "standard-version"
+    "release": "standard-version",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
@@ -46,13 +47,14 @@
     "johnny-five": "^2.0.0"
   },
   "devDependencies": {
-    "standard-version": "^9.0.0",
     "board-io": "^3.0.4",
     "coveralls": "^3.1.0",
+    "eslint": "^7.10.0",
     "istanbul": "^0.4.5",
     "johnny-five": "^2.0.0",
     "mock-firmata": "0.2.0",
     "nodeunit": "^0.11.3",
-    "sinon": "^9.1.0"
+    "sinon": "^9.1.0",
+    "standard-version": "^9.0.0"
   }
 }
