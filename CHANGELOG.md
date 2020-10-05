@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.5](https://github.com/ajfisher/node-pixel/compare/v0.10.4...v0.10.5) (2020-10-05)
+
+
+### Bug Fixes
+
+* **linting:** Added linting checks to the JS files to the repo ([#169](https://github.com/ajfisher/node-pixel/issues/169)) ([f32c302](https://github.com/ajfisher/node-pixel/commit/f32c302517bb0581585dcf9f9b733462905d0fda))
+* **utils:** Removed debug msg and added release recipe ([#172](https://github.com/ajfisher/node-pixel/issues/172)) ([710f29d](https://github.com/ajfisher/node-pixel/commit/710f29dea671ad24a5e4d28c71f1c84a2777f9e9))
+
+
+### Chores
+
+* **ci:** Add husky to repo with tests hooked correctly ([#170](https://github.com/ajfisher/node-pixel/issues/170)) ([e5e1a0e](https://github.com/ajfisher/node-pixel/commit/e5e1a0e500c9b878a07d456a194ce179ec2ce140))
+* **ci:** Updated node versions to 12 and 14 for current support for travis ([#171](https://github.com/ajfisher/node-pixel/issues/171)) ([01f120e](https://github.com/ajfisher/node-pixel/commit/01f120ed665246a3af0d2f301cdf74d607c98ca4))
+
+
+### Build System
+
+* Additional make recipes to make life a bit easier ([#174](https://github.com/ajfisher/node-pixel/issues/174)) ([690d972](https://github.com/ajfisher/node-pixel/commit/690d9724341e999817642fc421228182bc404575))
+* **docs:** Added changelog controls to standard-version to include other detail ([#173](https://github.com/ajfisher/node-pixel/issues/173)) ([0444aaa](https://github.com/ajfisher/node-pixel/commit/0444aaa1bc1d355907e1bb1d0bb7905a0bd57bb6))
+
 ### [0.10.4](https://github.com/ajfisher/node-pixel/compare/v0.10.3...v0.10.4) (2020-10-04)
 
 
