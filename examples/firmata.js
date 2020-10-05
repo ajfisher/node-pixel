@@ -14,7 +14,7 @@ opts.port = process.argv[2];
 
 let strip = null;
 
-var board = new firmata.Board(opts.port, function() {
+const board = new firmata.Board(opts.port, function() {
   console.log('Firmata ready, lets add light');
 
   strip = new pixel.Strip({
