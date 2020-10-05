@@ -16,31 +16,6 @@ let strip = null;
 board.on('ready', function() {
   console.log('Board ready, lets add light');
 
-  // setup the node-pixel strip.
-  strip = new pixel.Strip({
-    data: 6,
-    length: 16, // number of pixels in the strip.
-    board: this,
-    controller: 'FIRMATA'
-  });
-
-  strip.on('ready', function() {
-    console.log("Strip ready, let's go");
-
-    staticRainbow();
-  });
-
-  function staticRainbow() {
-    console.log('staticRainbow');
-
-    let showColor;
-    for (let i = 0; i < strip.length; i++) {
-      showColor = colorWheel( ( (i+10)*256 / strip.length ) & 255 );
-      strip.pixel(i).color( showColor);
-    }
-    strip.show();
-  }
-
   // Input a value 0 to 255 to get a color value.
   // The colours are a transition r - g - b - back to r.
   function colorWheel( WheelPos ) {
@@ -65,4 +40,29 @@ board.on('ready', function() {
     // returns a string with the rgb value to be used as the parameter
     return 'rgb(' + r +',' + g + ',' + b + ')';
   }
+
+  function staticRainbow() {
+    console.log('staticRainbow');
+
+    let showColor;
+    for (let i = 0; i < strip.length; i++) {
+      showColor = colorWheel( ( (i+10)*256 / strip.length ) & 255 );
+      strip.pixel(i).color( showColor);
+    }
+    strip.show();
+  }
+
+  // setup the node-pixel strip.
+  strip = new pixel.Strip({
+    data: 6,
+    length: 16, // number of pixels in the strip.
+    board: this,
+    controller: 'FIRMATA'
+  });
+
+  strip.on('ready', function() {
+    console.log("Strip ready, let's go");
+
+    staticRainbow();
+  });
 });

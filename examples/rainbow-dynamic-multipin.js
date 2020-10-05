@@ -21,36 +21,6 @@ const fps = 30;
 board.on('ready', function() {
   console.log('Board ready, lets add light');
 
-  // setup the node-pixel strip.
-  strip = new pixel.Strip({
-    board: this,
-    controller: 'FIRMATA',
-    strips: [ {pin: 6, length: 8}, {pin: 7, length: 8}]
-  });
-
-  strip.on('ready', function() {
-    console.log("Strip ready, let's go");
-    dynamicRainbow(fps);
-  });
-
-  function dynamicRainbow( delay ) {
-    console.log( 'dynamicRainbow' );
-
-    let showColor;
-    let cwi = 0; // colour wheel index (current position on colour wheel)
-    const foo = setInterval(function() {
-      if (++cwi > 255) {
-        cwi = 0;
-      }
-
-      for (let i = 0; i < strip.length; i++) {
-        showColor = colorWheel( ( cwi+i ) & 255 );
-        strip.pixel( i ).color( showColor );
-      }
-      strip.show();
-    }, 1000/delay);
-  }
-
   // Input a value 0 to 255 to get a color value.
   // The colors are a transition r - g - b - back to r.
   function colorWheel( WheelPos ) {
@@ -75,4 +45,34 @@ board.on('ready', function() {
     // returns a string with the rgb value to be used as the parameter
     return 'rgb(' + r +',' + g + ',' + b + ')';
   }
+
+  function dynamicRainbow( delay ) {
+    console.log( 'dynamicRainbow' );
+
+    let showColor;
+    let cwi = 0; // colour wheel index (current position on colour wheel)
+    const foo = setInterval(function() {
+      if (++cwi > 255) {
+        cwi = 0;
+      }
+
+      for (let i = 0; i < strip.length; i++) {
+        showColor = colorWheel( ( cwi+i ) & 255 );
+        strip.pixel( i ).color( showColor );
+      }
+      strip.show();
+    }, 1000/delay);
+  }
+
+  // setup the node-pixel strip.
+  strip = new pixel.Strip({
+    board: this,
+    controller: 'FIRMATA',
+    strips: [ {pin: 6, length: 8}, {pin: 7, length: 8}]
+  });
+
+  strip.on('ready', function() {
+    console.log("Strip ready, let's go");
+    dynamicRainbow(fps);
+  });
 });
