@@ -72,6 +72,8 @@ board.on('ready', function() {
         case 'cyan':
           hc = `rgb(0, ${fade_level}, ${fade_level})`;
           break;
+        default:
+          break;
       }
 
       // need to do this by pixel
