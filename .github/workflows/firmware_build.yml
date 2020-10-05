@@ -1,6 +1,6 @@
 name: Test Firmware Builds
 
-on: push
+on: pull_request
 env:
   FIRMATA_PATH: ./firmware/build/node_pixel_firmata/node_pixel_firmata.ino
   BACKPACK_PATH: ./firmware/build/backpack/backpack.ino
