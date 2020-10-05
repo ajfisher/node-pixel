@@ -22,10 +22,11 @@ jobs:
         uses: arduino/setup-arduino-cli@v1.0.0
 
       # now install the platform packages
-      - name: Install arduino platforms
+      - name: Install arduino platforms and libs
         run: |
           arduino-cli core update-index
           arduino-cli core install ${{ matrix.arduino-platform }}
+          arduino-cli lib install Servo
 
       # now build the firmata file for target
       - name: Compile firmata
