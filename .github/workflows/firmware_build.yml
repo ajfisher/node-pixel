@@ -1,0 +1,65 @@
+name: Test Firmware Builds
+
+on: pull_request
+env:
+  FIRMATA_PATH: ./firmware/build/node_pixel_firmata/node_pixel_firmata.ino
+  BACKPACK_PATH: ./firmware/build/backpack/backpack.ino
+
+jobs:
+  build-matrix:
+    strategy:
+      matrix:
+        board: ["uno", "nano", "pro-mini", "mega", "diecimila", "leonardo", "micro"]
+        include:
+          - board: "uno"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:uno"
+          - board: "nano"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:nano:cpu=atmega328"
+          - board: "pro-mini"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:pro:cpu=16MHzatmega328"
+          - board: "mega"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:mega:cpu=atmega2560"
+          - board: "diecimila"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:diecimila:cpu=atmega328"
+          - board: "leonardo"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:leonardo"
+          - board: "micro"
+            arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:micro"
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      # get all of the arduino CLI stuff set up
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v1.0.0
+
+      # now install the platform packages
+      - name: Install arduino platforms and libs
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install ${{ matrix.arduino-platform }}
+          arduino-cli lib install Servo
+
+      # now build the firmata file for target
+      - name: Compile firmata
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} $FIRMATA_PATH
+
+      # And now build the backpack for the target
+      - name: Compile backpack
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} $BACKPACK_PATH
+  build-success:
+    runs-on: ubuntu-latest
+    needs: build-matrix
+    steps:
+      - name: Build complete
+        run: echo Done!
+
