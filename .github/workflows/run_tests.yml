@@ -48,7 +48,7 @@ jobs:
         with:
           path: ./node_modules
           key: test-12-${{hashFiles('./package-lock.json')}}
-          restore-keys: test-12-${{hashFiles(./package-lock.json')}}
+          restore-keys: test-12-${{hashFiles('./package-lock.json')}}
       - name: Install modules
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm install
