@@ -22,15 +22,23 @@ help:
 	@echo "install:          Installs all of the packages"
 	@echo "lint:             Runs the linter"
 	@echo "test:             Runs all of the tests"
+	@echo "test [12,14]:     Runs the tests for a particular node target"
 	@echo ""
 	@echo "Build actions:"
 	@echo "--------------"
 	@echo "build:            Builds all of the codebase"
 	@echo "compile:          Compiles all of the binaries"
+	@echo "compile <tgt>:    Compiles the binaries for a particular target board eg uno, nano"
 	@echo ""
 	@echo "Release actions:"
 	@echo "----------------"
-	@echo "release:          Tags and releases code to NPM"
+	@echo "release-test:     Does a dry run version of the release"
+	@echo "release:          Builds a version, create tags and update changelog"
+	@echo "publish:          Pushes tags to github and publish to npm"
+	@echo ""
+	@echo "CI actions:"
+	@echo "----------------"
+	@echo "test-ci:          Runs the test suite against local node version for CI matrix builds"
 	@echo ""
 
 clean: clean-node clean-build clean-compiled
@@ -138,7 +146,11 @@ $(BOARD_TGTS):
 	$$ARDUINO_PATH --verify --verbose-build --board $(PKG_$@) \
 		--pref build.path=$(BIN_DIR)/backpack/$@ $(BACKPACK_INO)
 
+test-release:
+	npm run release -- --dry-run
+
 release:
 	npm run release
 
-
+publish:
+	git push --follow-tags origin master && npm publish
