@@ -10,7 +10,8 @@
     "test": "IS_TEST_MODE=true ./node_modules/.bin/nodeunit test/*",
     "test-cover": "IS_TEST_MODE=true istanbul cover ./node_modules/.bin/nodeunit test/*",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "release": "standard-version"
+    "release": "standard-version",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
