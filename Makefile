@@ -80,6 +80,9 @@ $(NODE_TARGETS):
 
 test: $(NODE_TARGETS)
 
+test-ci:
+	npm run test
+
 # make the Firmata build process to copy the files to the right place
 FIRMATA_DEST_DIR = $(BUILD_DIR)/node_pixel_firmata
 FIRMATA_FILES = $(LIBS_DIR)/firmata/arduino/*.{h,cpp}
