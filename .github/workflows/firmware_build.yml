@@ -1,0 +1,36 @@
+name: Test Firmware Build
+
+on: push
+
+jobs:
+  build-matrix:
+    strategy:
+      matrix:
+        arduino-platform: [ "arduino:avr" ]
+        include:
+          - arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:uno"
+          - arduino-platform: "arduino:avr"
+            fqbn: "arduino:avr:nano:cpu=atmega328"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      # get all of the arduino CLI stuff set up
+      - name: Setup Arduino CLI
+        uses: actions/setup-arduino-cli@v1.0.0
+
+      # now install the platform packages
+      - name: Install arduino platforms
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install ${{ matrix.arduino-platform }}
+
+      # now build the firmata file for target
+      - name: Compile firmata
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./firmware/build/node_pixel_firmata/node_pixel_firmata.ino
+
+      # And now build the backpack for the target
+      - name: Compile backpack
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./firmware/build/backpack/backpack.ino
