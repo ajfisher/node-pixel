@@ -24,21 +24,25 @@ relevant locations during the build process.
 
 ## Dev environment set up
 
-Due to the way this is all managed, the best way to work with this set up is
-to use something like arduino CLI tools so you can edit and then use make to
-build and compile the files.
+This is all built using the `arduino-cli` command line tools.
 
-If you don't have that sort of setup then the next easiest way is to switch your
-arduino IDE in preferences to "use an external editor". Then open up the target
-you want to build and edit the source file in a separate editor (eg Sublime Text,
-Vim or whatever). Then when you compile, the file and any supporting files will
-be loaded.
+Firstly - install the arduino-cli
+[according to the directions here](https://arduino.github.io/arduino-cli/latest/installation/)
+on the arduino CLI site.
 
-Export the path to your ARDUINO application:
+You should also view the [getting started guide](https://arduino.github.io/arduino-cli/latest/getting-started/)
+because you will need to ensure that you have all of the cores etc all set up
+for use in your default configuration. 
 
-`export ARDUINO_PATH=~/Downloads/Arduino.app/Contents/MacOS/Arduino`
+The main cores you will need are:
 
-To make sure it's available to make.
+* arduino:avr
+
+You may also need to install some core libs as well. You can do this with the
+`arduino-cli lib install` command. Some that may not be included by default are
+listed below (note capitalisation):
+
+* Servo
 
 ## Make
 
@@ -53,6 +57,19 @@ command like invocation.
 A useful trick is if you just want to build one target use `make uno` or `make nano`
 and this will build just the backpack and firmata for that target.
 
+## Uploading a file for testing
+
+The easiest way to do this is to build and upload using the arduino IDE. If you
+don't want to do that and want to test the actual build process to make sure
+the hex file you're outputting makes sense then you can do it using avrgirl
+
+eg:
+
+```
+npx avrgirl-arduino flash -f firmware/bin/firmata/uno/node_pixel_firmata.ino.hex -a uno
+```
+
+Will flash the output firmata hexfile for uno to the board.
 
 ## Building for deployment
 

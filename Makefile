@@ -57,13 +57,12 @@ clean-build-firmata:
 	rm -rf $(BUILD_DIR)/node_pixel_firmata
 
 clean-build: clean-build-backpack clean-build-firmata
-	@# grunt clean
 	@# remove the compiled bins
 	rm -rf $(BIN_DIR)/firmata/*
 	rm -rf $(BIN_DIR)/backpack/*
 
 clean-compiled:
-	# removes all of the compilation intermediate files
+	@# removes all of the compilation intermediate files
 	for f in $(BIN_DIR)/*/*/*; \
 	do \
     	if [[ $${f} != *.ino.hex ]]; \
@@ -71,6 +70,10 @@ clean-compiled:
 			rm -rf $${f}; \
         fi; \
 	done
+
+	@# remove the intermediate build files from the build directory too
+	rm -rf $(BUILD_DIR)/backpack/build
+	rm -rf $(BUILD_DIR)/node_pixel_firmata/build
 
 install: clean
 	@echo "Installing all of the packages needed"
@@ -139,12 +142,13 @@ compile: build-backpack build-firmata $(BOARD_TGTS)
 
 $(BOARD_TGTS):
 	@# make the firmata bin for this target board
-	$$ARDUINO_PATH --verify --verbose-build --board $(PKG_$@) \
-		--pref build.path=$(BIN_DIR)/firmata/$@ $(FIRMATA_INO)
+	arduino-cli compile --verbose -b $(PKG_$@) \
+		--build-path=$$PWD/$(BIN_DIR)/firmata/$@ $(FIRMATA_INO)
 
 	@# make the firmata bin for this target board
-	$$ARDUINO_PATH --verify --verbose-build --board $(PKG_$@) \
-		--pref build.path=$(BIN_DIR)/backpack/$@ $(BACKPACK_INO)
+	arduino-cli compile --verbose -b $(PKG_$@) \
+		--build-path=$$PWD/$(BIN_DIR)/backpack/$@ $(BACKPACK_INO)
+
 
 test-release:
 	npm run release -- --dry-run
