@@ -130,7 +130,6 @@ compile: build-backpack build-firmata $(BOARD_TGTS)
 	@$(MAKE) -f $(THIS_FILE) clean-compiled
 
 $(BOARD_TGTS):
-	@echo "This is $@ and package is $(PKG_$@) firmata $(FIRMATA_INO) BP $(BACKPACK_INO)"
 	@# make the firmata bin for this target board
 	$$ARDUINO_PATH --verify --verbose-build --board $(PKG_$@) \
 		--pref build.path=$(BIN_DIR)/firmata/$@ $(FIRMATA_INO)
@@ -140,6 +139,6 @@ $(BOARD_TGTS):
 		--pref build.path=$(BIN_DIR)/backpack/$@ $(BACKPACK_INO)
 
 release:
-	@echo "Not implemented"
+	npm run release
 
 
