@@ -1,6 +1,6 @@
 name: Test Firmware Builds
 
-on: pull_request
+on: push
 env:
   FIRMATA_PATH: ./firmware/build/node_pixel_firmata/node_pixel_firmata.ino
   BACKPACK_PATH: ./firmware/build/backpack/backpack.ino
@@ -56,3 +56,10 @@ jobs:
       # And now build the backpack for the target
       - name: Compile backpack
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} $BACKPACK_PATH
+  build-success:
+    runs-on: ubuntu-latest
+    needs: build-matrix
+    steps:
+      - name: Build complete
+        run: echo Done!
+
