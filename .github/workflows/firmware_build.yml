@@ -24,13 +24,13 @@ jobs:
             arduino-platform: "arduino:avr"
             fqbn: "arduino:avr:mega:cpu=atmega2560"
           - board: "diecimila"
-            arduino-platform: "arduino-avr"
+            arduino-platform: "arduino:avr"
             fqbn: "arduino:avr:diecimila:cpu=atmega328"
           - board: "leonardo"
-            arduino-platform: "arduino-avr"
+            arduino-platform: "arduino:avr"
             fqbn: "arduino:avr:leonardo"
           - board: "micro"
-            arduino-platform: "arduino-avr"
+            arduino-platform: "arduino:avr"
             fqbn: "arduino:avr:micro"
 
     runs-on: ubuntu-latest
