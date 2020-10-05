@@ -45,6 +45,7 @@ jobs:
         with:
           node-version: 12
       - uses: actions/cache@v1
+        id: cache-node-modules
         with:
           path: ./node_modules
           key: test-12-${{hashFiles('./package-lock.json')}}
