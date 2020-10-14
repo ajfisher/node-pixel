@@ -50,6 +50,13 @@ Plug in your arduino
 interchange install git+https://github.com/ajfisher/node-pixel -a uno --firmata
 ```
 
+Note that on windows, you may need to explictly pass a port to flash due to the
+way com ports work. eg:
+
+```
+interchange install git+https://github.com/ajfisher/node-pixel -a uno -p COM3 --firmata
+```
+
 ### A note on multiple strips
 
 Multiple led strips on one arduino or backpack are supported up to a maximum
