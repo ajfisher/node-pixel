@@ -12,6 +12,7 @@
     "no-var": 2,
     "prefer-const": 2,
     "no-shadow": 2,
+    "semi": 2,
     "no-shadow-restricted-names": 2,
     "no-use-before-define": 2,
     "comma-dangle": [2, "never"],

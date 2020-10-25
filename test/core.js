@@ -105,7 +105,7 @@ exports['Strip'] = {
     });
 
     test.throws(() => {
-      strip3.stripLength()
+      strip3.stripLength();
     },
     /NotImplemented/,
     'Deprecated stripLength() should throw NotImplemented error');

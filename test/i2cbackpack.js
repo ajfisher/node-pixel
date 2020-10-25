@@ -253,6 +253,6 @@ exports['Pixel - I2C'] = {
     this.strip.pixel(0).color('#FFF');
     test.equal(this.i2cWrite.callCount, 1,
       'i2cWrite should only call once to write a pixel value');
-    test.done()
+    test.done();
   }
-}
+};

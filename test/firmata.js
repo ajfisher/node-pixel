@@ -311,7 +311,7 @@ exports['Pixel - Firmata'] = {
     this.strip.pixel(0).color('#FFF');
     test.equal(this.write.callCount, 2,
       'Setting the pixel value should make a single serial call');
-    test.done()
+    test.done();
   }
 };
 
