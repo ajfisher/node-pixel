@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/ajfisher/node-pixel/compare/v0.10.5...v0.11.0) (2020-10-25)
+
+
+### Features
+
+* **build:** Updated build process to use arduino-cli ([#175](https://github.com/ajfisher/node-pixel/issues/175)) ([effa990](https://github.com/ajfisher/node-pixel/commit/effa99034d6770419788eade327027d892dcd4dc))
+
+
+### Build System
+
+* **deps:** bump color-string from 1.5.3 to 1.5.4 ([3588aff](https://github.com/ajfisher/node-pixel/commit/3588affdc0679f1d927f44835fbe191c02d1b190))
+* **deps-dev:** bump eslint from 7.10.0 to 7.11.0 ([1fd6af1](https://github.com/ajfisher/node-pixel/commit/1fd6af1283d131fcf988e2ffe41f91e7b31fa449))
+* **deps-dev:** bump sinon from 9.1.0 to 9.2.0 ([#179](https://github.com/ajfisher/node-pixel/issues/179)) ([a9ea21f](https://github.com/ajfisher/node-pixel/commit/a9ea21f67988663e976fec931b3ee55e0ad5b0d5))
+* Added github action for testing board compilation ([#176](https://github.com/ajfisher/node-pixel/issues/176)) ([5847799](https://github.com/ajfisher/node-pixel/commit/58477999099124921c50cfeedef9983e75ed1386))
+* Move testing and coveralls to github actions ([#178](https://github.com/ajfisher/node-pixel/issues/178)) ([a49db6f](https://github.com/ajfisher/node-pixel/commit/a49db6faed2b59058a6be932c9c982b0f361b9c3)), closes [#177](https://github.com/ajfisher/node-pixel/issues/177)
+
+
+### Documentation
+
+* Updated readme to provide extra help for windows users. Fixes [#182](https://github.com/ajfisher/node-pixel/issues/182) ([#183](https://github.com/ajfisher/node-pixel/issues/183)) ([5e22e8a](https://github.com/ajfisher/node-pixel/commit/5e22e8af125582964c86cf7a8c1d8d9a377e03a7))
+
+
+### Chores
+
+* bump eslint from 7.11.0 to 7.12.0 ([#185](https://github.com/ajfisher/node-pixel/issues/185)) ([2dda10f](https://github.com/ajfisher/node-pixel/commit/2dda10f582ad2644dbe1906bb777e69b8c48bbc0))
+* Create Dependabot config file ([#184](https://github.com/ajfisher/node-pixel/issues/184)) ([e390803](https://github.com/ajfisher/node-pixel/commit/e3908039898f48ae13fb53176116e2059b78fa82))
+
 ### [0.10.5](https://github.com/ajfisher/node-pixel/compare/v0.10.4...v0.10.5) (2020-10-05)
 
 
