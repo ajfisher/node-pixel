@@ -6,7 +6,7 @@ const MockSerialPort = mocks.SerialPort;
 const sinon = require('sinon');
 
 const five = require('johnny-five');
-const pixel = require('../lib/pixel.js');
+const pixel = require('../lib/index.js');
 
 const Board = five.Board;
 
@@ -79,9 +79,9 @@ exports['Strip - I2C'] = {
         if (err) {
           if (err.name == 'NoIOError') {
             return true;
-          } 
+          }
           return false;
-        } 
+        }
         return false;
       },
       'If IO is not present an error should be thrown'
@@ -253,6 +253,6 @@ exports['Pixel - I2C'] = {
     this.strip.pixel(0).color('#FFF');
     test.equal(this.i2cWrite.callCount, 1,
       'i2cWrite should only call once to write a pixel value');
-    test.done()
+    test.done();
   }
-}
+};

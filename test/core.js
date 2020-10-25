@@ -6,7 +6,7 @@ const MockSerialPort = mocks.SerialPort;
 const sinon = require('sinon');
 
 const five = require('johnny-five');
-const pixel = require('../lib/pixel.js');
+const pixel = require('../lib/index.js');
 
 const Board = five.Board;
 
@@ -105,7 +105,7 @@ exports['Strip'] = {
     });
 
     test.throws(() => {
-      strip3.stripLength()
+      strip3.stripLength();
     },
     /NotImplemented/,
     'Deprecated stripLength() should throw NotImplemented error');

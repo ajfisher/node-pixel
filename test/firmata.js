@@ -6,7 +6,7 @@ const MockSerialPort = mocks.SerialPort;
 const sinon = require('sinon');
 
 const five = require('johnny-five');
-const pixel = require('../lib/pixel.js');
+const pixel = require('../lib/index.js');
 
 const Board = five.Board;
 
@@ -88,9 +88,9 @@ exports['Firmata - Initialisation'] = {
         if (err) {
           if (err.name == 'NoFirmataError') {
             return true;
-          } 
+          }
           return false;
-        } 
+        }
         return false;
       },
       'If board is not present an error should be thrown'
@@ -112,9 +112,9 @@ exports['Firmata - Initialisation'] = {
         if (err) {
           if (err.name == 'NoWritablePortError') {
             return true;
-          } 
+          }
           return false;
-        } 
+        }
         return false;
       },
       'If there is no writable port, controller should throw an error'
@@ -136,9 +136,9 @@ exports['Firmata - Initialisation'] = {
         if (err) {
           if (err.name == 'IncorrectFirmataVersionError') {
             return true;
-          } 
+          }
           return false;
-        } 
+        }
         return false;
       },
       'If firmware name is incorrect, controller should throw an error'
@@ -311,7 +311,7 @@ exports['Pixel - Firmata'] = {
     this.strip.pixel(0).color('#FFF');
     test.equal(this.write.callCount, 2,
       'Setting the pixel value should make a single serial call');
-    test.done()
+    test.done();
   }
 };
 
