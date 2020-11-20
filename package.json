@@ -8,7 +8,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "cross-env IS_TEST_MODE=true nodeunit test",
+    "test": "yarn nodeunit && yarn jest",
+    "nodeunit": "cross-env IS_TEST_MODE=true nodeunit test",
+    "jest": "jest",
     "semantic-release": "semantic-release",
     "lint": "eslint .",
     "commit": "cz"
