@@ -5,7 +5,7 @@
  * adapted from the examples by @pierceray
  */
 const five = require('johnny-five');
-const pixel = require('../lib/pixel.js');
+const pixel = require('node-pixel');
 
 const opts = {};
 opts.port = process.argv[2] || '';

@@ -1,7 +1,7 @@
 // This example shows how to use node-pixel using Johnny Five as the
 // hook for the board.
 const five = require('johnny-five');
-const pixel = require('../lib/pixel.js');
+const pixel = require('node-pixel');
 
 const opts = {};
 opts.port = process.argv[2] || '';

@@ -14,7 +14,7 @@ Wire the neopixel strip up as shown below.
 
 ```js
 var five = require("johnny-five");
-var pixel = require("../lib/pixel.js");
+var pixel = require("node-pixel");
 
 var opts = {};
 opts.port = process.argv[2] || "";
