@@ -31,7 +31,7 @@ jobs:
       - name: Lint code
         run: yarn lint
       - name: Lint commit
-        run: yarn commitlint $(git log -1 --pretty=%B)
+        run: yarn commitlint $(git log --format=%B -n 1 ${{ github.event.after }})
 
   test-success:
     runs-on: ubuntu-latest
