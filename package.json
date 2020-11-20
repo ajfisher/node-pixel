@@ -1,21 +1,21 @@
 {
-  "name": "node-pixel",
+  "name": "node-pixel-async",
   "version": "0.11.0",
   "description": "Library for controlling addressable LEDs (such as NeoPixels) from firmata or Johnny Five.",
   "main": "lib/index.js",
   "directories": {
-    "example": "examples"
+    "example": "examples",
+    "doc": "docs"
   },
   "scripts": {
-    "test": "IS_TEST_MODE=true ./node_modules/.bin/nodeunit test/*",
-    "test-cover": "IS_TEST_MODE=true istanbul cover ./node_modules/.bin/nodeunit test/*",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "release": "standard-version",
-    "lint": "./node_modules/.bin/eslint ."
+    "test": "cross-env IS_TEST_MODE=true nodeunit test",
+    "semantic-release": "semantic-release",
+    "lint": "eslint .",
+    "commit": "cz"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ajfisher/node-pixel.git"
+    "url": "git@github.com:hweeks/node-pixel-async.git"
   },
   "keywords": [
     "nodebots",
@@ -23,6 +23,7 @@
     "leds",
     "ws2812",
     "ws2812b",
+    "ws2811",
     "firmata",
     "neopixel",
     "rgb led"
@@ -32,12 +33,9 @@
     "email": "ajfisher.td@gmail.com",
     "url": "http://twitter.com/ajfisher"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/ajfisher/node-pixel/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ajfisher/node-pixel/issues"
+    "url": "https://github.com/hweeks/node-pixel-async/issues"
   },
   "dependencies": {
     "color-string": "^1.5.3"
@@ -47,15 +45,26 @@
     "johnny-five": "^2.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "board-io": "^3.0.4",
+    "commitizen": "^4.2.2",
     "coveralls": "^3.1.0",
+    "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.10.0",
     "husky": "^4.3.0",
     "istanbul": "^0.4.5",
     "johnny-five": "^2.0.0",
     "mock-firmata": "0.2.0",
     "nodeunit": "^0.11.3",
+    "semantic-release": "^17.2.4",
     "sinon": "^9.1.0",
     "standard-version": "^9.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
