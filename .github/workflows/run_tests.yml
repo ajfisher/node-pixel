@@ -30,6 +30,8 @@ jobs:
         run: yarn test
       - name: Lint code
         run: yarn lint
+      - name: Lint commit
+        run: yarn commitlint $(git log -1 --pretty=%B)
 
   test-success:
     runs-on: ubuntu-latest
