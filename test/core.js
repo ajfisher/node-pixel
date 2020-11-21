@@ -6,9 +6,9 @@ const MockSerialPort = mocks.SerialPort;
 const sinon = require('sinon');
 
 const five = require('johnny-five');
-const pixel = require('../lib/index.js');
-const { colorValue } = require('../lib/pixel');
-const { create_gamma_table } = require('../lib/utils');
+const pixel = require('../dist/index.js');
+const { colorValue } = require('../dist/pixel');
+const { create_gamma_table } = require('../dist/utils');
 
 const Board = five.Board;
 

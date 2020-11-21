@@ -1,2 +1,5 @@
-coverage/*
+node_modules
+dist
+coverage
 firmware/src/libs/firmata/*
+examples
