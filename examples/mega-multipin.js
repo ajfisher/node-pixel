@@ -32,9 +32,9 @@ board.on('ready', function() {
     const strips = 8;
     const lengths = 8;
 
-    const current_pos = new Array();
+    const current_pos = [];
     for (let i=0; i< strips; i++) {
-      current_pos.push(new Array());
+      current_pos.push([]);
     }
 
     // periodically drop a new item onto one of the strips randomly.

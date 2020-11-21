@@ -3,8 +3,7 @@ const mocks = require('mock-firmata');
 const MockFirmata = mocks.Firmata;
 const MockSerialPort = mocks.SerialPort;
 const five = require('johnny-five');
-const pixel = require('../lib/index.js');
-
+const pixel = require('../lib/index');
 const Board = five.Board;
 
 function newBoard() {

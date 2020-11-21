@@ -6,7 +6,7 @@ const MockSerialPort = mocks.SerialPort;
 const sinon = require('sinon');
 
 const five = require('johnny-five');
-const pixel = require('../lib/index.js');
+const pixel = require('../dist/index.js');
 
 const Board = five.Board;
 
