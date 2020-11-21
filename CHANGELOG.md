@@ -1,3 +1,11 @@
+# [0.13.0](https://github.com/hweeks/node-pixel-async/compare/v0.12.0...v0.13.0) (2020-11-21)
+
+
+### Features
+
+* typescript, linting ([510644e](https://github.com/hweeks/node-pixel-async/commit/510644e28420b88bbc30e0fa26d107da155aca93))
+* update release process ([eb21cf1](https://github.com/hweeks/node-pixel-async/commit/eb21cf1c9f962b9f828eccf81afbfed3f1fdf2be))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
