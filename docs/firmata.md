@@ -13,7 +13,7 @@ Wire the neopixel strip up as shown below.
 ## Example code
 ```js
 var firmata = require("firmata");
-var pixel = require("node-pixel");
+var pixel = require("node-pixel-async");
 
 var opts = {};
 if (process.argv[2] == undefined) {
@@ -29,7 +29,7 @@ var board = new firmata.Board(opts.port, function() {
 
     console.log("Firmata ready, lets add light");
 
-    strip = new pixel.Strip({
+    strip = pixel.Strip({
         data: 6,
         length: 4,
         firmata: board,

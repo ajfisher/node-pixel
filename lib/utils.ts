@@ -3,7 +3,7 @@ import {
 } from './constants';
 
 // helper function for building gamma values
-function create_gamma_table(steps : number, gamma: number, warning: boolean) : number[] {
+export function create_gamma_table(steps : number, gamma: number, warning: boolean) : number[] {
   // used to build a gamma table for a particular value
 
   if (! warning && gamma == GAMMA_DEFAULT && ! (global as any).IS_TEST_MODE) {
@@ -21,6 +21,3 @@ function create_gamma_table(steps : number, gamma: number, warning: boolean) : n
   return g_table;
 }
 
-module.exports = {
-  create_gamma_table
-}

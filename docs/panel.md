@@ -14,7 +14,7 @@ Wire the neopixel panel up as shown below.
 
 ```js
 var five = require("johnny-five");
-var pixel = require("node-pixel");
+var pixel = require("node-pixel-async");
 
 var opts = {};
 opts.port = process.argv[2] || "";
@@ -28,7 +28,7 @@ board.on("ready", function() {
 
     console.log("Board ready, lets add light");
 
-    strip = new pixel.Strip({
+    strip = pixel.Strip({
         board: this,
         controller: "FIRMATA",
         data: 6,

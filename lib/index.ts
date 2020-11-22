@@ -1,4 +1,4 @@
-export {Strip} from './strip';
+export {Strip} from './strip/index';
 export {
   COLOR_ORDER,
   SHIFT_FORWARD as FORWARD,

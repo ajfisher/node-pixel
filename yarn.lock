@@ -1585,6 +1585,14 @@
   resolved "https://registry.yarnpkg.com/@types/color-string/-/color-string-1.5.0.tgz#0a9f3ee6bc9bd4f89693fc3f2bc30d47ad68afc3"
   integrity sha512-17/8LWbkfvoKgfnnBvKbUnPTzPtzBlSELf5FPvVt9dRTQW88igOYZZ78us9dmbY1301VtTBEnuPTKspvmtGDxA==
 
+"@types/firmata@^0.19.3":
+  version "0.19.3"
+  resolved "https://registry.yarnpkg.com/@types/firmata/-/firmata-0.19.3.tgz#cda2e99d89669d2b23dd9ef24ef06891f590beb1"
+  integrity sha512-hTm0Gv4HbfkHx7ke1HTuc+SDJr2ufU0SpVNMCEbgOq2eA3GCItPeMpIf8X3w3zUUz4w02mGv+L8p/ySzisQYig==
+  dependencies:
+    "@types/node" "*"
+    "@types/serialport" "^4"
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.4.tgz#4ff9f641a7c6d1a3508ff88bc3141b152772e753"
@@ -1610,6 +1618,13 @@
   integrity sha512-nwKNbvnwJ2/mndE9ItP/zc2TCzw6uuodnF4EHYWD+gCQDVBuRQL5UzbZD0/ezy1iKsFU2ZQiDqg4M9dN4+wZgA==
   dependencies:
     "@types/istanbul-lib-report" "*"
+
+"@types/johnny-five@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@types/johnny-five/-/johnny-five-1.3.0.tgz#4d385f9611645da9e38666eb90cdd88350e59975"
+  integrity sha512-V2GNfEJDXBjM3bUmUx8295wBgu+2OrnCw2t9W0giwKg6roZpwfVMHSuiUR/1fITEoSwbnzZByWvonIjSHeMUng==
+  dependencies:
+    "@types/node" "*"
 
 "@types/json-schema@^7.0.3":
   version "7.0.6"
@@ -1646,10 +1661,23 @@
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
 
+"@types/serialport@^4":
+  version "4.0.12"
+  resolved "https://registry.yarnpkg.com/@types/serialport/-/serialport-4.0.12.tgz#69d548b99b966960a829e7f4104c4567acf85e53"
+  integrity sha512-QBGKaQV4SI06sPSXTlkHiMyA/T6PGlZ2NzCXhmvG9Y7HnW9ZhDca1MiGw/j9fhbc+8pvj2DIURPyYSLz59+Pog==
+  dependencies:
+    "@types/node" "*"
+    "@types/streamjs" "*"
+
 "@types/stack-utils@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.0.tgz#7036640b4e21cc2f259ae826ce843d277dad8cff"
   integrity sha512-RJJrrySY7A8havqpGObOB4W92QXKJo63/jFLLgpvOtsGUqbQZ9Sbgl35KMm1DjC6j7AvmmU2bIno+3IyEaemaw==
+
+"@types/streamjs@*":
+  version "1.5.29"
+  resolved "https://registry.yarnpkg.com/@types/streamjs/-/streamjs-1.5.29.tgz#e95624f01faace3c2fcc07b647f2deadc14ee7e4"
+  integrity sha512-4D1pyiepIp6HuVNPrY38ZOTxGodyUmUhVVekhrq/9pb8teV+5k5ZK2HwHyFOjWZCI8Zpa/rx/CmftAUR2JIzJw==
 
 "@types/yargs-parser@*":
   version "15.0.0"

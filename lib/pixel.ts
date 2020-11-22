@@ -120,7 +120,7 @@ export class Pixel {
         return;
     }
   }
-  color(color : string | [number, number, number] | undefined, optOverride?: {sendmsg : boolean}) : void | PixelColor {
+  color(color?: string | [number, number, number], optOverride?: {sendmsg : boolean}) : void | PixelColor {
     // use a particular form to set the color either
     // color = hex value or named colors or array of colors
     // opts can contain _sendmsg_ as bool. If set to false message won't be
@@ -171,7 +171,7 @@ export class Pixel {
       console.log("Color supplied couldn't be parsed: " + color);
     }
   }
-  colour(color : string | [number, number, number] | undefined, optOverride?: {sendmsg : boolean}) : void | PixelColor {
+  colour(color?: string | [number, number, number], optOverride?: {sendmsg : boolean}) : void | PixelColor {
     this.color(color, optOverride);
   }
   off () : void {

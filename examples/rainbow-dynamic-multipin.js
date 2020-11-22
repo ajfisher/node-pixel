@@ -5,7 +5,7 @@
  * adapted from the examples by @pierceray
  */
 const five = require('johnny-five');
-const pixel = require('node-pixel');
+const pixel = require('node-pixel-async');
 
 const opts = {};
 opts.port = process.argv[2] || '';
@@ -65,7 +65,7 @@ board.on('ready', function() {
   }
 
   // setup the node-pixel strip.
-  strip = new pixel.Strip({
+  strip = pixel.Strip({
     board: this,
     controller: 'FIRMATA',
     strips: [ {pin: 6, length: 8}, {pin: 7, length: 8}]

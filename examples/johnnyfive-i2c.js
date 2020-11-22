@@ -1,7 +1,7 @@
 // This example shows how to use node-pixel using Johnny Five as the
 // hook for the board.
 const five = require('johnny-five');
-const pixel = require('node-pixel');
+const pixel = require('node-pixel-async');
 
 const opts = {};
 opts.port = process.argv[2] || '';
@@ -14,7 +14,7 @@ const fps = 1; // how many frames per second do you want to try?
 board.on('ready', function() {
   console.log('Board ready, lets add light');
 
-  strip = new pixel.Strip({
+  strip = pixel.Strip({
     color_order: pixel.COLOR_ORDER.GRB,
     board: this,
     controller: 'I2CBACKPACK',

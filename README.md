@@ -161,7 +161,7 @@ var strip = null;
 
 board.on("ready", function() {
 
-    strip = new pixel.Strip({
+    strip = pixel.Strip({
         board: this,
         controller: "FIRMATA",
         strips: [ {pin: 6, length: 4}, ], // this is preferred form for definition
@@ -182,7 +182,7 @@ var firmata = require('firmata');
 
 var board = new firmata.Board('path to usb',function(){
 
-    strip = new pixel.Strip({
+    strip = pixel.Strip({
         pin: 6, // this is still supported as a shorthand
         length: 4,
         firmata: board,
@@ -205,7 +205,7 @@ five = require("johnny-five");
 var board = new five.Board(opts);
 
 board.on("ready", function() {
-    strip = new pixel.Strip({
+    strip = pixel.Strip({
         board: this,
         controller: "I2CBACKPACK",
         strips: [4, 6, 8], // 3 physical strips on pins 0, 1 & 2 with lengths 4, 6 & 8.

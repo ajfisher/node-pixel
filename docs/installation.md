@@ -96,7 +96,7 @@ _Wiring diagram_
 
 ![Custom Firmata Diagram](breadboard/custom_firmata_bb.png)
 
-### I2C Backpack 
+### I2C Backpack
 
 This installation method installs a custom "Backpack" firmware onto an arduino
 Nano or Pro Mini which is then connected to the board using I2C connections.
@@ -125,8 +125,8 @@ will need to look at your board and backpack pin out diagrams to see what these 
 Depending on your Board you may be able to power the Backpack by providing 5V out
 to the 5v pin on the Backpack or you may need to supply that separately.
 
-*Note: Because of an [I2C bug](http://www.advamation.com/knowhow/raspberrypi/rpi-i2c-bug.html) 
-you must change the I2C baudrate on the Raspberry Pi and Pi 2. Edit `/boot/config.txt` 
+*Note: Because of an [I2C bug](http://www.advamation.com/knowhow/raspberrypi/rpi-i2c-bug.html)
+you must change the I2C baudrate on the Raspberry Pi and Pi 2. Edit `/boot/config.txt`
 to include the following line and reboot your Pi:*
 
 ```bash
@@ -142,7 +142,7 @@ Now you're set up, it's time to use some JS to manipulate the LEDs.
 To use the library, require it per normal:
 
 ```javascript
-var pixel = require("node-pixel");
+var pixel = require("node-pixel-async");
 ```
 
 The [main readme](../README.md) has more detailed instructions around the api.
