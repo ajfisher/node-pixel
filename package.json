@@ -10,10 +10,13 @@
   },
   "scripts": {
     "test": "yarn jest && yarn nodeunit",
-    "nodeunit": "yarn tsc && cross-env IS_TEST_MODE=true nodeunit test",
+    "nodeunit": "yarn build && cross-env IS_TEST_MODE=true nodeunit test",
     "jest": "jest",
     "jest-debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand --no-cache --watchAll",
-    "prepublishOnly": "tsc",
+    "clean": "rimraf dist/",
+    "prebuild": "yarn clean",
+    "build": "tsc",
+    "prepublishOnly": "yarn build",
     "semantic-release": "semantic-release",
     "lint": "eslint . --ext .ts",
     "commit": "cz"
@@ -80,6 +83,7 @@
     "johnny-five": "^2.0.0",
     "mock-firmata": "0.2.0",
     "nodeunit": "^0.11.3",
+    "rimraf": "^3.0.2",
     "semantic-release": "^17.2.4",
     "sinon": "^9.1.0",
     "standard-version": "^9.0.0",

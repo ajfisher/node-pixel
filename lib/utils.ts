@@ -6,6 +6,7 @@ import {
 export function create_gamma_table(steps : number, gamma: number, warning: boolean) : number[] {
   // used to build a gamma table for a particular value
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (! warning && gamma == GAMMA_DEFAULT && ! (global as any).IS_TEST_MODE) {
     console.info('INFO: Default gamma behaviour is changing');
     console.info('0.9 - gamma=1.0 - consistent with pre-gamma values');

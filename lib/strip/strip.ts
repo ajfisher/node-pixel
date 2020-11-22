@@ -1,11 +1,11 @@
 import {EventEmitter} from 'events'
 import ColorString, { Color } from 'color-string'
-import { colorValue, Pixel } from '../pixel'
+import { colorValue, Pixel } from '../pixel/'
 import { GAMMA_DEFAULT, SHIFT_BACKWARD, SHIFT_FORWARD } from '../constants'
 import { create_gamma_table } from '../utils'
 import { BaseStripOptions } from '../types'
 
-export class StripBase extends EventEmitter {
+export class Strip extends EventEmitter {
   pixels: Pixel[]
   gtable: number[]
   gamma: number
@@ -23,12 +23,14 @@ export class StripBase extends EventEmitter {
   getLength () : number {
     return this.pixels? this.pixels.length : 0;
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   stripColor (color: number) : void {
     return;
   }
   show() : void {
     return;
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _shift(amt : number, direction: typeof SHIFT_FORWARD | typeof SHIFT_BACKWARD, wrap: boolean) : void {
     return;
   }
@@ -65,7 +67,7 @@ export class StripBase extends EventEmitter {
 
       // renumber the items so the addresses are correct for display
       this.pixels.forEach((px, index) => {
-        px.internalPixel.address = index;
+        px.internalPixel && px.internalPixel.address ? px.internalPixel.address = index : undefined;
       });
 
       // now get the firmware to update appropriately as well.

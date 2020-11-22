@@ -7,7 +7,7 @@ const sinon = require('sinon');
 
 const five = require('johnny-five');
 const pixel = require('../dist/index.js');
-const { colorValue } = require('../dist/pixel');
+const { colorValue } = require('../dist/pixel/pixel');
 const { create_gamma_table } = require('../dist/utils');
 
 const Board = five.Board;
