@@ -24,7 +24,7 @@ start with pin 0 and work upwards from there to 8 max.
 
 ```js
 var five = require("johnny-five");
-var pixel = require("node-pixel");
+var pixel = require("node-pixel-async");
 
 var opts = {};
 opts.port = process.argv[2] || "";
@@ -38,7 +38,7 @@ board.on("ready", function() {
 
     console.log("Board ready, lets add light");
 
-    strip = new pixel.Strip({
+    strip = pixel.Strip({
         color_order: pixel.COLOR_ORDER.GRB,
         board: this,
         controller: "I2CBACKPACK",

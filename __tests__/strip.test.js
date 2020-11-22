@@ -28,7 +28,7 @@ describe('Strip', () => {
   let strip;
   beforeEach(() => {
     board = newBoard();
-    strip = new pixel.Strip({
+    strip = pixel.Strip({
       data: 6,
       length: 8,
       board,
@@ -37,7 +37,7 @@ describe('Strip', () => {
   });
   describe('length', () => {
     test('single pixel array', () => {
-      const stripOne = new pixel.Strip({
+      const stripOne = pixel.Strip({
         board,
         controller: 'FIRMATA',
         strips: [{pin: 2, length: 100}]
@@ -45,7 +45,7 @@ describe('Strip', () => {
       expect(stripOne.length).toBe(100);
     });
     test('double pixel array', () => {
-      const stripTwo = new pixel.Strip({
+      const stripTwo = pixel.Strip({
         board,
         controller: 'FIRMATA',
         strips: [{pin: 2, length: 50}, {pin: 3, length: 50}]
@@ -100,7 +100,7 @@ describe('Strip', () => {
   });
   describe('gamma', () => {
     test('default gamma sets correctly', () => {
-      const stripOne = new pixel.Strip({
+      const stripOne = pixel.Strip({
         board,
         controller: 'FIRMATA',
         strips: [{pin: 2, length: 1}]
@@ -110,7 +110,7 @@ describe('Strip', () => {
       expect(stripOne.gtable[18]).toBe(18);
     });
     test('custom gamma sets correctly', () => {
-      const stripOne = new pixel.Strip({
+      const stripOne = pixel.Strip({
         board,
         controller: 'FIRMATA',
         strips: [{pin: 2, length: 1}],
@@ -122,7 +122,7 @@ describe('Strip', () => {
     });
   });
   describe('shifty pixels', () => {
-    const shiftyStrip = new pixel.Strip({
+    const shiftyStrip = pixel.Strip({
       board: newBoard(),
       controller: 'FIRMATA',
       strips: [{ pin: 2, length: 8}]
@@ -141,7 +141,7 @@ describe('Strip', () => {
       // advance the pixels one step along the strip.
       shiftyStrip.shift(1, pixel.FORWARD, false);
       expect(shiftyStrip.pixel(7).color().color).toBe('blue');
-      expect(shiftyStrip.pixel(7).address).toBe(7);
+      expect(shiftyStrip.pixel(7).internalPixel.address).toBe(7);
       expect(shiftyStrip.pixel(6).color().color).toBe('black');
       expect(shiftyStrip.pixel(0).color().color).toBe('black');
     });

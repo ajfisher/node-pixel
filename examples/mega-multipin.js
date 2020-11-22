@@ -2,7 +2,7 @@
 // to control multiple strips on the same board
 
 const five = require('johnny-five');
-const pixel = require('node-pixel');
+const pixel = require('node-pixel-async');
 
 const opts = {};
 opts.port = process.argv[2] || '';
@@ -15,7 +15,7 @@ const fps = 10; // how many frames per second do you want to try?
 board.on('ready', function() {
   console.log('Board ready, lets add light');
 
-  strip = new pixel.Strip({
+  strip = pixel.Strip({
     board: this,
     controller: 'FIRMATA',
     strips: [

@@ -2,7 +2,7 @@
 // hook for the board.
 
 const firmata = require('firmata');
-const pixel = require('node-pixel');
+const pixel = require('node-pixel-async');
 
 const opts = {};
 if (process.argv[2] == undefined) {
@@ -17,7 +17,7 @@ let strip = null;
 const board = new firmata.Board(opts.port, function() {
   console.log('Firmata ready, lets add light');
 
-  strip = new pixel.Strip({
+  strip = pixel.Strip({
     data: 6,
     length: 4,
     firmata: board
