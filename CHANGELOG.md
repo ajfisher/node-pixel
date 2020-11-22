@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/hweeks/node-pixel-async/compare/v1.0.0...v1.1.0) (2020-11-22)
+
+
+### Features
+
+* pixel breakdown to match strip ([137a623](https://github.com/hweeks/node-pixel-async/commit/137a623a921564008620cb4058da4ba07e914905))
+
 # [1.0.0](https://github.com/hweeks/node-pixel-async/compare/v0.13.0...v1.0.0) (2020-11-22)
 
 
