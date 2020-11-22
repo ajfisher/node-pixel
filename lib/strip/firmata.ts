@@ -1,14 +1,14 @@
 import Board from "firmata";
 import { COLOR_ORDER } from "..";
 import { PIN_DEFAULT, MAX_STRIPS, START_SYSEX, PIXEL_COMMAND, PIXEL_CONFIG, FIRMATA_7BIT_MASK, END_SYSEX, PIXEL_SHOW, PIXEL_SET_STRIP, PIXEL_SHIFT, PIXEL_SHIFT_WRAP, SHIFT_BACKWARD, SHIFT_FORWARD } from "../constants";
-import { Pixel } from "../pixel";
+import buildPixel from "../pixel";
 import { FirmataOptions, StripConfig } from "../types";
-import { StripBase } from "./strip";
+import { Strip } from "./strip";
 import {Board as JohnnyBoard} from 'johnny-five';
 
-export class FirmataStrip extends StripBase {
+export class FirmataStrip extends Strip {
   io: Board | JohnnyBoard['io']
-  port: {write: (message: Buffer, cb?: (err: Error, msg?: any) => void) => void}
+  port: {write: (message: Buffer, cb?: (err: Error, msg?: unknown) => void) => void}
   length: number
   constructor(opts : FirmataOptions) {
     super(opts);
@@ -86,7 +86,7 @@ export class FirmataStrip extends StripBase {
     this.length = total_length
 
     for (let i=0; i< total_length; i++) {
-      this.pixels.push(new Pixel({
+      this.pixels.push(buildPixel({
         addr: i,
         firmata,
         port,

@@ -1,12 +1,12 @@
 import { COLOR_ORDER } from "..";
 import { I2C_DEFAULT, MAX_STRIPS, PIXEL_CONFIG, FIRMATA_7BIT_MASK, PIXEL_SHOW, PIXEL_SET_STRIP, PIXEL_SHIFT, PIXEL_SHIFT_WRAP, SHIFT_BACKWARD, SHIFT_FORWARD } from "../constants";
-import { Pixel } from "../pixel";
+import buildPixel from "../pixel";
 import { BackpackOptions, StripConfig } from "../types";
-import { StripBase } from "./strip";
+import { Strip } from "./strip";
 import {Firmware} from 'firmata'
 import {Board} from 'johnny-five'
 
-export class BackpackStrip extends StripBase {
+export class BackpackStrip extends Strip {
   io: Firmware | Board['io']
   i2c_address: number
   constructor(opts : BackpackOptions) {
@@ -66,7 +66,7 @@ export class BackpackStrip extends StripBase {
     this.length = total_length
 
     for (let i=0; i < total_length; i++) {
-      this.pixels.push(new Pixel({
+      this.pixels.push(buildPixel({
         addr: i,
         io,
         controller: 'I2CBACKPACK',
@@ -131,7 +131,6 @@ export class BackpackStrip extends StripBase {
   }
   _shift(amt: number, direction: typeof SHIFT_FORWARD | typeof SHIFT_BACKWARD, wrap: boolean) : void {
     // shifts the strip in the appropriate direction.
-    //
     const wrap_val = wrap ? PIXEL_SHIFT_WRAP : 0;
     const data : number[] = [];
     data[0] = PIXEL_SHIFT;
