@@ -1,3 +1,15 @@
+# [1.0.0](https://github.com/hweeks/node-pixel-async/compare/v0.13.0...v1.0.0) (2020-11-22)
+
+
+### Features
+
+* **core:** move to ts completly, strip factory ([fc6e016](https://github.com/hweeks/node-pixel-async/commit/fc6e016f3719517d14560bf414db8ed11c241c1f))
+
+
+### BREAKING CHANGES
+
+* **core:** strip class becomes a factory, private api changes
+
 # [0.13.0](https://github.com/hweeks/node-pixel-async/compare/v0.12.0...v0.13.0) (2020-11-21)
 
 

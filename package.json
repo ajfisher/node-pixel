@@ -1,6 +1,6 @@
 {
   "name": "node-pixel-async",
-  "version": "0.13.0",
+  "version": "1.0.0",
   "description": "Library for controlling addressable LEDs (such as NeoPixels) from firmata or Johnny Five.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
