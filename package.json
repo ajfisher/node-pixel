@@ -16,9 +16,10 @@
     "clean": "rimraf dist/",
     "prebuild": "yarn clean",
     "build": "tsc",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "yarn build && rimraf docs/ && yarn docs",
     "semantic-release": "semantic-release",
     "lint": "eslint . --ext .ts",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs lib/",
     "commit": "cz"
   },
   "repository": {
@@ -88,6 +89,8 @@
     "sinon": "^9.1.0",
     "standard-version": "^9.0.0",
     "ts-node": "^9.0.0",
+    "typedoc": "^0.19.2",
+    "typedoc-plugin-markdown": "^3.0.11",
     "typescript": "^4.1.2"
   },
   "config": {

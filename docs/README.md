@@ -1,3 +1,7 @@
+**[node-pixel-async](README.md)**
+
+> [Globals](globals.md)
+
 # Node Pixel Async
 
 > A completely derivative work of [node-pixel](https://github.com/ajfisher/node-pixel)

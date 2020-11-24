@@ -142,7 +142,7 @@ Now you're set up, it's time to use some JS to manipulate the LEDs.
 To use the library, require it per normal:
 
 ```javascript
-var pixel = require("node-pixel-async");
+var { Strip } = require("node-pixel-async");
 ```
 
 The [main readme](../README.md) has more detailed instructions around the api.
