@@ -38,7 +38,7 @@
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[constructor](_pixel_pixel_.pixel.md#constructor)*
 
-*Defined in [lib/pixel/firmata.ts:13](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/firmata.ts#L13)*
+*Defined in [lib/pixel/firmata.ts:13](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/firmata.ts#L13)*
 
 #### Parameters:
 
@@ -56,7 +56,7 @@ Name | Type |
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[internalPixel](_pixel_pixel_.pixel.md#internalpixel)*
 
-*Defined in [lib/pixel/firmata.ts:12](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/firmata.ts#L12)*
+*Defined in [lib/pixel/firmata.ts:12](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/firmata.ts#L12)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[sendmsg](_pixel_pixel_.pixel.md#sendmsg)*
 
-*Defined in [lib/pixel/firmata.ts:13](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/firmata.ts#L13)*
+*Defined in [lib/pixel/firmata.ts:13](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/firmata.ts#L13)*
 
 ## Methods
 
@@ -76,7 +76,7 @@ ___
 
 *Inherited from [Pixel](_pixel_pixel_.pixel.md).[color](_pixel_pixel_.pixel.md#color)*
 
-*Defined in [lib/pixel/pixel.ts:39](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L39)*
+*Defined in [lib/pixel/pixel.ts:39](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L39)*
 
 #### Parameters:
 
@@ -95,7 +95,7 @@ ___
 
 *Inherited from [Pixel](_pixel_pixel_.pixel.md).[colour](_pixel_pixel_.pixel.md#colour)*
 
-*Defined in [lib/pixel/pixel.ts:91](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L91)*
+*Defined in [lib/pixel/pixel.ts:91](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L91)*
 
 #### Parameters:
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **createPayload**(`colorAsNumber`: number): number[]
 
-*Defined in [lib/pixel/firmata.ts:32](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/firmata.ts#L32)*
+*Defined in [lib/pixel/firmata.ts:32](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/firmata.ts#L32)*
 
 #### Parameters:
 
@@ -130,7 +130,7 @@ ___
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[createPixel](_pixel_pixel_.pixel.md#createpixel)*
 
-*Defined in [lib/pixel/firmata.ts:19](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/firmata.ts#L19)*
+*Defined in [lib/pixel/firmata.ts:19](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/firmata.ts#L19)*
 
 #### Parameters:
 
@@ -148,7 +148,7 @@ ___
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[fillPixel](_pixel_pixel_.pixel.md#fillpixel)*
 
-*Defined in [lib/pixel/firmata.ts:46](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/firmata.ts#L46)*
+*Defined in [lib/pixel/firmata.ts:46](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/firmata.ts#L46)*
 
 #### Parameters:
 
@@ -166,6 +166,6 @@ ___
 
 *Inherited from [Pixel](_pixel_pixel_.pixel.md).[off](_pixel_pixel_.pixel.md#off)*
 
-*Defined in [lib/pixel/pixel.ts:94](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L94)*
+*Defined in [lib/pixel/pixel.ts:94](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L94)*
 
 **Returns:** void

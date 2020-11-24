@@ -29,7 +29,7 @@
 
 • `Optional` **board**: JohnnyBoard
 
-*Defined in [lib/types.ts:69](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L69)*
+*Defined in [lib/types.ts:69](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L69)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 •  **color\_order**: *typeof* [GRB](../modules/_constants_.md#grb) \| *typeof* [BRG](../modules/_constants_.md#brg) \| *typeof* [RGB](../modules/_constants_.md#rgb)
 
-*Defined in [lib/types.ts:67](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L67)*
+*Defined in [lib/types.ts:67](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L67)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • `Optional` **controller**: \"FIRMATA\" \| \"I2CBACKPACK\"
 
-*Defined in [lib/types.ts:70](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L70)*
+*Defined in [lib/types.ts:70](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L70)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 • `Optional` **firmata**: Board
 
-*Defined in [lib/types.ts:68](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L68)*
+*Defined in [lib/types.ts:68](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L68)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 •  **gamma**: number
 
-*Defined in [lib/types.ts:65](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L65)*
+*Defined in [lib/types.ts:65](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L65)*
 
 ___
 
@@ -69,4 +69,4 @@ ___
 
 •  **length**: number
 
-*Defined in [lib/types.ts:66](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L66)*
+*Defined in [lib/types.ts:66](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L66)*

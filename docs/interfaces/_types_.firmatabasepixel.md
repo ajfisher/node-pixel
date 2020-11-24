@@ -29,7 +29,7 @@
 
 *Inherited from [BuiltPixelBase](_types_.builtpixelbase.md).[address](_types_.builtpixelbase.md#address)*
 
-*Defined in [lib/types.ts:22](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L22)*
+*Defined in [lib/types.ts:22](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L22)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 *Inherited from [BuiltPixelBase](_types_.builtpixelbase.md).[color](_types_.builtpixelbase.md#color)*
 
-*Defined in [lib/types.ts:24](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L24)*
+*Defined in [lib/types.ts:24](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L24)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **firmata**: unknown
 
-*Defined in [lib/types.ts:40](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L40)*
+*Defined in [lib/types.ts:40](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L40)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 *Inherited from [BuiltPixelBase](_types_.builtpixelbase.md).[id](_types_.builtpixelbase.md#id)*
 
-*Defined in [lib/types.ts:23](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L23)*
+*Defined in [lib/types.ts:23](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L23)*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 *Inherited from [BuiltPixelBase](_types_.builtpixelbase.md).[parent](_types_.builtpixelbase.md#parent)*
 
-*Defined in [lib/types.ts:25](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L25)*
+*Defined in [lib/types.ts:25](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L25)*
 
 #### Type declaration:
 
@@ -81,7 +81,7 @@ ___
 
 •  **port**: { write: (message: Buffer) => void  }
 
-*Defined in [lib/types.ts:41](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L41)*
+*Defined in [lib/types.ts:41](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L41)*
 
 #### Type declaration:
 

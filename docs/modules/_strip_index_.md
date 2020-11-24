@@ -16,7 +16,7 @@
 
 ▸ `Const`**Strip**(`opts`: [FirmataOptions](../interfaces/_types_.firmataoptions.md) \| [BackpackOptions](../interfaces/_types_.backpackoptions.md)): [BackpackStrip](../classes/_strip_backpack_.backpackstrip.md) \| [FirmataStrip](../classes/_strip_firmata_.firmatastrip.md)
 
-*Defined in [lib/strip/index.ts:5](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/index.ts#L5)*
+*Defined in [lib/strip/index.ts:5](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/index.ts#L5)*
 
 #### Parameters:
 

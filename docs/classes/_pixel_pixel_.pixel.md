@@ -37,7 +37,7 @@
 
 \+ **new Pixel**(`opts`: [PixelInit](../modules/_pixel_pixel_.md#pixelinit)): [Pixel](_pixel_pixel_.pixel.md)
 
-*Defined in [lib/pixel/pixel.ts:26](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L26)*
+*Defined in [lib/pixel/pixel.ts:26](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L26)*
 
 #### Parameters:
 
@@ -53,7 +53,7 @@ Name | Type |
 
 •  **internalPixel**: [BasePixelConfiguration](../modules/_pixel_pixel_.md#basepixelconfiguration)
 
-*Defined in [lib/pixel/pixel.ts:25](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L25)*
+*Defined in [lib/pixel/pixel.ts:25](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L25)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 •  **sendmsg**: boolean
 
-*Defined in [lib/pixel/pixel.ts:26](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L26)*
+*Defined in [lib/pixel/pixel.ts:26](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L26)*
 
 ## Methods
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **color**(`color?`: string \| [number, number, number], `optOverride?`: undefined \| { sendmsg: boolean  }): void \| [PixelColor](../interfaces/_types_.pixelcolor.md)
 
-*Defined in [lib/pixel/pixel.ts:39](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L39)*
+*Defined in [lib/pixel/pixel.ts:39](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L39)*
 
 #### Parameters:
 
@@ -86,7 +86,7 @@ ___
 
 ▸ **colour**(`color?`: string \| [number, number, number], `optOverride?`: undefined \| { sendmsg: boolean  }): void \| [PixelColor](../interfaces/_types_.pixelcolor.md)
 
-*Defined in [lib/pixel/pixel.ts:91](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L91)*
+*Defined in [lib/pixel/pixel.ts:91](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L91)*
 
 #### Parameters:
 
@@ -103,7 +103,7 @@ ___
 
 ▸ **createPixel**(`opts`: [PixelInit](../modules/_pixel_pixel_.md#pixelinit)): [BasePixelConfiguration](../modules/_pixel_pixel_.md#basepixelconfiguration)
 
-*Defined in [lib/pixel/pixel.ts:32](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L32)*
+*Defined in [lib/pixel/pixel.ts:32](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L32)*
 
 #### Parameters:
 
@@ -119,7 +119,7 @@ ___
 
 ▸ **fillPixel**(`inputColor`: number): void
 
-*Defined in [lib/pixel/pixel.ts:36](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L36)*
+*Defined in [lib/pixel/pixel.ts:36](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L36)*
 
 #### Parameters:
 
@@ -135,6 +135,6 @@ ___
 
 ▸ **off**(): void
 
-*Defined in [lib/pixel/pixel.ts:94](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L94)*
+*Defined in [lib/pixel/pixel.ts:94](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/pixel/pixel.ts#L94)*
 
 **Returns:** void

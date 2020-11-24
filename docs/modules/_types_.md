@@ -29,7 +29,7 @@
 
 Ƭ  **StripConfig**: { color_order?: undefined \| number ; length: number ; pin?: undefined \| number  }
 
-*Defined in [lib/types.ts:73](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L73)*
+*Defined in [lib/types.ts:73](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L73)*
 
 #### Type declaration:
 

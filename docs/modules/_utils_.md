@@ -16,7 +16,7 @@
 
 ▸ **create_gamma_table**(`steps`: number, `gamma`: number, `warning`: boolean): number[]
 
-*Defined in [lib/utils.ts:6](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/utils.ts#L6)*
+*Defined in [lib/utils.ts:6](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/utils.ts#L6)*
 
 #### Parameters:
 

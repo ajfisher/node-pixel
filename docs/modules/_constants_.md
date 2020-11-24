@@ -37,7 +37,7 @@
 
 • `Const` **END\_SYSEX**: 247 = 247
 
-*Defined in [lib/constants.ts:3](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L3)*
+*Defined in [lib/constants.ts:3](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L3)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • `Const` **FIRMATA\_7BIT\_MASK**: 127 = 127
 
-*Defined in [lib/constants.ts:4](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L4)*
+*Defined in [lib/constants.ts:4](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L4)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 • `Const` **GAMMA\_DEFAULT**: 1 = 1
 
-*Defined in [lib/constants.ts:22](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L22)*
+*Defined in [lib/constants.ts:22](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L22)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Const` **I2C\_DEFAULT**: 66 = 66
 
-*Defined in [lib/constants.ts:20](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L20)*
+*Defined in [lib/constants.ts:20](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L20)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • `Const` **MAX\_STRIPS**: 8 = 8
 
-*Defined in [lib/constants.ts:16](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L16)*
+*Defined in [lib/constants.ts:16](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L16)*
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • `Const` **PIN\_DEFAULT**: 6 = 6
 
-*Defined in [lib/constants.ts:18](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L18)*
+*Defined in [lib/constants.ts:18](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L18)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • `Const` **PIXEL\_COMMAND**: 81 = 81
 
-*Defined in [lib/constants.ts:6](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L6)*
+*Defined in [lib/constants.ts:6](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L6)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 • `Const` **PIXEL\_CONFIG**: 1 = 1
 
-*Defined in [lib/constants.ts:8](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L8)*
+*Defined in [lib/constants.ts:8](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L8)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • `Const` **PIXEL\_OFF**: 0 = 0
 
-*Defined in [lib/constants.ts:7](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L7)*
+*Defined in [lib/constants.ts:7](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L7)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • `Const` **PIXEL\_SET\_PIXEL**: 3 = 3
 
-*Defined in [lib/constants.ts:10](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L10)*
+*Defined in [lib/constants.ts:10](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L10)*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 • `Const` **PIXEL\_SET\_STRIP**: 4 = 4
 
-*Defined in [lib/constants.ts:11](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L11)*
+*Defined in [lib/constants.ts:11](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L11)*
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 • `Const` **PIXEL\_SHIFT**: 5 = 5
 
-*Defined in [lib/constants.ts:12](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L12)*
+*Defined in [lib/constants.ts:12](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L12)*
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 • `Const` **PIXEL\_SHIFT\_WRAP**: 64 = 64
 
-*Defined in [lib/constants.ts:5](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L5)*
+*Defined in [lib/constants.ts:5](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L5)*
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 • `Const` **PIXEL\_SHOW**: 2 = 2
 
-*Defined in [lib/constants.ts:9](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L9)*
+*Defined in [lib/constants.ts:9](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L9)*
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 • `Const` **SHIFT\_BACKWARD**: 0 = 0
 
-*Defined in [lib/constants.ts:14](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L14)*
+*Defined in [lib/constants.ts:14](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L14)*
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 • `Const` **SHIFT\_FORWARD**: 32 = 32
 
-*Defined in [lib/constants.ts:13](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L13)*
+*Defined in [lib/constants.ts:13](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L13)*
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 • `Const` **START\_SYSEX**: 240 = 240
 
-*Defined in [lib/constants.ts:1](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L1)*
+*Defined in [lib/constants.ts:1](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L1)*
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 • `Const` **STRING\_DATA**: 113 = 113
 
-*Defined in [lib/constants.ts:2](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L2)*
+*Defined in [lib/constants.ts:2](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L2)*
 
 ## Object literals
 
@@ -181,7 +181,7 @@ ___
 
 ▪ `Const` **COLOR\_ORDER**: object
 
-*Defined in [lib/constants.ts:24](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/constants.ts#L24)*
+*Defined in [lib/constants.ts:24](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/constants.ts#L24)*
 
 #### Properties:
 

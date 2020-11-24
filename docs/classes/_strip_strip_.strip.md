@@ -64,7 +64,7 @@
 
 *Overrides void*
 
-*Defined in [lib/strip/strip.ts:12](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L12)*
+*Defined in [lib/strip/strip.ts:12](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L12)*
 
 #### Parameters:
 
@@ -80,7 +80,7 @@ Name | Type |
 
 •  **gamma**: number
 
-*Defined in [lib/strip/strip.ts:11](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L11)*
+*Defined in [lib/strip/strip.ts:11](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L11)*
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 •  **gtable**: number[]
 
-*Defined in [lib/strip/strip.ts:10](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L10)*
+*Defined in [lib/strip/strip.ts:10](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L10)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 •  **length**: number
 
-*Defined in [lib/strip/strip.ts:12](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L12)*
+*Defined in [lib/strip/strip.ts:12](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L12)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 •  **pixels**: [Pixel](_pixel_pixel_.pixel.md)[]
 
-*Defined in [lib/strip/strip.ts:9](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L9)*
+*Defined in [lib/strip/strip.ts:9](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L9)*
 
 ___
 
@@ -140,7 +140,7 @@ regular `'error'` listener is installed.
 
 ▸ **_shift**(`amt`: number, `direction`: *typeof* SHIFT\_FORWARD \| *typeof* SHIFT\_BACKWARD, `wrap`: boolean): void
 
-*Defined in [lib/strip/strip.ts:34](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L34)*
+*Defined in [lib/strip/strip.ts:34](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L34)*
 
 #### Parameters:
 
@@ -177,7 +177,7 @@ ___
 
 ▸ **color**(`color?`: string \| [number, number, number]): void
 
-*Defined in [lib/strip/strip.ts:77](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L77)*
+*Defined in [lib/strip/strip.ts:77](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L77)*
 
 #### Parameters:
 
@@ -193,7 +193,7 @@ ___
 
 ▸ **colour**(`color?`: string \| [number, number, number]): void
 
-*Defined in [lib/strip/strip.ts:110](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L110)*
+*Defined in [lib/strip/strip.ts:110](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L110)*
 
 #### Parameters:
 
@@ -240,7 +240,7 @@ ___
 
 ▸ **getLength**(): number
 
-*Defined in [lib/strip/strip.ts:23](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L23)*
+*Defined in [lib/strip/strip.ts:23](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L23)*
 
 **Returns:** number
 
@@ -300,7 +300,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/strip/strip.ts:113](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L113)*
+*Defined in [lib/strip/strip.ts:113](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L113)*
 
 **Returns:** this
 
@@ -348,7 +348,7 @@ ___
 
 ▸ **pixel**(`addr`: number): [Pixel](_pixel_pixel_.pixel.md) \| undefined
 
-*Defined in [lib/strip/strip.ts:20](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L20)*
+*Defined in [lib/strip/strip.ts:20](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L20)*
 
 #### Parameters:
 
@@ -475,7 +475,7 @@ ___
 
 ▸ **shift**(`amt`: number, `direction`: *typeof* SHIFT\_FORWARD \| *typeof* SHIFT\_BACKWARD, `wrap`: boolean): void
 
-*Defined in [lib/strip/strip.ts:37](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L37)*
+*Defined in [lib/strip/strip.ts:37](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L37)*
 
 #### Parameters:
 
@@ -493,7 +493,7 @@ ___
 
 ▸ **show**(): void
 
-*Defined in [lib/strip/strip.ts:30](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L30)*
+*Defined in [lib/strip/strip.ts:30](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L30)*
 
 **Returns:** void
 
@@ -503,7 +503,7 @@ ___
 
 ▸ **stripColor**(`color`: number): void
 
-*Defined in [lib/strip/strip.ts:27](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L27)*
+*Defined in [lib/strip/strip.ts:27](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/strip/strip.ts#L27)*
 
 #### Parameters:
 

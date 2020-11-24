@@ -32,7 +32,7 @@
 
 *Inherited from [BaseStripOptions](_types_.basestripoptions.md).[board](_types_.basestripoptions.md#board)*
 
-*Defined in [lib/types.ts:69](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L69)*
+*Defined in [lib/types.ts:69](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L69)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 *Inherited from [BaseStripOptions](_types_.basestripoptions.md).[color_order](_types_.basestripoptions.md#color_order)*
 
-*Defined in [lib/types.ts:67](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L67)*
+*Defined in [lib/types.ts:67](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L67)*
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 *Inherited from [BaseStripOptions](_types_.basestripoptions.md).[controller](_types_.basestripoptions.md#controller)*
 
-*Defined in [lib/types.ts:70](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L70)*
+*Defined in [lib/types.ts:70](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L70)*
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 •  **data**: number
 
-*Defined in [lib/types.ts:81](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L81)*
+*Defined in [lib/types.ts:81](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L81)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 *Inherited from [BaseStripOptions](_types_.basestripoptions.md).[firmata](_types_.basestripoptions.md#firmata)*
 
-*Defined in [lib/types.ts:68](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L68)*
+*Defined in [lib/types.ts:68](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L68)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 *Inherited from [BaseStripOptions](_types_.basestripoptions.md).[gamma](_types_.basestripoptions.md#gamma)*
 
-*Defined in [lib/types.ts:65](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L65)*
+*Defined in [lib/types.ts:65](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L65)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 *Inherited from [BaseStripOptions](_types_.basestripoptions.md).[length](_types_.basestripoptions.md#length)*
 
-*Defined in [lib/types.ts:66](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L66)*
+*Defined in [lib/types.ts:66](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L66)*
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 •  **skip\_firmware\_check**: boolean
 
-*Defined in [lib/types.ts:83](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L83)*
+*Defined in [lib/types.ts:83](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L83)*
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 • `Optional` **strips**: number[] \| string[] \| [StripConfig](../modules/_types_.md#stripconfig)[]
 
-*Defined in [lib/types.ts:82](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L82)*
+*Defined in [lib/types.ts:82](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L82)*

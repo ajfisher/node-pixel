@@ -27,7 +27,7 @@
 
 •  **addr**: number
 
-*Defined in [lib/types.ts:47](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L47)*
+*Defined in [lib/types.ts:47](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L47)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 *Inherited from [PixelOptions](_types_.pixeloptions.md).[controller](_types_.pixeloptions.md#controller)*
 
-*Defined in [lib/types.ts:8](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L8)*
+*Defined in [lib/types.ts:8](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L8)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 •  **i2c\_address**: number
 
-*Defined in [lib/types.ts:51](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L51)*
+*Defined in [lib/types.ts:51](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L51)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 •  **io**: { i2cWrite: (address: number, color: number[]) => void  }
 
-*Defined in [lib/types.ts:48](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L48)*
+*Defined in [lib/types.ts:48](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L48)*
 
 #### Type declaration:
 
@@ -69,7 +69,7 @@ ___
 
 *Inherited from [PixelOptions](_types_.pixeloptions.md).[sendmsg](_types_.pixeloptions.md#sendmsg)*
 
-*Defined in [lib/types.ts:9](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L9)*
+*Defined in [lib/types.ts:9](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L9)*
 
 ___
 
@@ -77,4 +77,4 @@ ___
 
 •  **strip**: [FirmataStrip](../classes/_strip_firmata_.firmatastrip.md) \| [BackpackStrip](../classes/_strip_backpack_.backpackstrip.md)
 
-*Defined in [lib/types.ts:52](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L52)*
+*Defined in [lib/types.ts:52](https://github.com/hweeks/node-pixel-async/blob/e2c8d0c/lib/types.ts#L52)*
