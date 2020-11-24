@@ -1,19 +1,22 @@
-# Basic Johnny Five example
+# Multi strip example
 
-This example uses johnny five to control a neopixel strip using an I2C backpack.
+This example uses johnny five to control multiple WS2812 strips using an I2C
+backpack
 
 To install the I2C backpack, see the [Installation Guide](installation.md).
 
 ## Wiring
 
 Wire the neopixel strip up as shown below. This can be done on any I2C compatible
-board that Johnny Five supports. This example uses a Raspberry Pi.
+board that Johnny Five supports. This example uses a Raspberry Pi with 2 strips
+attached to the backpack. For the Raspberry Pi to work with the backpack, include the [raspi-io](https://www.npmjs.com/package/raspi-io) plugin to Johnny Five when initializing the Board.
 
-![Wiring diagram](breadboard/i2c_backpack_bb.png)
+![Wiring diagram](breadboard/i2c_backpack_multipin_bb.png)
 
-The example below uses and arduino Uno.
+The example below uses two strips attached to the backpack connected to the host
+Arduino Uno.
 
-![Wiring diagram](breadboard/i2c_backpack_arduino_bb.png)
+![Wiring diagram](breadboard/i2c_backpack_arduino_multipin_bb.png)
 
 ### I2C LED pins
 
@@ -24,7 +27,7 @@ start with pin 0 and work upwards from there to 8 max.
 
 ```js
 var five = require("johnny-five");
-var pixel = require("node-pixel-async");
+var { Strip } = require("node-pixel-async");
 
 var opts = {};
 opts.port = process.argv[2] || "";
@@ -38,24 +41,23 @@ board.on("ready", function() {
 
     console.log("Board ready, lets add light");
 
-    strip = pixel.Strip({
-        color_order: pixel.COLOR_ORDER.GRB,
+    strip = Strip({
         board: this,
         controller: "I2CBACKPACK",
-        strips: [8],
+        color_order: pixel.COLOR_ORDER.GRB,
+        strips: [ 17,8 ]
     });
 
     strip.on("ready", function() {
 
-        console.log("Strip ready, let's go");
+        console.log("Strip ready");
 
-        var colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "white"];
-        var current_colors = [0,1,2,3,4];
-        var current_pos = [0,1,2,3,4];
+        var colors = ["red", "green", "blue"];
+        var current_colors = [0,1,2];
+        var current_pos = [0,1,2];
         var blinker = setInterval(function() {
 
             strip.color("#000"); // blanks it out
-
             for (var i=0; i< current_pos.length; i++) {
                 if (++current_pos[i] >= strip.length) {
                     current_pos[i] = 0;
@@ -67,15 +69,34 @@ board.on("ready", function() {
             strip.show();
         }, 1000/fps);
     });
+
+    strip.on("error", function(err) {
+        console.log(err);
+        process.exit();
+    });
 });
 ```
+
+When using a Raspberry Pi:
+
+```js
+var Raspi = require("raspi-io");
+var five = require("johnny-five");
+
+const board = new five.Board({
+    io: new Raspi()
+});
+
+// .. Rest of your code
+```
+
 
 ## Running
 
 To run the example:
 
 ```
-node examples/johnnyfive-i2c.js
+node examples/multipin-i2c.js
 ```
 
 You can optionally pass a port in as a parameter.

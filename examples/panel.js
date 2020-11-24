@@ -3,7 +3,7 @@
 // hook for the board.
 
 const five = require('johnny-five');
-const pixel = require('node-pixel-async');
+const { Strip } = require('node-pixel-async');
 
 const opts = {};
 opts.port = process.argv[2] || '';
@@ -16,7 +16,7 @@ const fps = 1; // how many frames per second do you want to try?
 board.on('ready', function() {
   console.log('Board ready, lets add light');
 
-  strip = pixel.Strip({
+  strip = Strip({
     board: this,
     controller: 'FIRMATA',
     data: 6,

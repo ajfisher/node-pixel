@@ -5,7 +5,7 @@
  * created by @pierceray in June 2015
  */
 const five = require('johnny-five');
-const pixel = require('node-pixel-async');
+const { Strip } = require('node-pixel-async');
 
 const opts = {};
 opts.port = process.argv[2] || '';
@@ -53,7 +53,7 @@ board.on('ready', function() {
   }
 
   // setup the node-pixel strip.
-  strip = pixel.Strip({
+  strip = Strip({
     data: 6,
     length: 16, // number of pixels in the strip.
     board: this,
