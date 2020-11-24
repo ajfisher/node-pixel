@@ -27,7 +27,7 @@
 
 •  **address**: number
 
-*Defined in [lib/types.ts:22](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L22)*
+*Defined in [lib/types.ts:22](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L22)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **color**: [PixelColor](_types_.pixelcolor.md)
 
-*Defined in [lib/types.ts:24](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L24)*
+*Defined in [lib/types.ts:24](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L24)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 •  **id**: number
 
-*Defined in [lib/types.ts:23](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L23)*
+*Defined in [lib/types.ts:23](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L23)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 •  **parent**: { gtable: number[]  }
 
-*Defined in [lib/types.ts:25](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L25)*
+*Defined in [lib/types.ts:25](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L25)*
 
 #### Type declaration:
 

@@ -25,7 +25,7 @@
 
 •  **controller**: \"FIRMATA\" \| \"I2CBACKPACK\"
 
-*Defined in [lib/types.ts:8](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L8)*
+*Defined in [lib/types.ts:8](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L8)*
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 • `Optional` **sendmsg**: undefined \| false \| true
 
-*Defined in [lib/types.ts:9](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L9)*
+*Defined in [lib/types.ts:9](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L9)*

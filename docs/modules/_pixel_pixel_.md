@@ -25,7 +25,7 @@
 
 Ƭ  **BasePixelConfiguration**: [FirmataBasePixel](../interfaces/_types_.firmatabasepixel.md) \| [BackpackBasePixel](../interfaces/_types_.backpackbasepixel.md) \| undefined
 
-*Defined in [lib/pixel/pixel.ts:22](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/pixel.ts#L22)*
+*Defined in [lib/pixel/pixel.ts:22](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L22)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 Ƭ  **PixelInit**: [FirmataPixelOptions](../interfaces/_types_.firmatapixeloptions.md) \| [BackpackPixelOptions](../interfaces/_types_.backpackpixeloptions.md)
 
-*Defined in [lib/pixel/pixel.ts:21](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/pixel.ts#L21)*
+*Defined in [lib/pixel/pixel.ts:21](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L21)*
 
 ## Functions
 
@@ -41,7 +41,7 @@ ___
 
 ▸ **colorValue**(`colors`: number[], `g_table`: number[]): number
 
-*Defined in [lib/pixel/pixel.ts:4](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/pixel.ts#L4)*
+*Defined in [lib/pixel/pixel.ts:4](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L4)*
 
 #### Parameters:
 

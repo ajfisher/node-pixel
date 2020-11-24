@@ -25,7 +25,7 @@
 
 •  **b**: number
 
-*Defined in [lib/types.ts:15](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L15)*
+*Defined in [lib/types.ts:15](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L15)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 •  **color**: string
 
-*Defined in [lib/types.ts:17](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L17)*
+*Defined in [lib/types.ts:17](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L17)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 •  **g**: number
 
-*Defined in [lib/types.ts:14](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L14)*
+*Defined in [lib/types.ts:14](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L14)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 •  **hexcode**: string
 
-*Defined in [lib/types.ts:16](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L16)*
+*Defined in [lib/types.ts:16](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L16)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 •  **r**: number
 
-*Defined in [lib/types.ts:13](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L13)*
+*Defined in [lib/types.ts:13](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L13)*
 
 ___
 
@@ -65,4 +65,4 @@ ___
 
 •  **rgb**: [number, number, number]
 
-*Defined in [lib/types.ts:18](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L18)*
+*Defined in [lib/types.ts:18](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L18)*

@@ -27,7 +27,7 @@
 
 •  **addr**: number
 
-*Defined in [lib/types.ts:31](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L31)*
+*Defined in [lib/types.ts:31](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L31)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 *Inherited from [PixelOptions](_types_.pixeloptions.md).[controller](_types_.pixeloptions.md#controller)*
 
-*Defined in [lib/types.ts:8](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L8)*
+*Defined in [lib/types.ts:8](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L8)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 •  **firmata**: unknown
 
-*Defined in [lib/types.ts:32](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L32)*
+*Defined in [lib/types.ts:32](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L32)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 •  **port**: { write: (message: Buffer) => void  }
 
-*Defined in [lib/types.ts:33](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L33)*
+*Defined in [lib/types.ts:33](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L33)*
 
 #### Type declaration:
 
@@ -69,7 +69,7 @@ ___
 
 *Inherited from [PixelOptions](_types_.pixeloptions.md).[sendmsg](_types_.pixeloptions.md#sendmsg)*
 
-*Defined in [lib/types.ts:9](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L9)*
+*Defined in [lib/types.ts:9](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L9)*
 
 ___
 
@@ -77,4 +77,4 @@ ___
 
 •  **strip**: [FirmataStrip](../classes/_strip_firmata_.firmatastrip.md) \| [BackpackStrip](../classes/_strip_backpack_.backpackstrip.md)
 
-*Defined in [lib/types.ts:36](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/types.ts#L36)*
+*Defined in [lib/types.ts:36](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/types.ts#L36)*

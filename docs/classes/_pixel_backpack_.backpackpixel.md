@@ -38,7 +38,7 @@
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[constructor](_pixel_pixel_.pixel.md#constructor)*
 
-*Defined in [lib/pixel/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/backpack.ts#L11)*
+*Defined in [lib/pixel/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/backpack.ts#L11)*
 
 #### Parameters:
 
@@ -56,7 +56,7 @@ Name | Type |
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[internalPixel](_pixel_pixel_.pixel.md#internalpixel)*
 
-*Defined in [lib/pixel/backpack.ts:10](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/backpack.ts#L10)*
+*Defined in [lib/pixel/backpack.ts:10](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/backpack.ts#L10)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[sendmsg](_pixel_pixel_.pixel.md#sendmsg)*
 
-*Defined in [lib/pixel/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/backpack.ts#L11)*
+*Defined in [lib/pixel/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/backpack.ts#L11)*
 
 ## Methods
 
@@ -76,7 +76,7 @@ ___
 
 *Inherited from [Pixel](_pixel_pixel_.pixel.md).[color](_pixel_pixel_.pixel.md#color)*
 
-*Defined in [lib/pixel/pixel.ts:39](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/pixel.ts#L39)*
+*Defined in [lib/pixel/pixel.ts:39](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L39)*
 
 #### Parameters:
 
@@ -95,7 +95,7 @@ ___
 
 *Inherited from [Pixel](_pixel_pixel_.pixel.md).[colour](_pixel_pixel_.pixel.md#colour)*
 
-*Defined in [lib/pixel/pixel.ts:91](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/pixel.ts#L91)*
+*Defined in [lib/pixel/pixel.ts:91](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L91)*
 
 #### Parameters:
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **createPayload**(`colorAsNumber`: number): number[]
 
-*Defined in [lib/pixel/backpack.ts:30](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/backpack.ts#L30)*
+*Defined in [lib/pixel/backpack.ts:30](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/backpack.ts#L30)*
 
 #### Parameters:
 
@@ -130,7 +130,7 @@ ___
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[createPixel](_pixel_pixel_.pixel.md#createpixel)*
 
-*Defined in [lib/pixel/backpack.ts:17](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/backpack.ts#L17)*
+*Defined in [lib/pixel/backpack.ts:17](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/backpack.ts#L17)*
 
 #### Parameters:
 
@@ -148,7 +148,7 @@ ___
 
 *Overrides [Pixel](_pixel_pixel_.pixel.md).[fillPixel](_pixel_pixel_.pixel.md#fillpixel)*
 
-*Defined in [lib/pixel/backpack.ts:41](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/backpack.ts#L41)*
+*Defined in [lib/pixel/backpack.ts:41](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/backpack.ts#L41)*
 
 #### Parameters:
 
@@ -166,6 +166,6 @@ ___
 
 *Inherited from [Pixel](_pixel_pixel_.pixel.md).[off](_pixel_pixel_.pixel.md#off)*
 
-*Defined in [lib/pixel/pixel.ts:94](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/pixel/pixel.ts#L94)*
+*Defined in [lib/pixel/pixel.ts:94](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/pixel/pixel.ts#L94)*
 
 **Returns:** void

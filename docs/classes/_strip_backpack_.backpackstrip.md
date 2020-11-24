@@ -59,7 +59,7 @@
 
 *Overrides [Strip](_strip_strip_.strip.md).[constructor](_strip_strip_.strip.md#constructor)*
 
-*Defined in [lib/strip/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/backpack.ts#L11)*
+*Defined in [lib/strip/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/backpack.ts#L11)*
 
 #### Parameters:
 
@@ -77,7 +77,7 @@ Name | Type |
 
 *Inherited from [Strip](_strip_strip_.strip.md).[gamma](_strip_strip_.strip.md#gamma)*
 
-*Defined in [lib/strip/strip.ts:11](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L11)*
+*Defined in [lib/strip/strip.ts:11](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L11)*
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[gtable](_strip_strip_.strip.md#gtable)*
 
-*Defined in [lib/strip/strip.ts:10](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L10)*
+*Defined in [lib/strip/strip.ts:10](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L10)*
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 •  **i2c\_address**: number
 
-*Defined in [lib/strip/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/backpack.ts#L11)*
+*Defined in [lib/strip/backpack.ts:11](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/backpack.ts#L11)*
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 •  **io**: Firmware \| Board[\"io\"]
 
-*Defined in [lib/strip/backpack.ts:10](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/backpack.ts#L10)*
+*Defined in [lib/strip/backpack.ts:10](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/backpack.ts#L10)*
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[length](_strip_strip_.strip.md#length)*
 
-*Defined in [lib/strip/strip.ts:12](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L12)*
+*Defined in [lib/strip/strip.ts:12](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L12)*
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[pixels](_strip_strip_.strip.md#pixels)*
 
-*Defined in [lib/strip/strip.ts:9](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L9)*
+*Defined in [lib/strip/strip.ts:9](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L9)*
 
 ## Methods
 
@@ -133,7 +133,7 @@ ___
 
 *Overrides [Strip](_strip_strip_.strip.md).[_shift](_strip_strip_.strip.md#_shift)*
 
-*Defined in [lib/strip/backpack.ts:132](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/backpack.ts#L132)*
+*Defined in [lib/strip/backpack.ts:132](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/backpack.ts#L132)*
 
 #### Parameters:
 
@@ -172,7 +172,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[color](_strip_strip_.strip.md#color)*
 
-*Defined in [lib/strip/strip.ts:77](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L77)*
+*Defined in [lib/strip/strip.ts:77](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L77)*
 
 #### Parameters:
 
@@ -190,7 +190,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[colour](_strip_strip_.strip.md#colour)*
 
-*Defined in [lib/strip/strip.ts:110](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L110)*
+*Defined in [lib/strip/strip.ts:110](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L110)*
 
 #### Parameters:
 
@@ -239,7 +239,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[getLength](_strip_strip_.strip.md#getlength)*
 
-*Defined in [lib/strip/strip.ts:23](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L23)*
+*Defined in [lib/strip/strip.ts:23](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L23)*
 
 **Returns:** number
 
@@ -301,7 +301,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/strip/strip.ts:113](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L113)*
+*Defined in [lib/strip/strip.ts:113](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L113)*
 
 **Returns:** this
 
@@ -351,7 +351,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[pixel](_strip_strip_.strip.md#pixel)*
 
-*Defined in [lib/strip/strip.ts:20](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L20)*
+*Defined in [lib/strip/strip.ts:20](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L20)*
 
 #### Parameters:
 
@@ -480,7 +480,7 @@ ___
 
 *Inherited from [Strip](_strip_strip_.strip.md).[shift](_strip_strip_.strip.md#shift)*
 
-*Defined in [lib/strip/strip.ts:37](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/strip.ts#L37)*
+*Defined in [lib/strip/strip.ts:37](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/strip.ts#L37)*
 
 #### Parameters:
 
@@ -500,7 +500,7 @@ ___
 
 *Overrides [Strip](_strip_strip_.strip.md).[show](_strip_strip_.strip.md#show)*
 
-*Defined in [lib/strip/backpack.ts:108](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/backpack.ts#L108)*
+*Defined in [lib/strip/backpack.ts:108](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/backpack.ts#L108)*
 
 **Returns:** void
 
@@ -512,7 +512,7 @@ ___
 
 *Overrides [Strip](_strip_strip_.strip.md).[stripColor](_strip_strip_.strip.md#stripcolor)*
 
-*Defined in [lib/strip/backpack.ts:117](https://github.com/hweeks/node-pixel-async/blob/94dca3b/lib/strip/backpack.ts#L117)*
+*Defined in [lib/strip/backpack.ts:117](https://github.com/hweeks/node-pixel-async/blob/c6b1f13/lib/strip/backpack.ts#L117)*
 
 #### Parameters:
 
