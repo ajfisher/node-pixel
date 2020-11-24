@@ -19,7 +19,7 @@
     "prepublishOnly": "yarn build && rimraf docs/ && yarn docs",
     "semantic-release": "semantic-release",
     "lint": "eslint . --ext .ts",
-    "docs": "yarn typedoc --plugin typedoc-plugin-markdown --out docs lib/",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs lib/",
     "commit": "cz"
   },
   "repository": {
