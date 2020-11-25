@@ -3,6 +3,7 @@ import {Board as JohnnyBoard} from 'johnny-five';
 import Board from "firmata";
 import { FirmataStrip } from "./strip/firmata";
 import { BackpackStrip } from "./strip/backpack";
+import { Strip } from "./strip/strip";
 
 export interface PixelOptions {
   controller: 'FIRMATA' | 'I2CBACKPACK'
@@ -22,9 +23,7 @@ export interface BuiltPixelBase {
   address: number
   id: number
   color: PixelColor
-  parent: {
-    gtable: number[]
-  }
+  parent: Strip
 }
 
 export interface FirmataPixelOptions extends PixelOptions {
@@ -61,6 +60,11 @@ export interface BackpackBasePixel extends BuiltPixelBase {
 
 // Strip Types
 
+export interface WhiteBasedMaximum {
+  channel: 'R' | 'G' | 'B'
+  maximum: number
+}
+
 export interface BaseStripOptions {
   gamma: number
   length: number
@@ -68,6 +72,7 @@ export interface BaseStripOptions {
   firmata?: Board
   board?: JohnnyBoard
   controller?: 'FIRMATA' | 'I2CBACKPACK'
+  whiteCap: [WhiteBasedMaximum, WhiteBasedMaximum, WhiteBasedMaximum]
 }
 
 export type StripConfig = {pin?: number, color_order?: number, length: number}

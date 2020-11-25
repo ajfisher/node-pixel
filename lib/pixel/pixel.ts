@@ -78,7 +78,10 @@ export class Pixel {
       }
       pixel.color.rgb = pixelcolor.value as [number, number, number];
 
-      const pixelColor = colorValue(pixelcolor.value, pixel.parent.gtable);
+      let pixelColor = colorValue(pixelcolor.value, pixel.parent.gtable);
+      if (this.internalPixel?.parent.whiteCap) {
+        // pixelColor = some transform
+      }
       if (shouldMessage) {
         // TODO probably should be pulling the color off the obj rather than
         // sending it to this function....

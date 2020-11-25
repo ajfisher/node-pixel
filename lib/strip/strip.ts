@@ -10,6 +10,7 @@ export class Strip extends EventEmitter {
   gtable: number[]
   gamma: number
   length: number
+  whiteCap?: BaseStripOptions['whiteCap']
   constructor(opts : BaseStripOptions) {
     super()
     this.gamma = opts.gamma || GAMMA_DEFAULT
@@ -102,7 +103,11 @@ export class Strip extends EventEmitter {
       }
 
       // set the whole strip color to the appropriate int value
-      this.stripColor(colorValue(stripcolor, this.gtable));
+      let builtColor = colorValue(stripcolor, this.gtable)
+      if (this.whiteCap) {
+        // color = result of transform
+      }
+      this.stripColor(builtColor);
     } else {
       console.log("Supplied colour couldn't be parsed: " + color);
     }
