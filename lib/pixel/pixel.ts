@@ -1,5 +1,6 @@
 import ColorString, { ColorDescriptor } from 'color-string' // used for color parsing
 import { FirmataPixelOptions, BackpackPixelOptions, FirmataBasePixel, BackpackBasePixel, PixelColor } from '../types';
+import { normalize_color } from '../utils';
 
 export function colorValue(colors : number[], g_table: number[]) : number {
   // colors are assumed to be an array of [r, g, b] bytes
@@ -78,7 +79,12 @@ export class Pixel {
       }
       pixel.color.rgb = pixelcolor.value as [number, number, number];
 
-      const pixelColor = colorValue(pixelcolor.value, pixel.parent.gtable);
+      let pixelColor: number
+      if (this.internalPixel?.parent.whiteCap) {
+        pixelColor = normalize_color(pixelcolor.value, this.internalPixel.parent.whiteCap);
+      } else {
+        pixelColor = colorValue(pixelcolor.value, pixel.parent.gtable);
+      }
       if (shouldMessage) {
         // TODO probably should be pulling the color off the obj rather than
         // sending it to this function....

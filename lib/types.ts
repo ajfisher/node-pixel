@@ -3,6 +3,7 @@ import {Board as JohnnyBoard} from 'johnny-five';
 import Board from "firmata";
 import { FirmataStrip } from "./strip/firmata";
 import { BackpackStrip } from "./strip/backpack";
+import { Strip } from "./strip/strip";
 
 export interface PixelOptions {
   controller: 'FIRMATA' | 'I2CBACKPACK'
@@ -22,9 +23,7 @@ export interface BuiltPixelBase {
   address: number
   id: number
   color: PixelColor
-  parent: {
-    gtable: number[]
-  }
+  parent: Strip
 }
 
 export interface FirmataPixelOptions extends PixelOptions {
@@ -61,19 +60,33 @@ export interface BackpackBasePixel extends BuiltPixelBase {
 
 // Strip Types
 
+export interface ChannelTransformRequest {
+  maximum: number,
+  gamma?: number
+}
+
+export interface ChannelTransform {
+  maximum: number,
+  gamma: number,
+  g_table: number[]
+}
+
+export type ChannelTransformArray = [ChannelTransform, ChannelTransform, ChannelTransform]
+
 export interface BaseStripOptions {
   gamma: number
-  length: number
-  color_order: typeof COLOR_ORDER.GRB | typeof COLOR_ORDER.BRG | typeof COLOR_ORDER.RGB
+  length?: number
+  color_order?: typeof COLOR_ORDER.GRB | typeof COLOR_ORDER.BRG | typeof COLOR_ORDER.RGB
   firmata?: Board
   board?: JohnnyBoard
   controller?: 'FIRMATA' | 'I2CBACKPACK'
+  whiteCap?: [ChannelTransformRequest, ChannelTransformRequest, ChannelTransformRequest]
 }
 
 export type StripConfig = {pin?: number, color_order?: number, length: number}
 
 export interface BackpackOptions extends BaseStripOptions {
-  address: number
+  address?: number
   strips?: number[] | string[] | StripConfig[]
 }
 
