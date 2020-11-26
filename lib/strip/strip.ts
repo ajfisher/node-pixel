@@ -2,7 +2,7 @@ import {EventEmitter} from 'events'
 import ColorString, { Color } from 'color-string'
 import { Pixel } from '../pixel/'
 import { GAMMA_DEFAULT, SHIFT_BACKWARD, SHIFT_FORWARD } from '../constants'
-import { buildGammaTable, normalizeColor, colorValue } from '../utils'
+import { buildGammaTable, normalizeColor, colorValue, normalizeColorWithBrightness } from '../utils'
 import { BaseStripOptions, ChannelTransformArray } from '../types'
 
 export class Strip extends EventEmitter {
@@ -87,7 +87,7 @@ export class Strip extends EventEmitter {
       this._shift(amt, direction, wrap);
     }
   }
-  color (color?: string | [number, number, number]) : void {
+  color (color?: string | [number, number, number], brightness?: number) : void {
     // sets the color of the entire strip
     // use a particular form to set the color either
     // color = hex value or named colors
@@ -117,15 +117,19 @@ export class Strip extends EventEmitter {
       // set the whole strip color to the appropriate int value
       let builtColor = colorValue(stripcolor, this.gtable)
       if (this.whiteCap) {
-        builtColor = normalizeColor(stripcolor, this.whiteCap);
+        if (brightness !== undefined) {
+          builtColor = normalizeColorWithBrightness(stripcolor, brightness, this.whiteCap);
+        } else {
+          builtColor = normalizeColor(stripcolor, this.whiteCap);
+        }
       }
       this.stripColor(builtColor);
     } else {
       console.log("Supplied colour couldn't be parsed: " + color);
     }
   }
-  colour (color?: string | [number, number, number]) : void {
-    return this.color(color)
+  colour (color?: string | [number, number, number], brightness?: number) : void {
+    return this.color(color, brightness)
   }
   off() : this {
     this.color([0,0,0])

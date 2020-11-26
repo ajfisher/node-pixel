@@ -79,7 +79,7 @@ export class Pixel {
       console.log("Color supplied couldn't be parsed: " + color);
     }
   }
-  colour(color?: string | [number, number, number], optOverride?: {sendmsg : boolean}) : void | PixelColor {
+  colour(color?: string | [number, number, number], optOverride?: {sendmsg : boolean, brightness?: number}) : void | PixelColor {
     this.color(color, optOverride);
   }
   off () : void {
