@@ -1,6 +1,7 @@
 import {
   GAMMA_DEFAULT
 } from './constants';
+import { ChannelTransformArray } from './types';
 
 // helper function for building gamma values
 export function create_gamma_table(steps : number, gamma: number, warning: boolean) : number[] {
@@ -22,3 +23,23 @@ export function create_gamma_table(steps : number, gamma: number, warning: boole
   return g_table;
 }
 
+export function normalize_color(colors : number[], whiteCap: ChannelTransformArray): number {
+  // colors are assumed to be an array of [r, g, b] bytes
+  // colorValue returns a packed value able to be pushed to firmata rather than
+  // text values.
+  // if g_tables are passed then they should use the supplied gamma
+  // correction table to correct the received value.
+
+  // before sending, account for gamma correction.
+  const gammaCorrectedColor = Object.assign({}, colors);
+
+  gammaCorrectedColor[0] = whiteCap[0].g_table[gammaCorrectedColor[0]];
+  gammaCorrectedColor[1] = whiteCap[1].g_table[gammaCorrectedColor[1]];
+  gammaCorrectedColor[2] = whiteCap[2].g_table[gammaCorrectedColor[2]];
+
+  gammaCorrectedColor[0] = Math.round((gammaCorrectedColor[0] / 255) * whiteCap[0].maximum)
+  gammaCorrectedColor[1] = Math.round((gammaCorrectedColor[1] / 255) * whiteCap[1].maximum)
+  gammaCorrectedColor[2] = Math.round((gammaCorrectedColor[2] / 255) * whiteCap[2].maximum)
+
+  return ((gammaCorrectedColor[0] << 16) + (gammaCorrectedColor[1] << 8) + (gammaCorrectedColor[2]));
+}

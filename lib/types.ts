@@ -60,25 +60,33 @@ export interface BackpackBasePixel extends BuiltPixelBase {
 
 // Strip Types
 
-export interface WhiteBasedMaximum {
-  channel: 'R' | 'G' | 'B'
-  maximum: number
+export interface ChannelTransformRequest {
+  maximum: number,
+  gamma?: number
 }
+
+export interface ChannelTransform {
+  maximum: number,
+  gamma: number,
+  g_table: number[]
+}
+
+export type ChannelTransformArray = [ChannelTransform, ChannelTransform, ChannelTransform]
 
 export interface BaseStripOptions {
   gamma: number
-  length: number
-  color_order: typeof COLOR_ORDER.GRB | typeof COLOR_ORDER.BRG | typeof COLOR_ORDER.RGB
+  length?: number
+  color_order?: typeof COLOR_ORDER.GRB | typeof COLOR_ORDER.BRG | typeof COLOR_ORDER.RGB
   firmata?: Board
   board?: JohnnyBoard
   controller?: 'FIRMATA' | 'I2CBACKPACK'
-  whiteCap: [WhiteBasedMaximum, WhiteBasedMaximum, WhiteBasedMaximum]
+  whiteCap?: [ChannelTransformRequest, ChannelTransformRequest, ChannelTransformRequest]
 }
 
 export type StripConfig = {pin?: number, color_order?: number, length: number}
 
 export interface BackpackOptions extends BaseStripOptions {
-  address: number
+  address?: number
   strips?: number[] | string[] | StripConfig[]
 }
 

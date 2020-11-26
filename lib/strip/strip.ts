@@ -3,20 +3,32 @@ import ColorString, { Color } from 'color-string'
 import { colorValue, Pixel } from '../pixel/'
 import { GAMMA_DEFAULT, SHIFT_BACKWARD, SHIFT_FORWARD } from '../constants'
 import { create_gamma_table } from '../utils'
-import { BaseStripOptions } from '../types'
+import { BaseStripOptions, ChannelTransformArray } from '../types'
 
 export class Strip extends EventEmitter {
   pixels: Pixel[]
   gtable: number[]
   gamma: number
   length: number
-  whiteCap?: BaseStripOptions['whiteCap']
+  whiteCap?: ChannelTransformArray
   constructor(opts : BaseStripOptions) {
     super()
     this.gamma = opts.gamma || GAMMA_DEFAULT
     this.gtable = create_gamma_table(256, this.gamma, false);
+    this.whiteCap = this.createWhiteCap(opts.whiteCap);
     this.pixels = [];
     this.length = 0;
+  }
+  createWhiteCap(userWhiteCaps?: BaseStripOptions['whiteCap']): ChannelTransformArray | undefined {
+    if (userWhiteCaps?.length === 3) {
+      return userWhiteCaps.map(
+        value => value.gamma ? value : {
+          ...value,
+          gamma: this.gamma,
+          g_table: create_gamma_table(256, this.gamma, false)
+        }
+      ) as ChannelTransformArray;
+    }
   }
   pixel(addr : number) : Pixel | undefined {
     return this.pixels && this.pixels[addr]
