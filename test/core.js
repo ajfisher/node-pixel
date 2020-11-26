@@ -7,8 +7,8 @@ const sinon = require('sinon');
 
 const five = require('johnny-five');
 const pixel = require('../dist/index.js');
-const { colorValue } = require('../dist/pixel/pixel');
-const { create_gamma_table } = require('../dist/utils');
+const { colorValue } = require('../dist/utils');
+const { buildGammaTable } = require('../dist/utils');
 
 const Board = five.Board;
 
@@ -71,7 +71,7 @@ exports['Color Value'] = {
   },
   leak(test) {
     test.expect(1);
-    const internalGTable = create_gamma_table(256, 2.8, false);
+    const internalGTable = buildGammaTable(256, 2.8, false);
     const baseColor = [123,123,123];
     colorValue(baseColor, internalGTable);
     test.deepEqual(baseColor, [123,123,123], 'The input should not be modified at all by the gamma correction');
@@ -107,7 +107,7 @@ exports['Pixel'] = {
       r: 255, g: 255, b: 255,
       hexcode: '#FFFFFF',
       color: 'white',
-      rgb: [255, 255, 255]
+      rgb: [255, 255, 255, 1]
     };
 
     this.strip.pixel(0).color('#FFFFFF');
@@ -118,7 +118,7 @@ exports['Pixel'] = {
       r: 0, g: 255, b: 0,
       hexcode: '#00FF00',
       color: 'lime',
-      rgb: [0, 255, 0]
+      rgb: [0, 255, 0, 0]
     };
 
     this.strip.pixel(3).color([0, 255, 0]);
@@ -146,7 +146,7 @@ exports['Pixel'] = {
       r: 0, g: 0, b: 0,
       hexcode: '#000000',
       color: 'black',
-      rgb: [0, 0, 0]
+      rgb: [0, 0, 0, 0]
     };
 
     this.strip.pixel(1).off();

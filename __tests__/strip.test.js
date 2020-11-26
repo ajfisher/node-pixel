@@ -59,7 +59,7 @@ describe('Strip', () => {
         r: 255, g: 255, b: 255,
         hexcode: '#FFFFFF',
         color: 'white',
-        rgb: [255, 255, 255]
+        rgb: [255, 255, 255, 1]
       };
       strip.color('#FFFFFF');
       expect(strip.pixel(0).color()).toEqual(colourcheck);
@@ -69,7 +69,7 @@ describe('Strip', () => {
         r: 0, g: 255, b: 0,
         hexcode: '#00FF00',
         color: 'lime',
-        rgb: [0, 255, 0]
+        rgb: [0, 255, 0, 0]
       };
       strip.color([0, 255, 0]);
       expect(strip.pixel(3).color()).toEqual(colourcheck);
@@ -79,7 +79,7 @@ describe('Strip', () => {
         r: 0, g: 255, b: 0,
         hexcode: '#00FF00',
         color: 'lime',
-        rgb: [0, 255, 0]
+        rgb: [0, 255, 0, 0]
       };
       strip.color([0, 255, 0]);
       strip.color('QWERTYUIOP');
@@ -92,7 +92,7 @@ describe('Strip', () => {
         r: 0, g: 0, b: 0,
         hexcode: '#000000',
         color: 'black',
-        rgb: [0, 0, 0]
+        rgb: [0, 0, 0, 0]
       };
       strip.off();
       expect(strip.pixel(0).color()).toEqual(colourcheck);

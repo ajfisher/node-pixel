@@ -1,23 +1,7 @@
 import ColorString, { ColorDescriptor } from 'color-string' // used for color parsing
+import { colorValue, normalizeColorWithBrightness } from '../utils';
 import { FirmataPixelOptions, BackpackPixelOptions, FirmataBasePixel, BackpackBasePixel, PixelColor } from '../types';
-import { normalize_color } from '../utils';
-
-export function colorValue(colors : number[], g_table: number[]) : number {
-  // colors are assumed to be an array of [r, g, b] bytes
-  // colorValue returns a packed value able to be pushed to firmata rather than
-  // text values.
-  // if gtable is passed then it should use the supplied gamma
-  // correction table to correct the received value.
-
-  // before sending, account for gamma correction.
-  const gammaCorrectedColor = Object.assign({}, colors);
-
-  gammaCorrectedColor[0] = g_table[gammaCorrectedColor[0]];
-  gammaCorrectedColor[1] = g_table[gammaCorrectedColor[1]];
-  gammaCorrectedColor[2] = g_table[gammaCorrectedColor[2]];
-
-  return ((gammaCorrectedColor[0] << 16) + (gammaCorrectedColor[1] << 8) + (gammaCorrectedColor[2]));
-}
+import { normalizeColor } from '../utils';
 
 export type PixelInit = FirmataPixelOptions | BackpackPixelOptions
 export type BasePixelConfiguration = FirmataBasePixel | BackpackBasePixel | undefined
@@ -37,7 +21,7 @@ export class Pixel {
   fillPixel(inputColor : number) : void {
     return;
   }
-  color(color?: string | [number, number, number], optOverride?: {sendmsg : boolean}) : void | PixelColor {
+  color(color?: string | [number, number, number], optOverride?: {sendmsg : boolean, brightness?: number}) : void | PixelColor {
     // use a particular form to set the color either
     // color = hex value or named colors or array of colors
     // opts can contain _sendmsg_ as bool. If set to false message won't be
@@ -46,7 +30,7 @@ export class Pixel {
     const pixel = this.internalPixel;
     if (!pixel) return;
     const shouldMessage = optOverride?.sendmsg !== undefined ? optOverride.sendmsg : this.sendmsg;
-    let pixelcolor : ColorDescriptor | {model: string, value: [number, number, number]} | null;
+    let pixelcolor : ColorDescriptor | null;
 
     if (color) {
       // get the color based on a string
@@ -54,7 +38,7 @@ export class Pixel {
         // we have an RGB array value
         pixelcolor = {
           model: 'rgb',
-          value: color
+          value: [...color, 0]
         };
       } else {
         pixelcolor = ColorString.get(color);
@@ -72,23 +56,24 @@ export class Pixel {
       pixel.color.r = pixelcolor.value[0];
       pixel.color.g = pixelcolor.value[1];
       pixel.color.b = pixelcolor.value[2];
-      pixel.color.hexcode = ColorString.to.hex(pixelcolor.value);
-      pixel.color.color = ColorString.to.keyword(pixelcolor.value);
-      if (pixelcolor.value.length == 4) {
-        pixelcolor.value.pop();
-      }
-      pixel.color.rgb = pixelcolor.value as [number, number, number];
+      pixel.color.hexcode = ColorString.to.hex([pixelcolor.value[0], pixelcolor.value[1], pixelcolor.value[2]]);
+      pixel.color.color = ColorString.to.keyword([pixelcolor.value[0], pixelcolor.value[1], pixelcolor.value[2]]);
+      pixel.color.rgb = pixelcolor.value;
 
-      let pixelColor: number
+      let finalColor: number
       if (this.internalPixel?.parent.whiteCap) {
-        pixelColor = normalize_color(pixelcolor.value, this.internalPixel.parent.whiteCap);
+        if (optOverride?.brightness !== undefined) {
+          finalColor = normalizeColorWithBrightness(pixelcolor.value, optOverride.brightness, this.internalPixel.parent.whiteCap)
+        } else {
+          finalColor = normalizeColor(pixelcolor.value, this.internalPixel.parent.whiteCap);
+        }
       } else {
-        pixelColor = colorValue(pixelcolor.value, pixel.parent.gtable);
+        finalColor = colorValue(pixelcolor.value, pixel.parent.gtable);
       }
       if (shouldMessage) {
         // TODO probably should be pulling the color off the obj rather than
         // sending it to this function....
-        this.fillPixel(pixelColor);
+        this.fillPixel(finalColor);
       }
     } else {
       console.log("Color supplied couldn't be parsed: " + color);

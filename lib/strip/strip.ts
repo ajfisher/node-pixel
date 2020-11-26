@@ -1,8 +1,8 @@
 import {EventEmitter} from 'events'
 import ColorString, { Color } from 'color-string'
-import { colorValue, Pixel } from '../pixel/'
+import { Pixel } from '../pixel/'
 import { GAMMA_DEFAULT, SHIFT_BACKWARD, SHIFT_FORWARD } from '../constants'
-import { create_gamma_table, normalize_color } from '../utils'
+import { buildGammaTable, normalizeColor, colorValue } from '../utils'
 import { BaseStripOptions, ChannelTransformArray } from '../types'
 
 export class Strip extends EventEmitter {
@@ -14,7 +14,7 @@ export class Strip extends EventEmitter {
   constructor(opts : BaseStripOptions) {
     super()
     this.gamma = opts.gamma || GAMMA_DEFAULT
-    this.gtable = create_gamma_table(256, this.gamma, false);
+    this.gtable = buildGammaTable(256, this.gamma);
     this.whiteCap = this.createWhiteCap(opts.whiteCap);
     this.pixels = [];
     this.length = 0;
@@ -25,7 +25,7 @@ export class Strip extends EventEmitter {
         value => value.gamma ? value : {
           ...value,
           gamma: this.gamma,
-          g_table: create_gamma_table(256, this.gamma, false)
+          g_table: buildGammaTable(256, this.gamma)
         }
       ) as ChannelTransformArray;
     }
@@ -117,7 +117,7 @@ export class Strip extends EventEmitter {
       // set the whole strip color to the appropriate int value
       let builtColor = colorValue(stripcolor, this.gtable)
       if (this.whiteCap) {
-        builtColor = normalize_color(stripcolor, this.whiteCap);
+        builtColor = normalizeColor(stripcolor, this.whiteCap);
       }
       this.stripColor(builtColor);
     } else {

@@ -16,7 +16,7 @@ export interface PixelColor {
   b: number
   hexcode: string
   color: string
-  rgb: [number, number, number]
+  rgb: [number, number, number, number?]
 }
 
 export interface BuiltPixelBase {
