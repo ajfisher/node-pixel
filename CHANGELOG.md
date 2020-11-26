@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/hweeks/node-pixel-async/compare/v1.1.0...v1.2.0) (2020-11-26)
+
+
+### Bug Fixes
+
+* allow color conversion based on channel maximums ([4f1d542](https://github.com/hweeks/node-pixel-async/commit/4f1d5425fd172063e07d80219fb8e5455102e1f7))
+
+
+### Features
+
+* **color:** allow color conversion based on channel maximums ([2bd4264](https://github.com/hweeks/node-pixel-async/commit/2bd42649e546a8953ec2e82eb036ea48e37de1e7))
+* add base config for function ([ac5bac9](https://github.com/hweeks/node-pixel-async/commit/ac5bac9c1fbc9a6e73e924c51100f004fd34d2d4))
+
 # [1.1.0](https://github.com/hweeks/node-pixel-async/compare/v1.0.0...v1.1.0) (2020-11-22)
 
 
