@@ -2,7 +2,7 @@ import {EventEmitter} from 'events'
 import ColorString, { Color } from 'color-string'
 import { colorValue, Pixel } from '../pixel/'
 import { GAMMA_DEFAULT, SHIFT_BACKWARD, SHIFT_FORWARD } from '../constants'
-import { create_gamma_table } from '../utils'
+import { create_gamma_table, normalize_color } from '../utils'
 import { BaseStripOptions, ChannelTransformArray } from '../types'
 
 export class Strip extends EventEmitter {
@@ -117,7 +117,7 @@ export class Strip extends EventEmitter {
       // set the whole strip color to the appropriate int value
       let builtColor = colorValue(stripcolor, this.gtable)
       if (this.whiteCap) {
-        // color = result of transform
+        builtColor = normalize_color(stripcolor, this.whiteCap);
       }
       this.stripColor(builtColor);
     } else {
