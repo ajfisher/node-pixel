@@ -40,7 +40,7 @@ jobs:
 
       # get all of the arduino CLI stuff set up
       - name: Setup Arduino CLI
-        uses: arduino/setup-arduino-cli@v1.0.0
+        uses: arduino/setup-arduino-cli@v1.1.1
 
       # now install the platform packages
       - name: Install arduino platforms and libs
