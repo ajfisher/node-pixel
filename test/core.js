@@ -7,6 +7,8 @@ const sinon = require('sinon');
 
 const five = require('johnny-five');
 const pixel = require('../lib/index.js');
+const { colorValue } = require('../lib/pixel');
+const { create_gamma_table } = require('../lib/utils');
 
 const Board = five.Board;
 
@@ -56,6 +58,23 @@ exports['Test Mode configured'] = {
     // tests that the env variable is set properly
     test.expect(1);
     test.equal(process.env.IS_TEST_MODE, 'true', 'Test mode should be configured');
+    test.done();
+  }
+};
+
+exports['Color Value'] = {
+  setUp(done) {
+    done();
+  },
+  tearDown(done) {
+    done();
+  },
+  leak(test) {
+    test.expect(1);
+    const internalGTable = create_gamma_table(256, 2.8, false);
+    const baseColor = [123,123,123];
+    colorValue(baseColor, internalGTable);
+    test.deepEqual(baseColor, [123,123,123], 'The input should not be modified at all by the gamma correction');
     test.done();
   }
 };
