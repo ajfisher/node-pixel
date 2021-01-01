@@ -2,7 +2,7 @@
 // hook for the board.
 
 const firmata = require('firmata');
-const pixel = require('../lib/pixel.js');
+const pixel = require('node-pixel');
 
 const opts = {};
 if (process.argv[2] == undefined) {
