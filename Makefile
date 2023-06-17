@@ -96,12 +96,13 @@ test-ci:
 
 # make the Firmata build process to copy the files to the right place
 FIRMATA_DEST_DIR = $(BUILD_DIR)/node_pixel_firmata
-FIRMATA_FILES = $(LIBS_DIR)/firmata/arduino/*.{h,cpp}
+FIRMATA_DIR = $(LIBS_DIR)/firmata/arduino
 
 build-firmata: clean-build-firmata
 	@echo "Creating firmata build files"
 	mkdir $(FIRMATA_DEST_DIR)
-	cp $(FIRMATA_FILES) $(FIRMATA_DEST_DIR)/
+	cp $(FIRMATA_DIR)/*.h $(FIRMATA_DEST_DIR)/
+	cp $(FIRMATA_DIR)/*.cpp $(FIRMATA_DEST_DIR)/
 	cp $(LIBS_DIR)/ws2812/* $(FIRMATA_DEST_DIR)/
 	cp $(LIBS_DIR)/lightws2812/* $(FIRMATA_DEST_DIR)/
 	cp $(SRC_DIR)/controller_src/firmata/* $(FIRMATA_DEST_DIR)/
